@@ -21,6 +21,8 @@ marker12 = Marker.create(rsid: "rs21", snp: "GG", disease_id: "3")
 marker13 = Marker.create(rsid: "rs21", snp: "AT", disease_id: "3")
 marker14 = Marker.create(rsid: "rs21", snp: "AA", disease_id: "1")
 
+
+
 10.times do 
 	Risk.create(genome_id: 1, marker_id: rand(1..14))
 end
@@ -28,3 +30,17 @@ end
 Genome.create(user_id: 1, file_url:"espn.com")
 
 User.create(first_name: "Jerry", last_name: "Berry", email: "jb@email.com", password_digest: "password")
+
+
+$redis.set("rs50", "CC")
+$redis.set("rs51", "AT")
+$redis.set("rs20", "AG")
+$redis.set("rs21", "TT")
+
+current_user = 1 #add id to equation
+Marker.all.each do |marker|
+	if $redis.get(marker.rsid) == marker.snp
+		Risk.create(genome_id: current_user, marker_id: marker.id) 
+	end
+end
+
