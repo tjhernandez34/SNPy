@@ -13,5 +13,7 @@ describe Disease do
     @new_disease.name = ""
     @new_disease.should_not be_valid
   end
+
+  it { should have_many :markers}
 end
 

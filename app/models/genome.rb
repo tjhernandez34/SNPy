@@ -1,4 +1,6 @@
 class Genome < ActiveRecord::Base
-	belongs_to :user
+  validates_presence_of :file_url
+	
+  belongs_to :user
 	has_many :risks
 end
