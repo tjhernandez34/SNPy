@@ -9,16 +9,18 @@ describe User do
     @sample_user.should be_valid
   end
 
-  it "should not be valid if missing first_name" do
-    @sample_user.first_name = ""
+  it "should not be valid if missing email" do
+    @sample_user.email = ""
     @sample_user.should_not be_valid
   end
 
-  it "should not be valid if missing last_name" do
-    @sample_user.last_name = ""
+  it "should not be valid if missing password_digest" do
+    @sample_user.password_digest = ""
     @sample_user.should_not be_valid
   end
 
-  it { should have_many :markers}
+  it { should validate_uniqueness_of :email }
+  it { should have_one :genome }
+  it { should have_many(:risks).through(:genome) }
 end
 
