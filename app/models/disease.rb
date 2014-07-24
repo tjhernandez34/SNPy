@@ -1,3 +1,5 @@
 class Disease < ActiveRecord::Base
-	has_many :markers
+  validates_presence_of :name
+	
+  has_many :markers
 end
