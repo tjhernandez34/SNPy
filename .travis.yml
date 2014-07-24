@@ -13,4 +13,4 @@ before_script:
   # - bundle exec rake db:test:prepare --trace
 
 script:
-  - bundle exec rake spec  
+  - bundle exec rspec  
