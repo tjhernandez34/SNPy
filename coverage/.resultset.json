@@ -1,11 +1,15 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/helpers/application_helper.rb": [
+      "/Users/apprentice/Desktop/SNPy/app/helpers/application_helper.rb": [
         1,
         null
       ],
+<<<<<<< HEAD
       "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/disease.rb": [
+=======
+      "/Users/apprentice/Desktop/SNPy/app/models/disease.rb": [
+>>>>>>> 5c6370f74e53cb101c1b0f683adce646ddc3f7e5
         1,
         null,
         1,
@@ -14,37 +18,99 @@
         null,
         null
       ],
-      "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/genome.rb": [
+      "/Users/apprentice/Desktop/SNPy/app/models/genome.rb": [
         1,
         null,
         1,
+        null,
+        1,
+        null,
+        1,
+<<<<<<< HEAD
+        1,
+=======
+        null,
+        null
+      ],
+      "/Users/apprentice/Desktop/SNPy/app/uploaders/genome_uploader.rb": [
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+>>>>>>> 5c6370f74e53cb101c1b0f683adce646ddc3f7e5
+        null,
+        null
+      ],
+      "/Users/apprentice/Desktop/SNPy/app/models/marker.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/Users/apprentice/Desktop/SNPy/app/models/risk.rb": [
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
         1,
         1,
         null,
         null
       ],
-      "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/marker.rb": [
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null
-      ],
-      "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/risk.rb": [
-        1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null
-      ],
-      "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/user.rb": [
+      "/Users/apprentice/Desktop/SNPy/app/models/user.rb": [
         1,
         1,
         1,
@@ -59,6 +125,10 @@
         null
       ]
     },
+<<<<<<< HEAD
     "timestamp": 1406303748
+=======
+    "timestamp": 1406305585
+>>>>>>> 5c6370f74e53cb101c1b0f683adce646ddc3f7e5
   }
 }
