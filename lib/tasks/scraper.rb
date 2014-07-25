@@ -24,7 +24,6 @@ require 'byebug'
 # disorders = "miscellaneous.html"
 
 # @pages = [autoimmune, genetic, cancers, neurodegenerative, psychological, heart, digestive, addictions, female, disorders]
-
 class Parse
   attr_accessor :disease_names, :disease_id, :snp_info, :allele_info, :risk_info
 
@@ -35,7 +34,6 @@ class Parse
   end
 
   def do_it
-    x = 1
     @cut_page = @cut_page.sub(/.html/, "")
     last_description = ""
     @category_hash["#{@cut_page}"] = {}
@@ -47,9 +45,7 @@ class Parse
           @last_snp = row.css('.snp').text
           @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"] = {}
         end
-
         if row.css('.risk').text != '' && row.css('.risk').text != "Risk alleles"
-
           row.css('.risk').children.css('font').each do |allele|
             if allele.attributes['color'].value == '#00FF00'
               @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => -3)
@@ -62,13 +58,11 @@ class Parse
             end
           end
         end
-
       elsif row.css('.description').text == ''
         if row.css('.snp').text != ''
           @last_snp = row.css('.snp').text
           @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"] = {}
         end
-
         if row.css('.risk').text != '' && row.css('.risk').text != "Risk alleles"
           row.css('.risk').children.css('font').each do |allele|
             allele.text.gsub!(", ", "")
@@ -88,10 +82,8 @@ class Parse
     end
     p @category_hash
   end
-
 end
 
-  #create all the objects from this category hash
 pages = ["autoimmune.html", "genetic.html", "cancer.html", "neurodegenerative.html", "neuropsychological.html", "cardiovascular.html", "digestive.html", "addictions.html", "female_specific.html", "miscellaneous.html"]
 
 pages.each do |page|
