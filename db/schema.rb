@@ -11,13 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723235254) do
+ActiveRecord::Schema.define(version: 20140725143655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "diseases", force: true do |t|
     t.string   "name"
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -30,16 +37,22 @@ ActiveRecord::Schema.define(version: 20140723235254) do
   end
 
   create_table "markers", force: true do |t|
-    t.string   "rsid"
     t.string   "snp"
+    t.string   "allele"
     t.integer  "risk_level"
     t.integer  "disease_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "risks", force: true do |t|
+  create_table "reports", force: true do |t|
     t.integer  "genome_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "risks", force: true do |t|
+    t.integer  "report_id"
     t.integer  "marker_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -48,6 +61,7 @@ ActiveRecord::Schema.define(version: 20140723235254) do
   create_table "users", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "username"
     t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at"

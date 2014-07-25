@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+  - "2.0.0"
+  # - jruby-18mode # JRuby in 1.8 mode
+  # - jruby-19mode # JRuby in 1.9 mode
+  # - rbx
+# uncomment this line if your project needs to run something other than `rake`:
+# script: bundle exec rspec spec
+
+before_script:
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate RAILS_ENV=test  --trace
+  # - bundle exec rake db:test:prepare --trace
+
+script:
+  - bundle exec rspec  
