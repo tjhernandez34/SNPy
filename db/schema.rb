@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 20140723235254) do
   end
 
   create_table "markers", force: true do |t|
-    t.string   "rsid"
     t.string   "snp"
+    t.string   "allele"
     t.integer  "risk_level"
     t.integer  "disease_id"
     t.datetime "created_at"

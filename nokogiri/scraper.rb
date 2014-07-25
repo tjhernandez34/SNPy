@@ -39,27 +39,45 @@ class Parse
   end
 
   def do_it
+    x = 1
     @cut_page = @cut_page.sub(/.html/, "")
     last_description = ""
     @category_hash["#{@cut_page}"] = {}
       @page.css('tr').map do |row|
+
         row.css('.description').map do |description|
           if description.text != '' && description.text != "Description"
             last_description = description.text
-            @category_hash["#{@cut_page}"]["#{last_description}"] = {}#{description.text => nil, :other_key => 5}
-            row.css('.snp').map do |snp|
-              # if snp.text != '' && snp.text != "SNP"
-                @category_hash["#{@cut_page}"]["#{last_description}"][snp.text] = {}
-              # end
-            end
-          elsif description.text == ''
+            @category_hash["#{@cut_page}"]["#{last_description}"] = {}
+
             row.css('.snp').map do |snp|
               if snp.text != '' && snp.text != "SNP"
-                @category_hash["#{@cut_page}"]["#{last_description}"][snp.text] = {}
+                @last_snp = snp.text
+                @category_hash["#{@cut_page}"]["#{last_description}"]["#{@last_snp}"] = {}
               end
             end
+
+            row.css('.risk').map do |allele|
+              @category_hash["#{@cut_page}"]["#{last_description}"]["#{@last_snp}"] = allele.text
+            end
+
+          elsif description.text == ''
+
+            row.css('.snp').map do |snp|
+              if snp.text != '' && snp.text != "SNP"
+                @last_snp = snp.text
+                @category_hash["#{@cut_page}"]["#{last_description}"]["#{@last_snp}"] = {}
+              end
+            end
+
+            row.css('.risk').map do |allele|
+              @category_hash["#{@cut_page}"]["#{last_description}"]["#{@last_snp}"] = allele.text
+            end
+
+
           end
         end
+
       end
     puts @category_hash
     end
