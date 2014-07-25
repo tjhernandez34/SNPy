@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class GenomeUploader < CarrierWave::Uploader::Base
-
+  process :parse
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -26,6 +26,26 @@ class GenomeUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   # process :scale => [200, 300]
+
+  def parse
+    # p "------------------------------"
+    page = self
+    File.open(self.path).read.each_line do |line|
+      snp = line.scan(/(^rs\d+|^i\d+)/)
+      allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
+      if snp != "" && allele != ""
+        snp = snp.join.strip
+        allele = allele.join.strip
+        $redis.hset("hello", snp, allele)
+      end
+    end
+    # @page = Nokogiri::HTML(open(page))
+    # puts self.inspect
+    # puts self.length
+    # p "-----------------------------------------"
+    # puts self.read
+  end
+
   #
   # def scale(width, height)
   #   # do something
