@@ -2,20 +2,20 @@ require "spec_helper"
 
 describe Marker do 
   before(:each) do
-    @marker1 = Marker.new(rsid: "rs51", snp: "CC", risk_level: 3, disease_id: 1)
+    @marker1 = Marker.new(snp: "rs51", allele: "CC", risk_level: 3, disease_id: 1)
   end
 
   it "should be valid when new" do
     @marker1.should be_valid
   end
 
-  it "should not be valid if rsid" do
-    @marker1.rsid = ""
+  it "should not be valid if snp is missing" do
+    @marker1.snp = ""
     @marker1.should_not be_valid
   end
 
-  it "should not be valid if snp" do
-    @marker1.snp = ""
+  it "should not be valid if allele is missing" do
+    @marker1.allele = ""
     @marker1.should_not be_valid
   end
 
