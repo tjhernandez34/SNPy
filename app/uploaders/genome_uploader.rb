@@ -28,7 +28,6 @@ class GenomeUploader < CarrierWave::Uploader::Base
   # process :scale => [200, 300]
 
   def parse
-    # p "------------------------------"
     page = self
     File.open(self.path).read.each_line do |line|
       snp = line.scan(/(^rs\d+|^i\d+)/)
@@ -39,11 +38,15 @@ class GenomeUploader < CarrierWave::Uploader::Base
         $redis.hset("hello", snp, allele)
       end
     end
-    # @page = Nokogiri::HTML(open(page))
-    # puts self.inspect
-    # puts self.length
-    # p "-----------------------------------------"
-    # puts self.read
+    puts "------------------------------------------------"
+    @report = Report.create(genome_id: 32)
+    Marker.all.each do |marker|
+      if $redis.hget("hello", marker.snp) == marker.allele
+        p '----------------------Risk Object Created -------------------------'
+        Risk.create(report_id: @report.id, marker_id: marker.id)
+      end
+    end
+    $redis.del("hello")
   end
 
   #
