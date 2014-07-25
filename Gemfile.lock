@@ -33,13 +33,6 @@ GEM
       nokogiri (>= 1.4.4)
     bcrypt (3.1.7)
     builder (3.2.2)
-
-    carrierwave (0.10.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
-
     byebug (3.1.2)
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
@@ -49,6 +42,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     childprocess (0.5.3)
       ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.0.1)
@@ -71,7 +69,7 @@ GEM
     erubis (2.7.0)
     excon (0.38.0)
     execjs (2.2.1)
-
+    ffi (1.9.3)
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
@@ -99,9 +97,6 @@ GEM
       fog-core
       fog-json
     formatador (0.2.5)
-
-    ffi (1.9.3)
-
     hike (1.2.3)
     i18n (0.6.11)
     inflecto (0.0.2)
@@ -126,13 +121,11 @@ GEM
     monban-generators (0.0.4)
       monban (>= 0.0.12)
     multi_json (1.10.1)
-
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
-    nokogiri (1.6.2.1)
-
     netrc (0.7.7)
+    nokogiri (1.6.2.1)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     pg (0.17.1)
@@ -232,16 +225,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-
   aws-sdk
-  carrierwave
-  coffee-rails (~> 4.0.0)
-  figaro
-  fog
   byebug
   capybara (= 2.1.0)
+  carrierwave
   coffee-rails (~> 4.0.0)
   coveralls
+  figaro
+  fog
   jbuilder (~> 2.0)
   jquery-rails
   minitest
