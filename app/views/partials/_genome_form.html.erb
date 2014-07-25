@@ -1,0 +1,15 @@
+<!-- Not sure if we need to use a partial so this same form is in the genomes/new.html.erb
+ -->
+ 
+<%= form_for @genome, :html => {:multipart => true} do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :user_id %>
+  <p>
+    <%= f.file_field :image %>
+  </p>
+  <p>
+    <%= f.label :remote_image_url, "or image URL" %><br />
+    <%= f.text_field :remote_image_url %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

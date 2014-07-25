@@ -43,3 +43,9 @@ gem 'spring',        group: :development
 gem 'monban'
 gem 'monban-generators'
 
+## genome uploader
+gem 'carrierwave'
+gem 'fog'
+gem 'figaro'
+gem 'aws-sdk'
+
