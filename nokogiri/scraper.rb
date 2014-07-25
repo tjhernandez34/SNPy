@@ -49,9 +49,8 @@ class Parse
         end
 
         if row.css('.risk').text != '' && row.css('.risk').text != "Risk alleles"
-          row.css('.risk').children.each do |allele|
-            byebug
-            allele.text.gsub!(", ", "")
+
+          row.css('.risk').children.css('font').each do |allele|
             if allele.attributes['color'].value == '#00FF00'
               @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => -3)
             elsif allele.attributes['color'].value == '#006600'
@@ -71,7 +70,7 @@ class Parse
         end
 
         if row.css('.risk').text != '' && row.css('.risk').text != "Risk alleles"
-          row.css('.risk').children.each do |allele|
+          row.css('.risk').children.css('font').each do |allele|
             allele.text.gsub!(", ", "")
             if allele.attributes['color'].value == '#00FF00'
               @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => -3)
