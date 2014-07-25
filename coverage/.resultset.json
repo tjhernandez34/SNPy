@@ -7,17 +7,20 @@
       ],
       "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/disease.rb": [
         1,
-        1,
         null,
         1,
+        1,
+        1,
+        null,
         null
       ],
       "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/genome.rb": [
         1,
-        1,
         null,
         1,
         1,
+        1,
+        null,
         null
       ],
       "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/marker.rb": [
@@ -30,6 +33,9 @@
         null
       ],
       "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/risk.rb": [
+        1,
+        null,
+        1,
         1,
         null,
         null,
@@ -45,9 +51,14 @@
         null,
         1,
         1,
+        null,
+        1,
+        0,
+        null,
+        null,
         null
       ]
     },
-    "timestamp": 1406245745
+    "timestamp": 1406303748
   }
 }
