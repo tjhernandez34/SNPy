@@ -42,6 +42,8 @@ group :test do
   gem 'capybara', '2.1.0'
 end
 
+gem 'nokogiri'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -53,7 +55,7 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+gem 'byebug'
 ## authentication
 gem 'monban'
 gem 'monban-generators'
