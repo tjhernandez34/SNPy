@@ -40,7 +40,7 @@ gem 'nokogiri'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+gem 'byebug'
 ## authentication
 gem 'monban'
 gem 'monban-generators'

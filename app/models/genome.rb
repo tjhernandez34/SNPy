@@ -1,4 +1,4 @@
 class Genome < ActiveRecord::Base
 	belongs_to :user
-	has_many :risks
+	has_many :reports
 end
