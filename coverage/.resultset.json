@@ -5,7 +5,11 @@
         1,
         null
       ],
+<<<<<<< HEAD
+      "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/disease.rb": [
+=======
       "/Users/apprentice/Desktop/SNPy/app/models/disease.rb": [
+>>>>>>> 5c6370f74e53cb101c1b0f683adce646ddc3f7e5
         1,
         null,
         1,
@@ -18,11 +22,13 @@
         1,
         null,
         1,
-        1,
         null,
         1,
         null,
         1,
+<<<<<<< HEAD
+        1,
+=======
         null,
         null
       ],
@@ -76,6 +82,7 @@
         null,
         null,
         null,
+>>>>>>> 5c6370f74e53cb101c1b0f683adce646ddc3f7e5
         null,
         null
       ],
@@ -89,6 +96,9 @@
         null
       ],
       "/Users/apprentice/Desktop/SNPy/app/models/risk.rb": [
+        1,
+        null,
+        1,
         1,
         null,
         1,
@@ -115,6 +125,14 @@
         null
       ]
     },
+<<<<<<< HEAD
     "timestamp": 1406306492
+=======
+<<<<<<< HEAD
+    "timestamp": 1406303748
+=======
+    "timestamp": 1406305585
+>>>>>>> 5c6370f74e53cb101c1b0f683adce646ddc3f7e5
+>>>>>>> ed11150e11ccdd233f2b0325a24cb6002383cf56
   }
 }
