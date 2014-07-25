@@ -47,17 +47,44 @@ class Parse
           @last_snp = row.css('.snp').text
           @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"] = {}
         end
-        if row.css('.risk').text != ''
-          @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"] = row.css('.risk').text
+
+        if row.css('.risk').text != '' && row.css('.risk').text != "Risk alleles"
+          row.css('.risk').children.each do |allele|
+            byebug
+            allele.text.gsub!(", ", "")
+            if allele.attributes['color'].value == '#00FF00'
+              @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => -3)
+            elsif allele.attributes['color'].value == '#006600'
+              @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => -1)
+            elsif allele.attributes['color'].value == '#990000'
+              @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => 1)
+            elsif allele.attributes['color'].value == '#FF0000'
+              @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => 3)
+            end
+          end
         end
+
       elsif row.css('.description').text == ''
         if row.css('.snp').text != ''
           @last_snp = row.css('.snp').text
           @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"] = {}
         end
-        if row.css('.risk').text != ''
-          @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"] = row.css('.risk').text
+
+        if row.css('.risk').text != '' && row.css('.risk').text != "Risk alleles"
+          row.css('.risk').children.each do |allele|
+            allele.text.gsub!(", ", "")
+            if allele.attributes['color'].value == '#00FF00'
+              @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => -3)
+            elsif allele.attributes['color'].value == '#006600'
+              @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => -1)
+            elsif allele.attributes['color'].value == '#990000'
+              @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => 1)
+            elsif allele.attributes['color'].value == '#FF0000'
+              @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"].merge!(allele.text => 3)
+            end
+          end
         end
+
       end
     end
     p @category_hash
