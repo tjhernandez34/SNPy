@@ -93,6 +93,12 @@
         1,
         null
       ],
+      "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/report.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
       "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/risk.rb": [
         1,
         null,
@@ -118,14 +124,8 @@
         null,
         null,
         null
-      ],
-      "/Users/nataliemccroy/Desktop/team_evil_genius/SNPy/app/models/report.rb": [
-        1,
-        1,
-        1,
-        null
       ]
     },
-    "timestamp": 1406316969
+    "timestamp": 1406321856
   }
 }
