@@ -20,7 +20,7 @@ describe User do
   end
 
   it { should validate_uniqueness_of :email }
-  it { should have_one :genome }
-  it { should have_many(:risks).through(:genome) }
+  it { should have_many :genomes }
+  it { should have_many(:reports).through(:genomes) }
 end
 
