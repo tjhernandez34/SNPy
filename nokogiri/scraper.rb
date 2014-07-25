@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+# require 'byebug'
 # genetic = "genetic.html"
 # cancers = "cancer.html"
 # neurodegenerative = "neurodegenerative.html"
@@ -35,7 +36,7 @@ class Parse
     # @disease_names = []
     # @snp_info = []
     # @allele_info = []
-    @risk_info = []
+    # @risk_info = []
   end
 
   def do_it
@@ -45,39 +46,32 @@ class Parse
     @category_hash["#{@cut_page}"] = {}
       @page.css('tr').map do |row|
 
-        row.css('.description').map do |description|
-          if description.text != '' && description.text != "Description"
-            last_description = description.text
-            @category_hash["#{@cut_page}"]["#{last_description}"] = {}
+        if row.css('.description').text != ('' || "Description")
 
-            row.css('.snp').map do |snp|
-              if snp.text != '' && snp.text != "SNP"
-                @last_snp = snp.text
-                @category_hash["#{@cut_page}"]["#{last_description}"]["#{@last_snp}"] = {}
-              end
-            end
+          @last_description = row.css('.description').text
+          @category_hash["#{@cut_page}"]["#{@last_description}"] = {}
 
-            row.css('.risk').map do |allele|
-              @category_hash["#{@cut_page}"]["#{last_description}"]["#{@last_snp}"] = allele.text
-            end
-
-          elsif description.text == ''
-
-            row.css('.snp').map do |snp|
-              if snp.text != '' && snp.text != "SNP"
-                @last_snp = snp.text
-                @category_hash["#{@cut_page}"]["#{last_description}"]["#{@last_snp}"] = {}
-              end
-            end
-
-            row.css('.risk').map do |allele|
-              @category_hash["#{@cut_page}"]["#{last_description}"]["#{@last_snp}"] = allele.text
-            end
-
-
+          if row.css('.snp').text != ''
+            @last_snp = row.css('.snp').text
+            @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"] = {}
           end
-        end
+          if row.css('.risk').text != ''
+            @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"] = row.css('.risk').text
+          end
 
+        elsif row.css('.description').text == ''
+
+
+          if row.css('.snp').text != ''
+            @last_snp = row.css('.snp').text
+            @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"] = {}
+          end
+
+          if row.css('.risk').text != ''
+            @category_hash["#{@cut_page}"]["#{@last_description}"]["#{@last_snp}"] = row.css('.risk').text
+          end
+
+        end
       end
     puts @category_hash
     end
