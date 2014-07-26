@@ -8,7 +8,18 @@
 </head>
 <body>
 
-<%= yield %>
-
-</body>
+   <%= render "partials/nav" %>
+  <% if current_user == nil %>
+  <div class = "modal login-form hidden">
+    <%= render "partials/login" %>
+  </div>
+  <div class = "modal signup-form hidden">
+    <%= render "partials/signup" %>
+  </div>
+<% end %>
+  <%= yield %>
+  <% if current_user %>
+    <% link_to "logout", :controller => "sessions", :action => "destroy" %>
+  <% end %>
+  </body>
 </html>

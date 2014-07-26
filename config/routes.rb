@@ -3,7 +3,19 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   resources :genomes, only: [:new, :create]
 
-  root 'welcome#index'
+  root :to => 'sessions#new'
+
+  get '/login' => 'sessions#new'
+
+  post '/login' => 'sessions#create'
+
+  get '/logout' => 'sessions#destroy'
+
+  resources :categories
+
+  resources :diseases
+
+  resources :risks
 
   get 'user/profile' => 'users#show',
     as: 'user'

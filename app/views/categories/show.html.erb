@@ -1,0 +1,5 @@
+<% if @category %>
+  <% @category.diseases.each do |disease| %>
+    <p><%= link_to "#{disease.name}", disease_path(disease) %></p>
+  <% end %>
+<% end %>

@@ -5,9 +5,9 @@ class GenomesController < ApplicationController
 	end
 
 	def create
-		genome = Genome.new(genome_params)
+		@genome = Genome.new(genome_params)
     respond_to do |format|
-      if genome.save
+      if @genome.save
         format.html {redirect_to '/user/profile', notice: "Genome was successfully uploaded." }
       else
         format.html {render :new}

@@ -5,8 +5,14 @@ class User < ActiveRecord::Base
   has_many :genomes
 	has_many :reports, through: :genomes
 
-  def category_risks(category)
-    reports.order(created_at: :desc).first
+  def current_risks_by_category
+    if self.reports.length > 0
+      self.current_risks.group_by {|risk| risk.category}.delete_if{|category, risks| risks.length == 0}.keys
+    end
   end
 
+
+  def current_risks
+    self.reports.order(created_at: :desc).first.risks
+  end
 end

@@ -1,0 +1,6 @@
+<% if @diseases %>
+  <% @diseases.each do |disease| %>
+    <p><%= link_to "#{disease.name}", category_disease_risks_path(disease) %></p>
+  <% end %>
+<% end %>
+

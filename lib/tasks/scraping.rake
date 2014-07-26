@@ -6,7 +6,7 @@ task :fetch_markers => :environment do
     last_description = ""
     @cut_page = @cut_page.sub(/.html/, "")
     @cut_page.gsub!("_", " ")
-    category = Category.create(name: @cut_page)
+    category = Category.create(name: @cut_page.titleize)
     @page.css('#dna tr').map do |row|
       if row.css('.description').text != '' && row.css('.description').text != "Description"
         @last_description = row.css('.description').text

@@ -1,1 +1,10 @@
-<a href="<%=@user.genomes.first.file_url%>"> Click Here </a>
+<%= link_to "upload genome", new_genome_path %>
+<p>Welcome <%= current_user.first_name %></p>
+
+<% if @categories %>
+  <% @categories.each do |category| %>
+    <p><%= link_to "#{category.name}", category_path(category) %></p>
+  <% end %>
+<% end %>
+
+
