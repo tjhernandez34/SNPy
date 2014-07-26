@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   skip_before_action :require_login, only: [:new, :create]
 
   def new
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :first_name, :last_name)
+    params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :doctor)
   end
 end
 

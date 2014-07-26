@@ -7,7 +7,6 @@ class GenomeUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  # storage :file
   storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -29,24 +28,27 @@ class GenomeUploader < CarrierWave::Uploader::Base
 
   def parse
     page = self
+    report = Report.create_report
+    username = User.current_username
+
+
+
     File.open(self.path).read.each_line do |line|
       snp = line.scan(/(^rs\d+|^i\d+)/)
       allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
       if snp != "" && allele != ""
         snp = snp.join.strip
         allele = allele.join.strip
-        $redis.hset("hello", snp, allele)
+        $redis.hset(username, snp, allele)
       end
     end
-    puts "------------------------------------------------"
-    @report = Report.create(genome_id: 32)
+
     Marker.all.each do |marker|
-      if $redis.hget("hello", marker.snp) == marker.allele
-        p '----------------------Risk Object Created -------------------------'
-        Risk.create(report_id: @report.id, marker_id: marker.id)
+      if $redis.hget(username, marker.snp) == marker.allele
+        Risk.create(report_id: report.id, marker_id: marker.id)
       end
     end
-    $redis.del("hello")
+    $redis.del(username)
   end
 
   #

@@ -1,6 +1,8 @@
 <% if @category %>
 <h2><%= @category.name %></h2>
   <% @category.diseases.each do |disease| %>
-    <p><%= link_to "#{disease.name}", disease_path(disease) %></p>
+    <% if @diseases.include?(disease.name) %>
+      <p><%= link_to "#{disease.name}", disease_path(disease) %></p>
+    <% end %>
   <% end %>
 <% end %>

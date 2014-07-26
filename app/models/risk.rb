@@ -7,4 +7,6 @@ class Risk < ActiveRecord::Base
   has_one :disease, through: :marker
   has_one :category, through: :disease
 
+
+
 end
