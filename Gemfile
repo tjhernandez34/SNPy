@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 # Use postgresql as the database for Active Record
-gem 'pg'
 gem 'redis'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -40,6 +39,11 @@ group :test do
   gem 'shoulda-matchers'
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor', '0.0.2'
 end
 
 gem 'nokogiri'
