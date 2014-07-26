@@ -2,10 +2,10 @@
 <% if @disease %>
     <h2><%=@disease.name%></h2>
     <% total = 0 %>
-  <% @disease.markers.each do |marker| %>
-    <p>SNP: <%=marker.snp%> Allele: <%=marker.snp%></p>
-    <p><%= marker.risk_level %></p>
-    <% total += marker.risk_level %>
+  <% @risks.each do |risk| %>
+    <p>SNP: <%=risk.marker.snp%> Allele: <%=risk.marker.snp%></p>
+    <p><%= risk.marker.risk_level %></p>
+    <% total += risk.marker.risk_level %>
   <% end %>
 <% end %>
 <p>Total Risk: <%= total %></p>

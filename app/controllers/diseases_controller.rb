@@ -5,7 +5,7 @@ class DiseasesController < ApplicationController
   end
 
   def show
-    @disease = Disease.find(params[:id])
     @risks = current_user.genomes.last.reports.last.risks
+    @disease = Disease.find(params[:id])
   end
 end
