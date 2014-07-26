@@ -1,4 +1,4 @@
-SNPy
+SNPy: Look at Your Genome
 ====
 
 [![Coverage Status](https://img.shields.io/coveralls/ozayyad/SNPy.svg)](https://coveralls.io/r/ozayyad/SNPy)

@@ -4,8 +4,8 @@ class Report < ActiveRecord::Base
 
   attr_reader :create_report
 
-  def self.create_report
-    create(genome_id: current_user.genomes.last)
-  end
+  # def self.create_report
+  #   create(genome_id: 32)#current_user.genomes.last)
+  # end
 
 end

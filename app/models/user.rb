@@ -18,8 +18,8 @@ class User < ActiveRecord::Base
     self.reports.order(created_at: :desc).first.risks
   end
 
-  def self.current_username
-    current_user.username
-  end
+  # def self.current_username
+  #   "joey"#current_user.username
+  # end
 
 end

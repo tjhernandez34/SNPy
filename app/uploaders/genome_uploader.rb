@@ -28,8 +28,8 @@ class GenomeUploader < CarrierWave::Uploader::Base
 
   def parse
     page = self
-    report = Report.create_report
-    username = User.current_username
+    report = Report.create(genome_id: 32)
+    username = "hello"
 
 
 

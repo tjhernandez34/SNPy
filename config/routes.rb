@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :risks
 
+  get 'testing' => "welcome#testing"
+
   get 'user/profile' => 'users#show',
     as: 'user'
   # The priority is based upon order of creation: first created -> highest priority.
