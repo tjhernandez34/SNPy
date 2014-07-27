@@ -3,7 +3,13 @@
 <ul class = "login_errors">
   <li></li>
 </ul>
-  <%= f.email_field :email, :placeholder => "Email", :class => "form-field email" %>
-  <%= f.password_field :password, :placeholder => "Password",  :class => "form-field password" %>
-  <%= f.submit "login", :class => "submit form-btn" %>
+	<div>
+  	<%= f.email_field :email, :placeholder => "Email", :class => "form-field email" %>
+	</div>
+	<div>
+  	<%= f.password_field :password, :placeholder => "Password",  :class => "form-field password" %>
+	</div>
+	<div>
+  	<%= f.submit "login", :class => "submit form-btn" %>
+	</div>
 <% end %>

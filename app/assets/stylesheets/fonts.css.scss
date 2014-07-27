@@ -1,0 +1,100 @@
+@import 'variables';
+
+/*
+Typography
+*/
+
+
+html,
+body {
+  font-family: $serif-font, serif;
+  text-align: center;
+  color: $alt-color;
+}
+
+p {
+  color: $secondary-color;
+  text-align: center;
+  font-size: 2em;
+  font-family: $serif-font, serif;
+}
+
+.font {
+  font-family: $serif-font, serif;
+}
+@media (min-width: 768) {
+  p {
+    font-size: 2.5em;
+  }
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: $sans-serif-font, sans-serif;
+  font-weight: 700;
+  color: $primary-color;
+  padding: .5em 0;
+}
+
+h2, .h2 {
+  text-transform: uppercase;
+}
+
+h1, .h1 {
+  font-size: 2.8em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+h2, .h2 {
+  font-size: 2.5em;
+}
+
+h3, .h3 {
+  font-size: 2em;
+}
+
+@media (min-width: 1068px) {
+  h1, .h1 {
+    font-size: 4em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+
+  h2, .h2 {
+    font-size: 3.25em;
+  }
+
+  h3, .h3 {
+    font-size: 2.5em;
+  }
+}
+
+h6, .h6 {
+  font-family: $serif-font, sans-serif;
+  font-weight: 100;
+  color: $alt-color;
+}
+
+table {
+  th {
+    font-weight: 700;
+    font-size: 90%;
+    font-family: $sans-serif-font, sans-serif;
+    color: $alt-color;
+  }
+  td {
+    font-weight: 500;
+    font-size: 85%;
+    font-family: $sans-serif-font, sans-serif;
+    color: $alt-color-light;
+  }
+}
+
+
+
+

@@ -1,10 +1,24 @@
 <%= form_for User.new do |f| %>
-<h2>sign up</h2>
-<%= f.text_field :first_name, :placeholder => "First Name", :class => "form-field first_name" %>
-<%= f.text_field :last_name, :placeholder => "Last Name", :class => "form-field last_name" %>
-<%= f.text_field :username, :placeholder => "Username", :class => "form-field username" %>
-<%= f.email_field :email, :placeholder => "Email", :class => "form-field email" %>
-<%= f.password_field :password, :placeholder => "Password", :class => "form-field password" %>
-<%= f.select(:doctor, [['Doctor', true], ['User', false]]) %>
-<%= f.submit "sign up", :class => "form-btn submit" %>
+	<h2>sign up</h2>
+	<div>
+		<%= f.text_field :first_name, :placeholder => "First Name", :class => "form-field first_name" %>
+	</div>
+	<div>
+		<%= f.text_field :last_name, :placeholder => "Last Name", :class => "form-field last_name" %>
+	</div>
+	<div>
+		<%= f.text_field :username, :placeholder => "Username", :class => "form-field username" %>
+	</div>
+	<div>
+		<%= f.email_field :email, :placeholder => "Email", :class => "form-field email" %>
+	</div>
+	<div>
+		<%= f.password_field :password, :placeholder => "Password", :class => "form-field password" %>
+	</div>
+	<div>
+		<%= f.select(:doctor, [['Doctor', true], ['User', false]]) %>
+	</div>
+	<div>
+		<%= f.submit "sign up", :class => "form-btn submit" %>
+	</div>
 <% end %>
