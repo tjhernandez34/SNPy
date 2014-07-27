@@ -2,15 +2,9 @@
   <%= f.hidden_field :user_id %>
   <div>
     <%= f.file_field :file_url %>
-    <% if current_user.doctor == true %>
-      <%= f.text_field :first_name, :placeholder => "Patient First Name", :class => "form-field first_name" %>
-      <%= f.text_field :last_name, :placeholder => "Patient Last Name", :class => "form-field last_name" %>
-      <%= f.text_field :username, :placeholder => "Patient Username", :class => "form-field username" %>
-    <% else %>
       <%= f.hidden_field :first_name %>
       <%= f.hidden_field :last_name %>
       <%= f.hidden_field :username %>
-    <% end %>
   </div>
   <div><%= f.submit "Discover" %></div>
 <% end %>

@@ -87,7 +87,7 @@ $(document).ready(function(){
 //       .attr("height", 140)
 //     .append("svg:g")
 //     	.attr("transform", "translate(10,15)");
-    	
+
 
 //   chart.selectAll("line")
 //       .data(x.ticks(10))
@@ -98,7 +98,7 @@ $(document).ready(function(){
 //       .attr("y2", 120)
 //       .attr("stroke", "#ccc");
 
-      
+
 //   chart.selectAll("div")
 //   		.data(data)
 //   	.enter().append("svg:rect")

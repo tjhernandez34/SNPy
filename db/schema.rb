@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 20140725143655) do
     t.string   "username"
     t.string   "email"
     t.string   "password_digest"
-    t.boolean  "doctor",          default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
