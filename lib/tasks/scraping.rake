@@ -10,7 +10,7 @@ task :fetch_markers => :environment do
     @page.css('#dna tr').map do |row|
       if row.css('.description').text != '' && row.css('.description').text != "Description"
         @last_description = row.css('.description').text
-        @disease = Disease.create(name: @last_description, category_id: category.id)
+        @disease = Disease.create(name: @last_description.titleize, category_id: category.id)
         if row.css('.risk').text != '' && row.css('.risk').text != "Risk alleles"
 
           row.css('.risk').children.css('font').each do |allele|
