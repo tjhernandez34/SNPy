@@ -40,7 +40,6 @@ $(document).ready(function(){
 
 	d3.json("chart", function(error, root) {
 		console.log(root);
-		// console.log(partition.nodes(root)[0]);
 	  var path = svg.selectAll("path")
 	      .data(partition.nodes(root))
 	    .enter().append("path")
