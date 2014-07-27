@@ -1,0 +1,96 @@
+@import 'variables';
+
+.body {
+  background-color: rgba(32, 148, 250, 0.2);
+  min-height: 600px;
+  position: relative;
+  top: 0px;
+}
+.index-header {
+  background-color: $nav-bar-color-index;
+}
+
+.content {
+  height: 100%;
+  min-height: 750px;
+  padding-top: 8%;
+  background-color: white;
+  -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
+  box-shadow: 0 0 50px rgba(0,0,0,0.8);
+  padding-right: 2%;
+  padding-left: 2%;
+}
+
+header {
+  background-color: $nav-bar-color;
+  max-height: 50%;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  z-index: 5;
+  .brand {
+    padding: 10px;
+    padding-left: 9%;
+    color: $white;
+    font-size: 2.8em;
+    font-family: $sans-serif-font, sans-serif;
+  }
+  nav {
+    padding: 10px;
+    padding-right: 9%;
+    margin-top: 6px;
+    position: relative;
+    top: px;
+    ul{
+      float: right;
+      li {
+        display: inline-block;
+        list-style: none;
+      }
+    }
+  }
+  .btn {
+    color: $white;
+    border-color: $white;
+  }
+}
+
+.container {
+  height: 100%;
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-left: 8%;
+  padding-right: 8%;
+  position: relative;
+  width: 100%;
+  background-color: $background-color;
+}
+
+.login{
+  background: url('http://farm3.staticflickr.com/2832/12303719364_c25cecdc28_b.jpg') fixed;
+  background-size: cover;
+  padding: 0;
+  margin: 0;
+}
+
+.footer {
+  position: relative;
+  bottom:0;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  width: 100%;
+  bottom: 0px;
+  background-color: $footer-bar;
+  height: 20%;
+  -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
+  box-shadow: 0 0 50px rgba(0,0,0,0.8);
+  color: $white;
+  font-size: 1em;
+  font-family: $sans-serif-font, sans-serif;
+}
+
+#track_page {
+  width: 100%;
+
+}
+
