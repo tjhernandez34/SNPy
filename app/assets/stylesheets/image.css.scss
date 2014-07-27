@@ -1,0 +1,21 @@
+@import 'variables';
+
+/*
+Background Images
+*/
+
+.background {
+  background-image: url(/images/market_header.jpg);
+  min-width: $min-width;
+  height: 100px;
+}
+
+.homepage {
+  background-image: url(/images/scene.jpg);
+  background-size: cover;
+  min-width: $min-width;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+
