@@ -38,9 +38,9 @@ $(document).ready(function(){
 	    .innerRadius(function(d) { return Math.max(0, y(d.y)); })
 	    .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
-	d3.json("flare.json", function(error, root) {
+	d3.json("chart", function(error, root) {
 		console.log(root);
-		console.log(partition.nodes(root)[0]);
+		// console.log(partition.nodes(root)[0]);
 	  var path = svg.selectAll("path")
 	      .data(partition.nodes(root))
 	    .enter().append("path")
