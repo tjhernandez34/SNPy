@@ -11,13 +11,13 @@ Rails.application.routes.draw do
 
   get '/logout' => 'sessions#destroy'
 
-  resources :categories
+  # resources :categories
 
-  resources :diseases
+  # resources :diseases
 
-  resources :risks
+  # resources :risks
 
-  get 'testing' => "welcome#testing"
+  get '/search' => 'searches#search'
 
   get 'user/profile' => 'users#show',
     as: 'user'

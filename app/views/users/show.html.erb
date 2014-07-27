@@ -1,11 +1,22 @@
 <%= link_to "upload genome", new_genome_path %>
 <p>Welcome <%= current_user.first_name %></p>
 
-<% if @categories %>
-  <% @categories.each do |category| %>
-    <p><%= link_to "#{category.name}", category_path(category) %></p>
-  <% end %>
+<% if current_user.genomes %>
+<div id = "home_search">
+  <%= form_tag("/search", method: "get", class: "pure-form") do %>
+  <%= label_tag(:q, "find your genetic risks", id: "search_tag") %>
+    <%= text_field_tag :search, params[:search], :placeholder => "enter illness", id: "box", class: "pure-input-1-4" %>
+  <%= submit_tag("Search", class: "pure-button") %>
 <% end %>
+</div>
+<% else %>
+	<p>please upload genome, <%= current_user.first_name %></p>
+<% end %>
+<% render 'searches/search' %>
+
+
+
+
 
 
 
