@@ -10,6 +10,7 @@ class WelcomeController < ApplicationController
 		risks = current_user.current_risks_by_category
 		diseases = current_user.current_risks.group_by{|risk| risk.disease}.keys.group_by{|disease| disease.category}
 		data = risks.merge(diseases){|category,risks,diseases| risks.group_by{|risk| risk.disease}}
+		puts data
 		render json: data
 
 	end
