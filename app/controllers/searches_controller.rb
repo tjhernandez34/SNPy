@@ -2,16 +2,33 @@ class SearchesController < ApplicationController
 # @searches = current_user.searches.all
 
 	def search
-		search = params[:search].titleize!
+		search = params[:search].titleize!.split
 		@risks = current_user.genomes.last.reports.last.risks
+		risk_names = []
+		@risks.each do |risk|
+			if risk.marker.disease.name
+				risk_names << risk.marker.disease.name
+			elsif risk.marker.disease.category.name
+				risk_names << risk.marker.disease.category.name
+			end
+			risk_names.uniq!
+		end
 		@results = []	
-		Category.where('name LIKE ?', "%#{search}%").each do |result|
-			@results << result
+		search.each do |term|
+		Category.where('name LIKE ?', "%#{term}%").each do |result|
+			if risk_names.include?(result.name)
+				@results << result
+			end
 		end
-		Disease.where('name LIKE ?', "%#{search}%").each do |result|
-			@results << result
+	end
+	search.each do |term|
+		Disease.where('name LIKE ?', "%#{term}%").each do |result|
+			if risk_names.include?(result.name)
+				@results << result
+			end
 		end
-		@results
-		redirect_to '/user/profile'
+	end
+		@results.uniq!
+		render :search
 	end
 end

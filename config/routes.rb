@@ -11,9 +11,9 @@ Rails.application.routes.draw do
 
   get '/logout' => 'sessions#destroy'
 
-  # resources :categories
+  resources :categories,  only: :show
 
-  # resources :diseases
+  resources :diseases, only: :show
 
   # resources :risks
 

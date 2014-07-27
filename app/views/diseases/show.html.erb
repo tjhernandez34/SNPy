@@ -1,0 +1,9 @@
+<h2><%= @disease.name %></h2>
+
+<% total = 0 %>
+<% @results.each do |marker| %>
+	<p>SNP: <%= marker.snp %> Allele: <%= marker.allele %></p>
+	<p>Risk Level: <%= marker.risk_level %>
+		<% total += marker.risk_level.to_i %>
+	<% end %>
+<h3>Total Risk Level: <%= total %></h3>
