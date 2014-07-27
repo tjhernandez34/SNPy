@@ -5,9 +5,9 @@ Nav Bar
 $index: rgba(0, 0, 0, 1);
 
 $nav-links: Verdana, sans-serif;
-$nav-bar-color: rgba(0, 0, 0, 0.9);
-$nav-bar-color-index: rgba(0, 0, 0, 0.6);
-$footer-bar: rgba(0,0,0,0.9);
+$nav-bar-color: rgba(66, 63, 63, 0.6);
+$nav-bar-color-index: rgba(66, 63, 63, 0.6);
+$footer-bar: rgba(66, 63, 63, 0.6);
 
 $max-width: 960px;
 $min-width: 320px;
@@ -27,4 +27,13 @@ $sans-serif-font: 'Raleway';
 $serif-font: 'Josefin Slab';
 
 $light-blue: rgba(93, 173, 243, 0.9);
+
+/*
+Form style
+*/
+$border-style: 2px solid $light-blue ;
+$border-radius: 5px;
+$form-width: 20em;
+$index-form-position: absolute;
+
 
