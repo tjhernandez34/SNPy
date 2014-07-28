@@ -1,27 +1,24 @@
 class GenomesController < ApplicationController
 	def new
-    if current_user.doctor == true
-		  @genome = Genome.new(user_id: current_user.id)
-    else
       @genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
-	  end
   end
 
 	def create
 		@genome = Genome.new(genome_params)
     text_file = params[:genome][:file_url].read
-    parse(text_file)
     respond_to do |format|
       if @genome.save
+        @report = Report.create(genome_id: @genome.id)
+        parse(text_file, @report)
         format.html {redirect_to '/user/profile', notice: "Genome was successfully uploaded." }
       else
         format.html {render :new}
       end
     end
-	end
+  end
 
-  def parse(file)
-      report = Report.create(genome_id: @genome.id)
+  def parse(file, report)
+      # report = current_user.reports.last
       file.each_line do |line|
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
