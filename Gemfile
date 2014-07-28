@@ -71,7 +71,6 @@ gem 'figaro'
 gem 'aws-sdk'
 
 gem 'coveralls', require: false
-gem 'bourbon'
-gem 'neat'
+
 
 
