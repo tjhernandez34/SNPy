@@ -67,6 +67,7 @@ gem 'monban-generators'
 
 ## genome uploader
 gem 'carrierwave'
+gem 'carrierwave_direct'
 gem 'fog'
 gem 'figaro'
 gem 'aws-sdk'

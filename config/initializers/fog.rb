@@ -3,8 +3,10 @@ CarrierWave.configure do |config|
 	:provider => 'AWS',
 	:aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
 	:aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
-  :path_style => true
+  # :path_style => true
 	}
 	config.fog_directory = ENV['AWS_BUCKET']
 	config.fog_public = false
+	
+	config.max_file_size = 1.gigabyte
 end
