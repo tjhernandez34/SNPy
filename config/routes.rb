@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get 'user/profile' => 'users#show',
     as: 'user'
 
-  get 'chart' => 'welcome#chart'
+  get '/sunburst' => 'welcome#sunburst'
 
   get 'flare' => 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

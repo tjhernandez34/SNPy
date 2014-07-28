@@ -1,4 +1,4 @@
-/*.chart text {
+.chart text {
   font: 10px sans-serif;
 }
 .chart rect {
@@ -6,4 +6,4 @@
   fill: steelblue;
   padding: 3px;
   margin: 1px;
- }*/
+ }

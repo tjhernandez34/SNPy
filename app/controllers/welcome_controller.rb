@@ -5,7 +5,11 @@ class WelcomeController < ApplicationController
 
 	end
 
-	def chart
+	def barchart
+
+	end
+
+	def sunburst
 		risks_by_disease = current_user.current_risks.group_by{|risk| risk.disease.name }
 		puts risks_by_disease
 		puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
@@ -36,23 +40,6 @@ class WelcomeController < ApplicationController
 		puts '--------------------------------------------------------------'
 		# puts json_hash[:children]
 		render json: json_hash
-
-		# puts json_hash
-		# render json: {
-		# 	name: "johnny",
-		# 	children: [
-		# 		{
-		# 			name: "Category 1",
-		# 			children: [
-		# 			{name: "johny 1.1", size: 5},{name: "johnny 1.2", size: 2 }]
-
-		# 			},
-		# 		{
-		# 			name: "Category 2",
-		# 			children: [
-		# 			{name: "johny 2.1", size: 1},{name: "johnny 3.2", size: 2 }]
-		# 			}
-		# 	]}
 
 	end
 
