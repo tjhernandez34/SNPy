@@ -1,0 +1,9 @@
+<% @results.each do |result| %>
+    <% if result.class.to_s == 'Category' %>
+      <p><%= link_to "#{result.name}", category_path(result) %></p>
+    <% elsif result.class.to_s == 'Disease' %>
+      <p><%= link_to "#{result.name}", disease_path(result) %></p>
+    <% end %>
+<% end %>
+
+  <p>no genome currently in system</p>

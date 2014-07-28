@@ -19,6 +19,12 @@ Rails.application.routes.draw do
 
   get 'testing' => "welcome#testing"
 
+  get '/sunburst' => 'welcome#sunburst'
+
+  get '/search' => 'searches#dynamic_sunburst'
+
+  get '/barchart/:id' => "diseases#barchart"
+
   get 'user/profile' => 'users#show',
     as: 'user'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
-  validates_inclusion_of :doctor, :in => [true, false]
 
   has_many :genomes
 	has_many :reports, through: :genomes
@@ -10,7 +9,7 @@ class User < ActiveRecord::Base
 
   def current_risks_by_category
     if self.reports.length > 0
-      self.current_risks.group_by {|risk| risk.category}.delete_if{|category, risks| risks.length == 0}.keys
+      self.current_risks.group_by {|risk| risk.category }
     end
   end
 
