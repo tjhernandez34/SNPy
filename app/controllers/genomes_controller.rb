@@ -13,6 +13,7 @@ class GenomesController < ApplicationController
     genome.save
 
     # however you want to handle this.
+    redirect_to 'users/profile'
   end
 
 	def create
