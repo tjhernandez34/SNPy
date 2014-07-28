@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class GenomesController < ApplicationController
 	def new
       genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
@@ -11,7 +13,9 @@ class GenomesController < ApplicationController
     genome.file_url.key = params[:key]
 
     genome.save
+    report = Report.create(genome_id: genome.id)
 
+    parse(genome.file_url.url, report)
     # however you want to handle this.
     redirect_to '/user/profile'
   end
@@ -31,8 +35,9 @@ class GenomesController < ApplicationController
   end
 
   def parse(file, report)
+      @file = Nokogiri::HTML(open(file))
       # report = current_user.reports.last
-      file.each_line do |line|
+      @file.each_line do |line|
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
         if snp != "" && allele != ""
