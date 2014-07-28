@@ -1,14 +1,17 @@
 $(document).ready(function() {
 
 
-    // $.post('/chart', function(response){
-    //  data = response;
-    //  console.log(data)
-    //  // chart(data)
+    // $.post('/chart', function(response) {
+    //     data = response;
+    //     console.log(data)
+    //     // chart(data)
     // });
     // console.log(flare.json)
 
-    $("")
+    // $("#search-button").on('click', function(event) {
+    //     event.preventDefault();
+
+    // });
 
     var width = 960,
         height = 740,
@@ -48,7 +51,7 @@ $(document).ready(function() {
             return Math.max(0, y(d.y + d.dy));
         });
 
-    d3.json("/dynamic_sunburst", function(error, root) {
+    d3.json("/sunburst", function(error, root) {
         console.log(root);
         var g = svg.selectAll("g")
             .data(partition.nodes(root))

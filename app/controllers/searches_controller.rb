@@ -20,8 +20,9 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
 						"Skin" => "Porphyria Psoriasis",
 						"Iron" => "Haemochromatosis",
 						"Blood" => "G6 Blood Gunther Sjögren",
-					 	"Digestive" => "Stomach Colitis Crohn's Celiac",
+					 	"Digestive" => "Digestive Stomach Colitis Crohn's Celiac Kidney",
 						"Bone" => "Bone Ankylosing",
+						"Urinary" => "Kidney Bladder",
 						"Ear" => "Otitis"}
 
 
@@ -93,12 +94,6 @@ def dynamic_sunburst
 	puts json_hash
 	render json: json_hash
 	end
-
-
-
-
-
-
 
 	def replace_terms(search)
 		CHANGES.each do |key, value|
