@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'fonts';
 
 .body {
   background-color: $home-background-color;
@@ -6,6 +7,7 @@
   position: relative;
   top: 0px;
 }
+
 .index-header {
   background-color: $nav-bar-color-index;
 }
@@ -56,15 +58,16 @@ header {
   }
 }
 
+
 .container {
-/*  height: 100%;
+  height: 100%;
   margin-top: 0px;
   padding-top: 0px;
   padding-left: 8%;
   padding-right: 8%;
   position: relative;
-  width: 100%;*/
-  background-color: $home-background-color;
+  width: 100%;
+  background-color: $nav-bar-color;
 }
 
 .login{
@@ -85,14 +88,10 @@ header {
   height: 20%;
   -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
   box-shadow: 0 0 50px rgba(0,0,0,0.8);
-  color: $white;
-  font-size: 1em;
+  color: $light-blue;
+  font-size: 0.9em;
   font-family: $sans-serif-font, sans-serif;
-}
-
-#track_page {
-  width: 100%;
-
+  font-weight: lighter;
 }
 
 .new_user {
@@ -130,40 +129,45 @@ div.modal.login-form.hidden {
   border-radius: 0.3em;
 }
 
+.pure-form {
+  position: relative;
+  top: 50px;
+  border: $border-style;
+  display: inline-block;
+  padding: 2%;
+
+}
+
+label#search_tag {
+  font-family: $sans-serif-font, sans-serif;
+  font-size: 1em;
+
+}
+
+input#search-button {
+  border: 0px solid white;
+  background: $light-blue;
+  font-family: $sans-serif-font, sans-serif;
+}
+
+input#genome_file_url::-webkit-file-upload-button {
+  background: $light-blue;
+  color: white;
+  padding: 1em;
+  border-radius: 0.3em;
+
+}
+
+.upload_submit {
+/*  border: 0px solid white;*/
+  background: $light-blue;
+  font-family: $sans-serif-font, sans-serif;
+  color: white;
+  border-radius: 0.3em;
+}
+
 /*
 Modal styling
 */
 
-/*#lean_overlay {
-    position: fixed;
-    z-index:100;
-    top: 0px;
-    left: 0px;
-    height:100%;
-    width:100%;
-    background: #000;
-    display: none;
-}
-.form_style {
-  width: 300px;
-  padding: 15px 20px;
-  background: #f3f6fa;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-}
 
-.new_user {
-  width: 300px;
-  padding: 15px 20px;
-  background: #f3f6fa;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-}*/

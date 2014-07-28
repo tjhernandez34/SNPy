@@ -1,13 +1,21 @@
 
 <% if @disease %>
-    <h2><%=@disease.name%></h2>
-    <% total = 0 %>
-  <% @risks.each do |risk| %>
-    <% if risk.marker.disease.name == @disease.name%>
-      <p>SNP: <%=risk.marker.snp%> Allele: <%=risk.marker.allele%></p>
-      <p><%= risk.marker.risk_level %></p>
-      <% total += risk.marker.risk_level %>
-    <%end%>
+<h2><%= @disease.name %></h2>
+<% total = 0 %>
+<% if @results != nil %>
+<% @results.each do |marker| %>
+  <p>SNP: <%= marker.snp %> Allele: <%= marker.allele %></p>
+  <p>Risk Level: <%= marker.risk_level %>
+    <% total += marker.risk_level.to_i %>
   <% end %>
+<h3>Total Risk Level: <%= total %></h3>
 <% end %>
-<p>Total Risk: <%= total %></p>
+<% end %>
+
+<form id="disease_bar_chart_form">
+  <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+  <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+</form>
+
+<div class="disease_bar_chart" id="<%=@disease.id%>">
+</div>

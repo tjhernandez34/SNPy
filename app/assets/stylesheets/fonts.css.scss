@@ -1,5 +1,6 @@
 @import 'variables';
 
+
 /*
 Typography
 */
@@ -35,7 +36,7 @@ h4, .h4,
 h5, .h5,
 h6, .h6 {
   font-family: $sans-serif-font, sans-serif;
-  font-weight: 700;
+  font-weight: 200;
   color: $primary-color;
   padding: .5em 0;
 }
