@@ -18,6 +18,16 @@
         <div class="content top clear-fix">
 
           <% if current_user == nil %>
+
+        <div id='content'>
+          <div class="carousel">
+            <ul class="frames">
+              <li class='hideable'>
+                <%= image_tag("genome2.jpg", :alt => "people viewing genome", :id => "main-image", :size => "900x400", :crop => :fill) %>
+              </li>
+            </ul>
+          </div>
+        </div>
             <div class = "modal login-form hidden">
               <%= render "partials/login" %>
             </div>
@@ -28,6 +38,7 @@
 
           <%= yield %>
         </div>
+
           <%= render 'partials/footer'%>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
