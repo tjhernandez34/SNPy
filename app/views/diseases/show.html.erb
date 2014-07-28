@@ -11,3 +11,11 @@
   <% end %>
 <% end %>
 <p>Total Risk: <%= total %></p>
+
+<form id="disease_bar_chart_form">
+  <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+  <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+</form>
+
+<div class="disease_bar_chart" id="<%=@disease.id%>">
+</div>

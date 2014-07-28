@@ -22,7 +22,7 @@ $(document).ready(function(){
 
 	var color = d3.scale.category20c();
 
-	var svg = d3.select("body").append("svg")
+	var svg = d3.select("#zoomable_sunburst").append("svg")
 	    .attr("width", width)
 	    .attr("height", height)
 	  .append("g")
@@ -58,7 +58,7 @@ $(document).ready(function(){
 				if ( d.children != null ){
 					return d.name;
 			  }
-			});
+	});
 
 	  // var path = svg.selectAll("path")
 	  //     .data(partition.nodes(root))

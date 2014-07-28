@@ -18,6 +18,9 @@ class User < ActiveRecord::Base
     self.reports.order(created_at: :desc).first.risks
   end
 
+  def current_risks_by_disease
+    self.current_risks.group_by {|risk| risk.disease.name}
+  end
   # def self.current_username
   #   "joey"#current_user.username
   # end
