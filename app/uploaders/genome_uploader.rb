@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class GenomeUploader < CarrierWave::Uploader::Base
-  process :parse
+  # process :parse
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -26,30 +26,30 @@ class GenomeUploader < CarrierWave::Uploader::Base
   # Process files as they are uploaded:
   # process :scale => [200, 300]
 
-  def parse
-    page = self
-    report = Report.create(genome_id: 32)
-    username = "hello"
+  # def parse
+  #   page = self
+  #   report = Report.create(genome_id: 32)
+  #   username = "hello"
 
 
 
-    File.open(self.path).read.each_line do |line|
-      snp = line.scan(/(^rs\d+|^i\d+)/)
-      allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
-      if snp != "" && allele != ""
-        snp = snp.join.strip
-        allele = allele.join.strip
-        $redis.hset(username, snp, allele)
-      end
-    end
+  #   File.open(self.path).read.each_line do |line|
+  #     snp = line.scan(/(^rs\d+|^i\d+)/)
+  #     allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
+  #     if snp != "" && allele != ""
+  #       snp = snp.join.strip
+  #       allele = allele.join.strip
+  #       $redis.hset(username, snp, allele)
+  #     end
+  #   end
 
-    Marker.all.each do |marker|
-      if $redis.hget(username, marker.snp) == marker.allele
-        Risk.create(report_id: report.id, marker_id: marker.id)
-      end
-    end
-    $redis.del(username)
-  end
+  #   Marker.all.each do |marker|
+  #     if $redis.hget(username, marker.snp) == marker.allele
+  #       Risk.create(report_id: report.id, marker_id: marker.id)
+  #     end
+  #   end
+  #   $redis.del(username)
+  # end
 
   #
   # def scale(width, height)

@@ -5,14 +5,37 @@ class GenomesController < ApplicationController
 
 	def create
 		@genome = Genome.new(genome_params)
+    text_file = params[:genome][:file_url].read
     respond_to do |format|
       if @genome.save
+        @report = Report.create(genome_id: @genome.id)
+        parse(text_file, @report)
         format.html {redirect_to '/user/profile', notice: "Genome was successfully uploaded." }
       else
         format.html {render :new}
       end
     end
-	end
+  end
+
+  def parse(file, report)
+      # report = current_user.reports.last
+      file.each_line do |line|
+        snp = line.scan(/(^rs\d+|^i\d+)/)
+        allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
+        if snp != "" && allele != ""
+          snp = snp.join.strip
+          allele = allele.join.strip
+          $redis.hset(current_user.username, snp, allele)
+        end
+      end
+
+      Marker.all.each do |marker|
+        if $redis.hget(current_user.username, marker.snp) == marker.allele
+          Risk.create(report_id: report.id, marker_id: marker.id)
+        end
+      end
+      $redis.del(current_user.username)
+    end
 
 	private
 	def genome_params
