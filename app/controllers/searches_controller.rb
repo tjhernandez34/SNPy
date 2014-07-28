@@ -32,14 +32,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
 		replace_terms(search)
 		@risks = current_user.genomes.last.reports.last.risks
 		give_risk_names(@risks)
-		@results = []	
-		# search.each do |term|
-		# Category.where('name LIKE ?', "%#{term}%").each do |result|
-		# 	if @risk_names.include?(result.name)
-		# 		@results << result
-		# 	end
-		# end
-	# end
+		@results = []
 	search.each do |term|
 		Disease.where('name LIKE ?', "%#{term}%").each do |result|
 			if @risk_names.include?(result.name)
@@ -48,8 +41,63 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
 		end
 	end
 		@results.uniq!
-		@results
+		@results #below is json
 	end
+
+def dynamic_sunburst
+	search = params[:search].titleize!.split
+		replace_terms(search)
+		@risks = current_user.genomes.last.reports.last.risks
+		give_risk_names(@risks)
+		@results = []
+	search.each do |term|
+		Disease.where('name LIKE ?', "%#{term}%").each do |result|
+			if @risk_names.include?(result.name)
+				@results << result
+			end
+		end
+	end
+		@results.uniq!
+
+
+
+	json_hash = {name: current_user.first_name, children: []}
+
+	Category.all.each_with_index do |category, category_index|
+		json_hash[:children] << {name: category.name, children:[]}
+
+		@result_by_category = []
+
+		@results.each do |result|
+			if result.category.name == category.name
+				@result_by_category << result
+			end
+		end
+		@result_by_category.each_with_index do |disease, disease_index|
+			json_hash[:children][category_index][:children] << {name: disease.name, children:[]}
+
+
+			@risks_by_disease = []
+
+			@risks.each do |risk|
+				if risk.marker.disease.name == disease.name
+					@risks_by_disease  << risk
+				end
+			end
+			@risks_by_disease.each_with_index do |risk|
+				json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: 1}
+			end
+		end
+	end
+	puts "----------------------------"
+	puts json_hash
+	render json: json_hash
+	end
+
+
+
+
+
 
 
 	def replace_terms(search)
@@ -69,8 +117,6 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
 		risks.each do |risk|
 			if risk.marker.disease.name
 				@risk_names << risk.marker.disease.name
-			# elsif risk.marker.disease.category.name
-			# 	@risk_names << risk.marker.disease.category.name
 			end
 			@risk_names.uniq!
 		end

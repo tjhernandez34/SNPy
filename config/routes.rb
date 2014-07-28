@@ -16,8 +16,9 @@ Rails.application.routes.draw do
   resources :diseases, only: :show
 
   # resources :risks
+  get '/sunburst' => 'welcome#sunburst'
 
-  get '/search' => 'searches#search'
+  get '/search' => 'searches#dynamic_sunburst'
 
   get 'user/profile' => 'users#show',
     as: 'user'
