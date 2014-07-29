@@ -44,7 +44,7 @@ class GenomesController < ApplicationController
       puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       puts params[:bucket]
       puts params[:key]
-      @file = open("https://s3.amazonaws.com/dbc.genomics/uploads/genome/file_url//fc90d727-b82e-4774-9504-1eb6408a2976/user284_file961_yearofbirth_1961_sex_XY.23andme.txt")
+      @file = open(params[:genome][:file_url].url)
       puts "---------------------------"
       puts "#{@file.read}"
       puts "#{@file.body.read}"
