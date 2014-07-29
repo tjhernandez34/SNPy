@@ -55,6 +55,7 @@ class GenomesController < ApplicationController
       data = open("https://s3.amazonaws.com/#{params[:bucket]}/#{params[:key]}") 
       puts "--------------------------------------------------"
       puts "#{data.read}"
+      puts "#{data.read.methods}"
       puts '..........................................................'
       puts send_data data.read, :filename => "#{params[:key]}", :disposition => 'attachment', :stream => 'true', :buffer_size => '4096' 
 
