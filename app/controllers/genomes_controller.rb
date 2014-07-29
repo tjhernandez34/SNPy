@@ -53,19 +53,19 @@ class GenomesController < ApplicationController
 
       puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       data = open("https://s3.amazonaws.com/#{params[:bucket]}/#{params[:key]}") 
-      puts "#{data.read}"
-      puts send_data data.read, :filename => "#{params[:key]}", :disposition => 'attachment', :stream => 'true', :buffer_size => '4096' 
+      # puts "#{data.read}"
+      # puts send_data data.read, :filename => "#{params[:key]}", :disposition => 'attachment', :stream => 'true', :buffer_size => '4096' 
 
 
-      # puts @file.open
-      puts "---------------------------"
-      # puts "#{@file.read}"
-      # puts "#{@file.body.read}"
-      # resp = file.open({ bucket:"#{params[:bucket]}", key:"#{params[:key]}"}, target: "#{file.url}")
-      # File.open("#{file.url}", "w") do |f|
-      #   puts "#{f.write(bucket.objects[1].read)}"
-      # end
-      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      # # puts @file.open
+      # puts "---------------------------"
+      # # puts "#{@file.read}"
+      # # puts "#{@file.body.read}"
+      # # resp = file.open({ bucket:"#{params[:bucket]}", key:"#{params[:key]}"}, target: "#{file.url}")
+      # # File.open("#{file.url}", "w") do |f|
+      # #   puts "#{f.write(bucket.objects[1].read)}"
+      # # end
+      # puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       # the_file = file.get_object(bucket: "dbc.genomics", key:"uploads/genome/file_url//c8aa2256-b38f-413c-acca-e087518aa6a1/x_sex_XY.23andme.txt")
       # puts "#{the_file.body.read}"
       # @file = open(file.url)
