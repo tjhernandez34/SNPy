@@ -2,28 +2,30 @@ require 'open-uri'
 
 class GenomesController < ApplicationController
 	def new
-      @genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
-      @uploader = @genome.file_url
-      create(@genome)
-      # @uploader.success_action_redirect = new_callback_genomes_url #set later
+      genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
+      @uploader = genome.file_url
+
+      @uploader.success_action_redirect = new_callback_genomes_url #set later
   end
 
   def new_callback
-    @genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
-    @genome.file_url.key = params[:key]
+    genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
+    genome.file_url.key = params[:key]
 
-    
+    genome.save
+    report = Report.create(genome_id: genome.id)
+    byebug
+    parse(genome.file_url.url, report)
     # however you want to handle this.
-    # redirect_to '/user/profile'
+    redirect_to create_genomes_url
   end
 
-	def create(genome)
-		# @genome = Genome.new(params)
-    genome.save
-    text_file = genome[:file_url].read
+	def create
+		@genome = Genome.last
+    text_file = @genome[:file_url].read
     respond_to do |format|
-      if genome.save
-        @report = Report.create(genome_id: genome.id)
+      if @genome.save
+        @report = Report.create(genome_id: @genome.id)
         parse(text_file, @report)
         format.html {redirect_to '/user/profile', notice: "Genome was successfully uploaded." }
       else
@@ -33,10 +35,9 @@ class GenomesController < ApplicationController
   end
 
   def parse(file, report)
-
-      # @file = Nokogiri::HTML(open(file))
+      @file = Nokogiri::HTML(open(file))
       # report = current_user.reports.last
-      file.each_line do |line|
+      @file.each_line do |line|
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
         if snp != "" && allele != ""
