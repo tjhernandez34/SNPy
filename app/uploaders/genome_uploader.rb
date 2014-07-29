@@ -1,9 +1,9 @@
 # encoding: utf-8
-# module CarrierWave::Uploader::Cache
-#   def full_cache_path
-#     "#{::Rails.root}/public/#{cache_dir}/#{cache_name}"
-#   end
-# end
+module CarrierWave::Uploader::Cache
+  def full_cache_path
+    "#{::Rails.root}/public/#{cache_dir}/#{cache_name}"
+  end
+end
 
 class GenomeUploader < CarrierWave::Uploader::Base
   include CarrierWaveDirect::Uploader
