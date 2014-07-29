@@ -12,6 +12,7 @@ class GenomesController < ApplicationController
   def new_callback
     genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
     genome.file_url.key = params[:key]
+    genome.file_url.bucket = params[:bucket]
 
     genome.save
     report = Report.create(genome_id: genome.id)
@@ -41,17 +42,19 @@ class GenomesController < ApplicationController
       # @file = Net::HTTP.get_response(URI.parse(file))
       # file = GenomeUploader.cached?
       puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      @file = open(file.url)
-      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      puts "#{@file}"
-      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      send_data @file
-      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      puts "file #{file}"
-      puts '............................'
-      puts "file.url #{file.url}"
-      puts ".............................."
-      puts "file.key #{file.key}"
+      the_file = file.get_object(bucket:bucket:"#{file.bucket}", key:"#{file.key}")
+      puts "#{the_file.body.read}"
+      # @file = open(file.url)
+      # puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      # puts "#{@file}"
+      # puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      # send_data @file
+      # puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      # puts "file #{file}"
+      # puts '............................'
+      # puts "file.url #{file.url}"
+      # puts ".............................."
+      # puts "file.key #{file.key}"
       file.read.each_line do |line|
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
