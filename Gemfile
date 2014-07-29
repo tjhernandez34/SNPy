@@ -74,6 +74,6 @@ gem 'aws-sdk'
 
 gem 'coveralls', require: false
 
-gem 'aws-sdk-core',
+gem 'aws-sdk-core'
 
 
