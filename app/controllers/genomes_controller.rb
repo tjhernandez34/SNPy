@@ -87,7 +87,7 @@ class GenomesController < ApplicationController
           allele = allele.join.strip
           $redis.hset(current_user.username, snp, allele)
         end
-        redirect_to '/user/profile'
+
       end
 
       Marker.all.each do |marker|
@@ -96,6 +96,7 @@ class GenomesController < ApplicationController
         end
       end
       $redis.del(current_user.username)
+      redirect_to '/user/profile'
     end
 
 	private
