@@ -3,7 +3,7 @@ require 'open-uri'
 class GenomesController < ApplicationController
 	def new
       @genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
-      @uploader = genome.file_url
+      @uploader = @genome.file_url
       create(@genome)
       # @uploader.success_action_redirect = new_callback_genomes_url #set later
   end
