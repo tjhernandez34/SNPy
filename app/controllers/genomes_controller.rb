@@ -57,7 +57,7 @@ class GenomesController < ApplicationController
       puts "#{data.read}"
       puts "#{data.read.methods}"
       puts '..........................................................'
-      puts send_data data.read, :filename => "#{params[:key]}", :disposition => 'attachment', :stream => 'true', :buffer_size => '4096' 
+      # puts send_data data.read, :filename => "#{params[:key]}", :disposition => 'attachment', :stream => 'true', :buffer_size => '4096' 
 
 
       # # puts @file.open
