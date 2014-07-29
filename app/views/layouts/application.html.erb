@@ -17,18 +17,22 @@
   <div class="container center global clear-fix">
 
 
+        <div class="content top clear-fix">
 
           <% if current_user == nil %>
-            <div class = "modal login-form hidden" style="display:none">
-              <%= render "partials/login" =%>
-            </div>
+
             <div class = "modal signup-form hidden" style="display:none">
               <%= render "partials/signup" %>
+            </div>
+
+            <div class = "modal login-form hidden" style="display:none" >
+              <%= link_to 'login', login_path %>
+              <%= render "partials/login" =%>
             </div>
           <% end %>
 
           <%= yield %>
-
+        </div>
 
           <%= render 'partials/footer'%>
     

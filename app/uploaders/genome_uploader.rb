@@ -1,7 +1,13 @@
 # encoding: utf-8
+# module CarrierWave::Uploader::Cache
+#   def full_cache_path
+#     "#{::Rails.root}/public/#{cache_dir}/#{cache_name}"
+#   end
+# end
 
 class GenomeUploader < CarrierWave::Uploader::Base
-  process :parse
+  include CarrierWaveDirect::Uploader
+  # process :parse
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -11,10 +17,18 @@ class GenomeUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  def move_to_cache
+    false
+  end
+  
+  def move_to_store
+    true
+  end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
@@ -26,30 +40,30 @@ class GenomeUploader < CarrierWave::Uploader::Base
   # Process files as they are uploaded:
   # process :scale => [200, 300]
 
-  def parse
-    page = self
-    report = Report.create(genome_id: 32)
-    username = "hello"
+  # def parse
+  #   page = self
+  #   report = Report.create(genome_id: 32)
+  #   username = "hello"
 
 
 
-    File.open(self.path).read.each_line do |line|
-      snp = line.scan(/(^rs\d+|^i\d+)/)
-      allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
-      if snp != "" && allele != ""
-        snp = snp.join.strip
-        allele = allele.join.strip
-        $redis.hset(username, snp, allele)
-      end
-    end
+  #   File.open(self.path).read.each_line do |line|
+  #     snp = line.scan(/(^rs\d+|^i\d+)/)
+  #     allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
+  #     if snp != "" && allele != ""
+  #       snp = snp.join.strip
+  #       allele = allele.join.strip
+  #       $redis.hset(username, snp, allele)
+  #     end
+  #   end
 
-    Marker.all.each do |marker|
-      if $redis.hget(username, marker.snp) == marker.allele
-        Risk.create(report_id: report.id, marker_id: marker.id)
-      end
-    end
-    $redis.del(username)
-  end
+  #   Marker.all.each do |marker|
+  #     if $redis.hget(username, marker.snp) == marker.allele
+  #       Risk.create(report_id: report.id, marker_id: marker.id)
+  #     end
+  #   end
+  #   $redis.del(username)
+  # end
 
   #
   # def scale(width, height)

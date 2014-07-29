@@ -1,17 +1,16 @@
-<%= form_for :session, url: new_session_path, :class => 'form_style', :remote => true do |f| %>
+<%= form_for :session, url: login_path, :id => 'home_login_form', :class => 'form_style', :remote => true do |f| %>
 <h2>Login</h2>
 <ul class = "login_errors">
   <li></li>
 </ul>
-	<div>
-  	<%= f.email_field :email, :placeholder => "Email", :class => "form-field email" %>
-	</div>
-	<div>
-  	<%= f.password_field :password, :placeholder => "Password",  :class => "form-field password" %>
-	</div>
-	<div>
-  	<%= f.submit "login", :class => "submit form-btn" %>
-	</div>
+  <div>
+    <%= f.email_field :email, :placeholder => "Email", :class => "form-field email" %>
+  </div>
+  <div>
+    <%= f.password_field :password, :placeholder => "Password",  :class => "form-field password" %>
+  </div>
+  <div>
+    <%= f.submit "login",  :class => "submit form-btn" %>
+  </div>
 <% end %>
-
 
