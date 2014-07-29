@@ -41,12 +41,19 @@ class GenomesController < ApplicationController
       # @file = Net::HTTP.get_response(URI.parse(file))
       # file = GenomeUploader.cached?
       puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      puts params[:bucket]
+      puts params[:key]
+      @file = open("https://s3.amazonaws.com/dbc.genomics/uploads/genome/file_url//fc90d727-b82e-4774-9504-1eb6408a2976/user284_file961_yearofbirth_1961_sex_XY.23andme.txt")
+      puts "---------------------------"
+      puts "#{@file.read}"
+      puts "#{@file.body.read}"
+      # resp = file.open({ bucket:"#{params[:bucket]}", key:"#{params[:key]}"}, target: "#{file.url}")
       # File.open("#{file.url}", "w") do |f|
       #   puts "#{f.write(bucket.objects[1].read)}"
       # end
       puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      the_file = file.get_object(bucket: "dbc.genomics", key:"uploads/genome/file_url//c8aa2256-b38f-413c-acca-e087518aa6a1/x_sex_XY.23andme.txt")
-      puts "#{the_file.body.read}"
+      # the_file = file.get_object(bucket: "dbc.genomics", key:"uploads/genome/file_url//c8aa2256-b38f-413c-acca-e087518aa6a1/x_sex_XY.23andme.txt")
+      # puts "#{the_file.body.read}"
       # @file = open(file.url)
       # puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       # puts "#{@file}"
