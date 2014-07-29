@@ -7,6 +7,7 @@ class Report < ActiveRecord::Base
   attr_reader :create_report
 
   def parse(bucket, key, user)
+    puts 'xxxxxxxxxxxxx'
     data = open("https://s3.amazonaws.com/#{bucket}/#{key}") 
     data.read.each_line do |line|
       snp = line.scan(/(^rs\d+|^i\d+)/)
