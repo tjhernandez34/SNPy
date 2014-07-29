@@ -22,7 +22,7 @@ class GenomesController < ApplicationController
     genome.save
     text_file = params[:genome][:file_url].read
     respond_to do |format|
-      if @genome.save
+      if genome.save
         @report = Report.create(genome_id: @genome.id)
         parse(text_file, @report)
         format.html {redirect_to '/user/profile', notice: "Genome was successfully uploaded." }
