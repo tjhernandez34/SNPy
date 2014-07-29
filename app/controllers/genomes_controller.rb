@@ -37,7 +37,8 @@ class GenomesController < ApplicationController
   def parse(file, report)
       # @file = Nokogiri::HTML(open(file))
       # report = current_user.reports.last
-      file.each_line do |line|
+      @file = Net::HTTP.get_response(URI.parse(file))
+      @file.each_line do |line|
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
         if snp != "" && allele != ""
