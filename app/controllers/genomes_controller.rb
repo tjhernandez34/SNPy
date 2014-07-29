@@ -1,5 +1,5 @@
 require 'open-uri'
-require 'open-uri-s3'
+# require 'open-uri-s3'
 
 class GenomesController < ApplicationController
 	def new
