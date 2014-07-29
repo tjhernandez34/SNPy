@@ -17,16 +17,16 @@ class GenomesController < ApplicationController
 
     parse(genome.file_url.key, report)
     # however you want to handle this.
-    redirect_to create_genomes_url
+    redirect_to '/user/profile'
   end
 
 	def create
-		@genome = Genome.last
-    text_file = @genome[:file_url].read
+		# @genome = Genome.last
+  #   text_file = @genome[:file_url].read
     respond_to do |format|
       if @genome.save
-        @report = Report.create(genome_id: @genome.id)
-        parse(text_file, @report)
+        # @report = Report.create(genome_id: @genome.id)
+        # parse(text_file, @report)
         format.html {redirect_to '/user/profile', notice: "Genome was successfully uploaded." }
       else
         format.html {render :new}
