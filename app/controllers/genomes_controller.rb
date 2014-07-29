@@ -14,8 +14,8 @@ class GenomesController < ApplicationController
 
     genome.save
     report = Report.create(genome_id: genome.id)
-    byebug
-    parse(genome.file_url.url, report)
+
+    parse(genome.file_url.key, report)
     # however you want to handle this.
     redirect_to create_genomes_url
   end
@@ -35,9 +35,9 @@ class GenomesController < ApplicationController
   end
 
   def parse(file, report)
-      @file = Nokogiri::HTML(open(file))
+      # @file = Nokogiri::HTML(open(file))
       # report = current_user.reports.last
-      @file.each_line do |line|
+      file.each_line do |line|
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
         if snp != "" && allele != ""
