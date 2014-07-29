@@ -7,6 +7,7 @@ class GenomesController < ApplicationController
       @uploader = genome.file_url
       # GenomeUploader.cache_stored_file!
 
+   
       @uploader.success_action_redirect = new_callback_genomes_url #set later
   end
 
