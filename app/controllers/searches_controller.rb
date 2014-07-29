@@ -98,7 +98,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
 
     if !request.xhr?
       puts "im in the render json hash section"
-      render json: json_hash
+      render json: json_hash, locals: {results: @results}
     else
       @results
     end
