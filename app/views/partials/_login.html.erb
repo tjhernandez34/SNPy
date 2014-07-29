@@ -1,4 +1,4 @@
-<%= form_for :session, url: login_path, :class => 'form_style' do |f| %>
+<%= form_for :session, url: new_session_path, :class => 'form_style', :remote => true do |f| %>
 <h2>Login</h2>
 <ul class = "login_errors">
   <li></li>

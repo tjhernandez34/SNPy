@@ -32,9 +32,6 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.7)
-    bourbon (3.2.3)
-      sass (~> 3.2)
-      thor
     builder (3.2.2)
     byebug (3.1.2)
       columnize (~> 0.8)
@@ -124,9 +121,6 @@ GEM
     monban-generators (0.0.4)
       monban (>= 0.0.12)
     multi_json (1.10.1)
-    neat (1.5.1)
-      bourbon (>= 3.1)
-      sass (~> 3.2.19)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
@@ -237,7 +231,6 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
-  bourbon
   byebug
   capybara (= 2.1.0)
   carrierwave
@@ -250,7 +243,6 @@ DEPENDENCIES
   minitest
   monban
   monban-generators
-  neat
   nokogiri
   pg
   rails (= 4.1.4)

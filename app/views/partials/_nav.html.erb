@@ -7,8 +7,8 @@
     <li><%= link_to "logout", logout_path %></li>
     <li><%= link_to "profile", user_path(session[:user_id]) %></li>
     <% else %>
-    <li><%= link_to "login", '#', class: "login" %></li>
-    <li><%= link_to "sign up", '#', class: "signup" %></li>
+    <li><%= link_to "login", new_session_path, class: "login" %></li>
+    <li><%= link_to "sign up", new_user_path, class: "signup" %></li>
     <% end %>
   </ul>
 </nav>
