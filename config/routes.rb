@@ -17,16 +17,18 @@ Rails.application.routes.draw do
 
   resources :risks
 
-  get '/testing' => "welcome#testing"
+  get '/index' => "welcome#index"
 
   get 'user/profile' => 'users#show',
     as: 'user'
 
   get '/sunburst' => 'welcome#sunburst'
 
-  get 'flare' => 'welcome#index'
-
   get '/barchart/:id' => "diseases#barchart"
+
+  get '/dna' => "welcome#testing"
+
+  get '/welcome/force' => "welcome#dna"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

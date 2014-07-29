@@ -1,142 +1,197 @@
 $(document).ready(function(){
 
 
-	y0 = 0
-  var disease_id = $(".disease_bar_chart").attr("id")
-  var margin = {top: 40, right: 10, bottom: 20, left: 10},
-  width = 500 - margin.left - margin.right,
-  height = 280 - margin.top - margin.bottom;
+var disease_id = $(".disease_bar_chart").attr("id");
 
-  d3.json("/barchart/"+ disease_id +"", function(root){
+// Kick it off
+d3.json("/barchart/"+ disease_id +"", function(data){
+	var data = data;
 
+var setupStack = function setupStack(origData){
+    // setup some variables
+    var len = 2;
+    var i=0; j=0, d=null;
+    var basePositive=0, baseNegative=0;
 
-  	console.log(root);
+    for(i=0;i<len;i++){ // loop through each stacked group
+        // reset bases for each new group
+        basePositive = 0;
+        baseNegative = 0;
 
-  	var n = root.length; // number of layers
-	  var m = 2; // number of samples per layer
-	  var stack = d3.layout.stack();
-	  var layers = stack(root);
-	  var yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }) });
-	  var yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0  }) });
+        for(j=0; j<origData[i].length; j++){ // loop through each stack
+            stackItem = origData[i][j];
+            stackItem.size = Math.abs(stackItem.value);
 
-console.log("layers:",layers)
+            // If the value is negative, we want to place the bar under
+            // the 0 line
+            if (stackItem.value < 0)  {
+                stackItem.y0 = baseNegative;
+                baseNegative -= stackItem.size;
+            } else { 
+                basePositive += stackItem.size;
+                stackItem.y0 = basePositive;
+            } 
+        }
+    }
 
-  var x = d3.scale.ordinal()
-  	.domain(d3.range(m))
-  	.rangeRoundBands([0, width], .08);
+    return origData;
+};
 
-  var y = d3.scale.linear()
-  	.domain([0, yStackMax])
-  	.range([height, 0]);
+// Setup SVG
+// --------------------------------------
+var width = 500;
+var height = 500;
+var margin = 20;
 
-  var color = d3.scale.linear()
-  	.domain([0, n - 1])
-  	.range(["#aad", "#556"]);
+var svg = d3.select('.disease_bar_chart').append("svg")
+	.attr({
+    width: width,
+    height: height
+});
 
-  var xAxis = d3.svg.axis()
-  	.scale(x)
-  	.tickSize(0)
-  	.tickPadding(6)
-  	.orient("bottom");
-
-
-
-
-	  
-  var svg = d3.select(".disease_bar_chart").append("svg")
-   	.attr("width", width + margin.left + margin.right)
-   	.attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-
-	  var layer = svg.selectAll(".layer")
-	    .data(layers)
-	  .enter().append("g")
-	    .attr("class", "layer")
-	    .style("fill", function(d, i) { return color(i); });
-
-	console.log("layer:", layer);
-
-		var rect = layer.selectAll("rect")
-		    .data(function(d) { return d; })
-		  .enter().append("rect")
-		    .attr("x", function(d) { return (d.x); })
-		    .attr("y", height)
-		    .attr("width", x.rangeBand())
-		    .attr("height", y);
-
-	console.log(rect)
+// Setup groups
+var chartGroup = svg.append('g');
+var xAxisGroup = svg.append('g').attr('class','axis x');
+var yAxisGroup = svg.append('g').attr('class','axis y').attr("transform", "translate(" + margin + ", 0)");
 
 
+// Setup scales and axes
+// --------------------------------------
+var xScale;
+var yScale;
 
-	rect.transition()
-	    .delay(function(d, i) { return i * 10; })
-	    .attr("y", function(d) { return y(d.y0 + d.y); })
-	    // .attr("height", function(d) { return y(0) - y(0 + d.y); });
+var updateScales = function updateScales(){
+    // setup an ordinal scale for the x axis. The input domain will be an
+    // array of group names (from the data)
 
-	svg.append("g")
-	    .attr("class", "x axis")
-	    .attr("transform", "translate(0," + height + ")")
-	    .call(xAxis);
+    xScale = d3.scale.ordinal().domain(data.map(function(datum,i){
 
-	d3.selectAll("input").on("change", change);
-	var timeout = setTimeout(function() {
-	  d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
-	}, 2000);
+            // We'll always have at least element in the datum array
+
+            return datum[0].group;
+        }))
+        .rangeRoundBands([margin, width - margin], 0.1);
 
 
-console.log(timeout);
-	function change() {
-	  clearTimeout(timeout);
-	  if (this.value === "grouped") transitionGrouped();
-	  else transitionStacked();
-	}
+    // Setup a linear scale for the y axis 
+    var merged = d3.merge(data);
+    yScale = d3.scale.linear().domain([
+            // the min data should be the base y minus the size
+            d3.min(merged, function(d){ return d.y0-d.size; }),
+            // y0 will contain the highest value
+            d3.max(merged, function(d){ return d.y0; })
+        ])
+        .range([height - margin, margin])
+        // nice it so we get nice round values
+        .nice();
+};
 
-	function transitionGrouped() {
-	  y.domain([0, yGroupMax]);
+var updateAxis = function(){
+    // Update the x and y axis
+    var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .orient("bottom")
+        .tickSize(6, 0);
 
-	  rect.transition()
-	      .duration(500)
-	      .delay(function(d, i) { return i * 10; })
-	      .attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / n * j; })
-	      .attr("width", x.rangeBand() / n)
-	    .transition()
-	      .attr("y", function(d) { return y(d.y); })
-	      .attr("height", function(d) { return height - y(d.y); });
-	}
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .orient("left");
 
-	function transitionStacked() {
-	  y.domain([0, yStackMax]);
+    // use the axes group defined above
+    xAxisGroup.transition().attr("transform","translate (" + [
+        0, yScale(0) ] + ")").call(xAxis);
+    yAxisGroup.transition().attr("transform","translate (" + [
+        xScale(margin), 0 ] + ")").call(yAxis);
+};
 
-	  rect.transition()
-	      .duration(500)
-	      .delay(function(d, i) { return i * 10; })
-	      .attr("y", function(d) { return y(d.y0 + d.y); })
-	      .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
-	    .transition()
-	      .attr("x", function(d) { return x(d.x); })
-	      .attr("width", x.rangeBand());
-	}
+// Update bars
+// --------------------------------------
+var updateBars = function(){
+    // This function is called to:
+    // 1. initially create the stacked bars
+    // 2. update stacked bars on all subsequent calls
+    
+    var color = d3.scale.category20c();
 
-	});
+    // Setup groups
+    var barGroups = chartGroup.selectAll('.barGroup').data(data);
 
-	// function bumpLayer(n, o) {
-	//   function bump(a) {
-	//     var x = 1 / (.1 + Math.random()),
-	//         y = 2 * Math.random() - .5,
-	//         z = 10 / (.1 + Math.random());
-	//     for (var i = 0; i < n; i++) {
-	//       var w = (i / n - y) * z;
-	//       a[i] += x * Math.exp(-w * w);
-	//     }
-	//   }
+    // create groups
+    barGroups.enter().append('svg:g').attr({
+        'class': 'barGroup'   
+    });
 
-	//   var a = [], i;
-	//   for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
-	//   for (i = 0; i < 5; ++i) bump(a);
-	//   return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
-	// }
+    // secondly, setup the stacked groups
+    var bars = barGroups.selectAll('.bar').data(function(d){ 
+        return d;
+    });
+
+    // ** Enter **
+    bars.enter().append('svg:rect').attr({
+        'class': 'bar',
+        width: xScale.rangeBand(),
+        x: function(d,i){
+            // Pass in the index to the xScale
+            return xScale(d.group);
+        },
+        y: function(d,i){
+            return yScale(d.y0);
+        },
+        height: function(d,i){
+            return (yScale(0) - yScale(d.size)) / 2;
+        }
+    }).style({
+        fill: function(d,i){
+            return color(i);
+        }
+    }).on('mouseenter', function(d){
+        console.log(d);  
+    });
+
+    // ** Update **
+    bars.transition().attr({
+        width: xScale.rangeBand(),
+        x: function(d,i){
+            // Pass in the index to the xScale
+            return xScale(d.group);
+        },
+        y: function(d,i){
+            return yScale(d.y0);
+        },
+        height: function(d,i){
+            return yScale(0) - yScale(d.size);
+        }
+    });
+
+
+    return bars;
+	};
+
+// --------------------------------------
+// Update / Draw Chart
+// --------------------------------------
+	var updateChart = function updateChart(info){
+    // This will draw (first time called) or update the chart (all calls after)
+    
+    // get some random data
+    // data = getData();
+
+    //format it for the stacked chart
+    setupStack(info);
+
+    // Update all parts of the chart
+    updateScales();
+
+    updateAxis();
+
+    // Update bars
+    updateBars();
+    
+	};
+
+	updateChart(data);
+
+});
+	
 
 });
