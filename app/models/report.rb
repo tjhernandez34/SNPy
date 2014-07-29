@@ -6,7 +6,7 @@ class Report < ActiveRecord::Base
 
   attr_reader :create_report
 
-  def parse(bucket, key)
+  def parse(bucket, key, user)
     puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
     data = open("https://s3.amazonaws.com/#{bucket}/#{key}") 
@@ -19,18 +19,18 @@ class Report < ActiveRecord::Base
         puts "y"
         snp = snp.join.strip
         allele = allele.join.strip
-        $redis.hset(current_user.username, snp, allele)
+        $redis.hset(user.username, snp, allele)
       end
    puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     end
 
     Marker.all.each do |marker|
-      if $redis.hget(current_user.username, marker.snp) == marker.allele
+      if $redis.hget(user.username, marker.snp) == marker.allele
         puts "z"
         Risk.create(report_id: self.id, marker_id: marker.id)
       end
     end
-    $redis.del(current_user.username)
+    $redis.del(user.username)
     
   end
 

@@ -12,7 +12,7 @@ class GenomesController < ApplicationController
     genome.file_url.key = params[:key]
     genome.save
     report = Report.create(genome_id: genome.id)
-    report.delay.parse(params[:bucket], params[:key])
+    report.delay.parse(params[:bucket], params[:key], current_user)
     redirect_to '/user/profile'
   end
 
