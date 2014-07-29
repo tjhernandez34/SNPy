@@ -17,8 +17,8 @@
     self.reports.order(created_at: :desc).first.risks
   end
 
-  # def self.current_username
-  #   "joey"#current_user.username
-  # end
+  def current_risks_by_disease
+    self.current_risks.group_by {|risk| risk.disease.name}
+  end
 
 end

@@ -3,7 +3,6 @@ $(document).ready(function() {
     // $("#search-button").on('click', function(event) {
     //     event.preventDefault();
 
-    // });
 
     var width = 960,
         height = 740,
@@ -12,22 +11,26 @@ $(document).ready(function() {
     var x = d3.scale.linear()
         .range([0, 2 * Math.PI]);
 
-    var y = d3.scale.linear()
-        .range([0, radius - 20]);
+    var y = d3.scale.sqrt()
+        .range([0, radius]);
 
     var color = d3.scale.category20c();
+    var colorCat = d3.scale.category20();
+    var colorRisk = d3.scale.category10();
+
+    console.log(color(1));
+    console.log(color("#969696"));
 
     var svg = d3.select("#zoomable_sunburst").append("svg")
         .attr("width", width)
         .attr("height", height)
         .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
+        .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")");
 
     var partition = d3.layout.partition()
         .value(function(d) {
             return d.size;
         });
-
 
     var arc = d3.svg.arc()
         .startAngle(function(d) {
@@ -43,55 +46,79 @@ $(document).ready(function() {
             return Math.max(0, y(d.y + d.dy));
         });
 
-    d3.json("/sunburst", function(error, root) {
-        console.log(root);
-        var g = svg.selectAll("g")
-            .data(partition.nodes(root))
-            .enter().append("g");
 
-        var path = g.append("path")
+    var tooltip = d3.select("#zoomable_sunburst")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("opacity", 0);
+
+    function format_number(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+
+    function format_name(d) {
+        console.log(d);
+        var name = d.name;
+        return '<b>' + name + '</b><br>';
+        // (' + format_number(d.size) + ')'
+    }
+
+    d3.json("/sunburst", function(error, root) {
+        var path = svg.selectAll("path")
+            .data(partition.nodes(root))
+            .enter().append("path")
             .attr("d", arc)
             .style("fill", function(d) {
-                return color((d.children ? d : d.parent).name);
+                if (d.depth == 0) {
+                    return "#2C2C28";
+                } else if (d.depth == 3) {
+                    var c = ["#ee8e8e", "#d84343", "#69d488", "#51bc55"]
+                    return c[(Math.floor((Math.random() * 3) + 1))];
+                } else {
+                    return colorCat((d).name);
+                }
+
             })
             .on("click", click)
-
-        var text = g.append("text")
-            .attr("transform", function(d) {
-                return "rotate(" + computeTextRotation(d) + ")"
+            .on("mouseover", function(d) {
+                tooltip.html(function() {
+                    var name = format_name(d);
+                    return name;
+                });
+                return tooltip.transition()
+                    .duration(50)
+                    .style("opacity", 0.9);
             })
-            .attr("x", function(d) {
-                return y(d.y);
+            .on("mousemove", function(d) {
+                return tooltip
+                    .style("top", (d3.event.pageY - 10) + "px")
+                    .style("left", (d3.event.pageX + 10) + "px");
             })
-            .attr("dx", "6")
-            .attr("dy", ".35em")
-            .text(function(d) {
-                if (d.children != null) {
-                    return d.name;
-                }
+            .on("mouseout", function() {
+                return tooltip.style("opacity", 0);
             });
 
-        function click(d) {
-            text.transition().attr("opacity", 0);
+        $("#zoombutton").on("click", click(root.children[1]));
+        // $("#zoombutton").on("click", click(root));
 
+        // .on($("#zoombutton").on("click", click(root.children[3])));
+
+
+        function click(d) {
             path.transition()
                 .duration(750)
-                .attrTween("d", arcTween(d))
-                .each("end", function(e, i) {
-                    if (e.x >= d.x && e.x < (d.x + d.dx)) {
-                        var arcText = d3.select(this.parentNode).select("text");
-                        arcText.transition().duration(750)
-                            .attr("opacity", 1)
-                            .attr("transform", function() {
-                                return "rotate(" + computeTextRotation(e) + ")"
-                            })
-                            .attr("x", function(d) {
-                                return y(d.y);
-                            });
-                    }
-                });
+                .attrTween("d", arcTween(d));
         }
+
+        console.log(root);
     });
+
+
+
+
 
     d3.select(self.frameElement).style("height", height + "px");
 
@@ -109,10 +136,5 @@ $(document).ready(function() {
                 return arc(d);
             };
         };
-    }
-
-    function computeTextRotation(d) {
-        var angle = x(d.x + d.dx / 2) - Math.PI / 2
-        return angle / Math.PI * 180;
     }
 })
