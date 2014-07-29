@@ -12,14 +12,14 @@ class GenomesController < ApplicationController
     @genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
     @genome.file_url.key = params[:key]
 
-    create
+    create(@genome)
     # however you want to handle this.
     # redirect_to '/user/profile'
   end
 
-	def create
+	def create(genome)
 		# @genome = Genome.new(params)
-    @genome.save
+    genome.save
     text_file = params[:genome][:file_url].read
     respond_to do |format|
       if @genome.save
