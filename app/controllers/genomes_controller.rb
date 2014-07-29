@@ -9,8 +9,8 @@ class GenomesController < ApplicationController
   end
 
   def new_callback
-    genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
-    genome.file_url.key = params[:key]
+    @genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
+    @genome.file_url.key = params[:key]
 
     create
     # however you want to handle this.
@@ -18,7 +18,8 @@ class GenomesController < ApplicationController
   end
 
 	def create
-		@genome = Genome.new(params)
+		# @genome = Genome.new(params)
+    @genome.save
     text_file = params[:genome][:file_url].read
     respond_to do |format|
       if @genome.save
