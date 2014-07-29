@@ -8,10 +8,7 @@ class Report < ActiveRecord::Base
 
   def parse(bucket, key)
     puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-    puts params[:bucket]
-    puts params[:key] 
 
-    puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     data = open("https://s3.amazonaws.com/#{bucket}/#{key}") 
     puts "--------------------------------------------------"
     data.read.each_line do |line|
@@ -24,7 +21,7 @@ class Report < ActiveRecord::Base
         allele = allele.join.strip
         $redis.hset(current_user.username, snp, allele)
       end
-
+   puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     end
 
     Marker.all.each do |marker|
