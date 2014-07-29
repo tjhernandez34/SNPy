@@ -55,7 +55,7 @@ class GenomesController < ApplicationController
       data = open("https://s3.amazonaws.com/#{params[:bucket]}/#{params[:key]}") 
       puts "--------------------------------------------------"
       data.read.each_line do |line|
-        put "x"
+        puts "x"
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
         if snp != "" && allele != ""
@@ -69,7 +69,7 @@ class GenomesController < ApplicationController
 
       Marker.all.each do |marker|
         if $redis.hget(current_user.username, marker.snp) == marker.allele
-          puts "z "
+          puts "z"
           Risk.create(report_id: report.id, marker_id: marker.id)
         end
       end
