@@ -42,7 +42,7 @@ class GenomesController < ApplicationController
     # :type => "application/text",
   end
 
-  def parse(report)
+  def parse(file, report)
       # @file = Nokogiri::HTML(open(file))
       # report = current_user.reports.last
       # @file = Net::HTTP.get_response(URI.parse(file))
