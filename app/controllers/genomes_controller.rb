@@ -36,14 +36,25 @@ class GenomesController < ApplicationController
     end
   end
 
-  def parse(file, report)
+   def download 
+    data = open("s3.amazonaws.com/#{params[:bucket]}/#{params[:key]}") 
+    send_data data.read, :filename => "#{params[:key]}", :disposition => 'attachment', :stream => 'true', :buffer_size => '4096' 
+    # :type => "application/text",
+  end
+
+  def parse(report)
       # @file = Nokogiri::HTML(open(file))
       # report = current_user.reports.last
       # @file = Net::HTTP.get_response(URI.parse(file))
       # file = GenomeUploader.cached?
       puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      puts params[:bucket].text
-      puts params[:key].text
+      puts params[:bucket]
+      puts params[:key] 
+
+      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      data = open("s3.amazonaws.com/#{params[:bucket]}/#{params[:key]}") 
+      send_data data.read, :filename => "#{params[:key]}", :disposition => 'attachment', :stream => 'true', :buffer_size => '4096' 
+
       @file = URI.parse(params[:key])
       puts @file.open
       puts "---------------------------"
