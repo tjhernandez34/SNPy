@@ -6,7 +6,7 @@ class Report < ActiveRecord::Base
 
   attr_reader :create_report
 
-  def parse(report, bucket, key)
+  def parse(bucket, key)
     puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     puts params[:bucket]
     puts params[:key] 
@@ -30,7 +30,7 @@ class Report < ActiveRecord::Base
     Marker.all.each do |marker|
       if $redis.hget(current_user.username, marker.snp) == marker.allele
         puts "z"
-        Risk.create(report_id: report.id, marker_id: marker.id)
+        Risk.create(report_id: self.id, marker_id: marker.id)
       end
     end
     $redis.del(current_user.username)
