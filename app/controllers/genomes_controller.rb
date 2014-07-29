@@ -12,7 +12,6 @@ class GenomesController < ApplicationController
   def new_callback
     genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
     genome.file_url.key = params[:key]
-    genome.file_url.bucket = params[:bucket]
 
     genome.save
     report = Report.create(genome_id: genome.id)
@@ -41,6 +40,7 @@ class GenomesController < ApplicationController
       # report = current_user.reports.last
       # @file = Net::HTTP.get_response(URI.parse(file))
       # file = GenomeUploader.cached?
+      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       File.open("#{file.url}", "w") do |f|
         puts "#{f.write(bucket.objects[1].read)}"
       end
