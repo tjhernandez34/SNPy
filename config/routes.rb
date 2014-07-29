@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   get '/sunburst' => 'welcome#sunburst'
 
-  get '/search' => 'searches#dynamic_sunburst'
+  get '/search' => 'searches#search'
 
   get '/barchart/:id' => "diseases#barchart"
 
