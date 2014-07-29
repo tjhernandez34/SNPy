@@ -19,7 +19,7 @@ class GenomesController < ApplicationController
 
     parse(genome.file_url, report)
     # however you want to handle this.
-    redirect_to '/user/profile'
+    
   end
 
 	def create
@@ -87,6 +87,7 @@ class GenomesController < ApplicationController
           allele = allele.join.strip
           $redis.hset(current_user.username, snp, allele)
         end
+        redirect_to '/user/profile'
       end
 
       Marker.all.each do |marker|
