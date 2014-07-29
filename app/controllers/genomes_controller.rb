@@ -42,6 +42,8 @@ class GenomesController < ApplicationController
       # @file = Net::HTTP.get_response(URI.parse(file))
       # file = GenomeUploader.cached?
       puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      "#{file.bucket}"
+      "#{file.key}"
       the_file = file.get_object(bucket: "#{file.bucket}", key:"#{file.key}")
       puts "#{the_file.body.read}"
       # @file = open(file.url)
