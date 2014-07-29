@@ -54,38 +54,12 @@ class GenomesController < ApplicationController
       puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       data = open("https://s3.amazonaws.com/#{params[:bucket]}/#{params[:key]}") 
       puts "--------------------------------------------------"
-      puts "#{data.read}"
-      puts "#{data.read.methods}"
-      puts '..........................................................'
-      # puts send_data data.read, :filename => "#{params[:key]}", :disposition => 'attachment', :stream => 'true', :buffer_size => '4096' 
-
-
-      # # puts @file.open
-      # puts "---------------------------"
-      # # puts "#{@file.read}"
-      # # puts "#{@file.body.read}"
-      # # resp = file.open({ bucket:"#{params[:bucket]}", key:"#{params[:key]}"}, target: "#{file.url}")
-      # # File.open("#{file.url}", "w") do |f|
-      # #   puts "#{f.write(bucket.objects[1].read)}"
-      # # end
-      # puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      # the_file = file.get_object(bucket: "dbc.genomics", key:"uploads/genome/file_url//c8aa2256-b38f-413c-acca-e087518aa6a1/x_sex_XY.23andme.txt")
-      # puts "#{the_file.body.read}"
-      # @file = open(file.url)
-      # puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      # puts "#{@file}"
-      # puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      # send_data @file
-      # puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      # puts "file #{file}"
-      # puts '............................'
-      # puts "file.url #{file.url}"
-      # puts ".............................."
-      # puts "file.key #{file.key}"
       data.read.each_line do |line|
+        put "x"
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
         if snp != "" && allele != ""
+          puts "y"
           snp = snp.join.strip
           allele = allele.join.strip
           $redis.hset(current_user.username, snp, allele)
@@ -95,6 +69,7 @@ class GenomesController < ApplicationController
 
       Marker.all.each do |marker|
         if $redis.hget(current_user.username, marker.snp) == marker.allele
+          puts "z "
           Risk.create(report_id: report.id, marker_id: marker.id)
         end
       end
