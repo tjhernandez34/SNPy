@@ -4,6 +4,7 @@ class GenomesController < ApplicationController
 	def new
       genome = Genome.new(user_id: current_user.id, first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username)
       @uploader = genome.file_url
+      # @uploader.cache_stored_file!
 
       @uploader.success_action_redirect = new_callback_genomes_url #set later
   end
@@ -37,8 +38,9 @@ class GenomesController < ApplicationController
   def parse(file, report)
       # @file = Nokogiri::HTML(open(file))
       # report = current_user.reports.last
-      @file = Net::HTTP.get_response(URI.parse(file))
-      @file.each_line do |line|
+      # @file = Net::HTTP.get_response(URI.parse(file))
+      # @uploader.cached?
+      @uploader.each_line do |line|
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
         if snp != "" && allele != ""
