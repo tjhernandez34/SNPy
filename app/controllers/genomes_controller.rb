@@ -40,8 +40,13 @@ class GenomesController < ApplicationController
       # report = current_user.reports.last
       # @file = Net::HTTP.get_response(URI.parse(file))
       # file = GenomeUploader.cached?
-      puts @file = open(file.url)
+      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      @file = open(file.url)
+      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      puts "#{@file}"
+      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       send_data @file
+      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       puts "file #{file}"
       puts '............................'
       puts "file.url #{file.url}"
