@@ -40,9 +40,9 @@ class GenomesController < ApplicationController
       # report = current_user.reports.last
       # @file = Net::HTTP.get_response(URI.parse(file))
       # file = GenomeUploader.cached?
-      puts "file"
-      puts "file.url"
-      puts "file.key"
+      puts file
+      puts file.url
+      puts file.key
       file.read.each_line do |line|
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
