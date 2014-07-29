@@ -18,7 +18,7 @@ class GenomesController < ApplicationController
   end
 
 	def create
-		@genome = Genome.new(genome_params)
+		@genome = Genome.new(params)
     text_file = params[:genome][:file_url].read
     respond_to do |format|
       if @genome.save
