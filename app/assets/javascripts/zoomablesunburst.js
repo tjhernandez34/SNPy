@@ -1,34 +1,43 @@
 $(document).ready(function() {
     // Start of sunburst code on click of the search button
-    var width = 960,
-        height = 740,
-        radius = Math.min(width, height) / 2;
+    width = 960,
+    height = 740,
+    radius = Math.min(width, height) / 2;
 
-    var x = d3.scale.linear()
+    x = d3.scale.linear()
         .range([0, 2 * Math.PI]);
 
-    var y = d3.scale.sqrt()
+    y = d3.scale.sqrt()
         .range([0, radius]);
 
-    var color = d3.scale.category20c();
-    var colorCat = d3.scale.category20();
-    var colorRisk = d3.scale.category10();
+    color = d3.scale.category20c();
+    colorCat = d3.scale.category20();
+    colorRisk = d3.scale.category10();
 
-    var svg = d3.select("#zoomable_sunburst").append("svg")
+    svg = d3.select("#zoomable_sunburst").append("svg")
         .attr("width", width)
         .attr("height", height)
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")");
 
+    createSunburst("/sunburst");
+
     $("#search-button").on('click', function(event) {
         event.preventDefault();
         console.log(event);
 
-        d3.select("svg")
-            .remove();
-        var searchTerm = $("#box").val().replace(/ /g, '+');
-        var searchurl = "/search?utf8=✓&search=" + searchTerm + "&commit=Search";
+        d3.select("svg").remove();
 
+        svg = d3.select("#zoomable_sunburst").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")");
+
+        var searchTerm = $("#box").val().replace(/ /g, '+');
+        var searchUrl = "/search?utf8=✓&search=" + searchTerm + "&commit=Search";
+        console.log("search url:", searchUrl);
+        createSunburst(searchUrl);
     });
 
 
@@ -243,25 +252,6 @@ $(document).ready(function() {
 
 
 
-
-    d3.select(self.frameElement).style("height", height + "px");
-
-    // Interpolate the scales!
-    function arcTween(d) {
-        var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
-            yd = d3.interpolate(y.domain(), [d.y, 1]),
-            yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
-        return function(d, i) {
-            return i ? function(t) {
-                return arc(d);
-            } : function(t) {
-                x.domain(xd(t));
-                y.domain(yd(t)).range(yr(t));
-                return arc(d);
-            };
-        };
-    }
-
     function createSunburst(url) {
         var url = url;
         var partition = d3.layout.partition()
@@ -351,5 +341,24 @@ $(document).ready(function() {
 
         });
     };
+
+    d3.select(self.frameElement).style("height", height + "px");
+
+    // Interpolate the scales!
+    function arcTween(d) {
+        var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
+            yd = d3.interpolate(y.domain(), [d.y, 1]),
+            yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
+        return function(d, i) {
+            return i ? function(t) {
+                return arc(d);
+            } : function(t) {
+                x.domain(xd(t));
+                y.domain(yd(t)).range(yr(t));
+                return arc(d);
+            };
+        };
+    }
+
 
 })
