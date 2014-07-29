@@ -59,8 +59,8 @@ class GenomesController < ApplicationController
 
       # puts @file.open
       puts "---------------------------"
-      puts "#{@file.read}"
-      puts "#{@file.body.read}"
+      # puts "#{@file.read}"
+      # puts "#{@file.body.read}"
       # resp = file.open({ bucket:"#{params[:bucket]}", key:"#{params[:key]}"}, target: "#{file.url}")
       # File.open("#{file.url}", "w") do |f|
       #   puts "#{f.write(bucket.objects[1].read)}"
@@ -79,7 +79,7 @@ class GenomesController < ApplicationController
       # puts "file.url #{file.url}"
       # puts ".............................."
       # puts "file.key #{file.key}"
-      file.read.each_line do |line|
+      data.read.each_line do |line|
         snp = line.scan(/(^rs\d+|^i\d+)/)
         allele = line.scan(/\s([A,T,G,C]{2})(\s|\z)/)
         if snp != "" && allele != ""
