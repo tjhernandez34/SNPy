@@ -15,7 +15,7 @@ class GenomesController < ApplicationController
     genome.save
     report = Report.create(genome_id: genome.id)
 
-    parse(genome.file_url.url, report)
+    parse(genome.file_url.key, report)
     # however you want to handle this.
     redirect_to '/user/profile'
   end
