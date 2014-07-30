@@ -14,16 +14,23 @@ class WelcomeController < ApplicationController
     diseases = current_user.current_risks.group_by{|risk| risk.disease}.keys.group_by{|disease| disease.category}
     data = risks.merge(diseases){|category,risks,diseases| risks.group_by{|risk| risk.disease}}
     json_hash = {name: current_user.first_name, children: []}
+    colorGroup = ['#ffdb11','#19258f','#17becf','#694026','#9467bd','#e377c2','#e80c58','#e80c58','#b6272b','#aadc74','#ff7f0e','#96ffcc','#1ba763']
 
     Category.all.each_with_index do |category, category_index|
-      json_hash[:children] << {name: category.name, children:[]}
+      json_hash[:children] << {name: category.name, children:[], group: category_index}
 
       category.diseases.each_with_index do |disease, disease_index|
-        json_hash[:children][category_index][:children] << {name: disease.name, children:[]}
+        json_hash[:children][category_index][:children] << {name: disease.name, children:[], group: category_index}
 
         if risks_by_disease[disease.name] != nil
           risks_by_disease[disease.name].each_with_index do |risk|
-            json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.allele, size: 1}
+            if risk.marker.risk_level > 0
+              group = "Negative"
+            else
+              group = "Positive"
+            end
+            json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.allele, size: risk.marker.risk_level.abs,
+             group: group }
           end
         end
       end
@@ -34,8 +41,6 @@ class WelcomeController < ApplicationController
     # puts '--------------------------------------------------------------'
 
     render json: json_hash
-
-    # puts json_hash[:children]
 
   end
 

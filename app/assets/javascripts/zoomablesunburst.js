@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // Start of sunburst code on click of the search button
+
     var width = 960,
         height = 740,
         radius = Math.min(width, height) / 2;
@@ -9,20 +9,28 @@ $(document).ready(function() {
 
     var y = d3.scale.sqrt()
         .range([0, radius]);
+    var colorGroup0 = ["#FFE1F4", "#FFBFE8", "#FF99D9", "#FF82D0", "#FF6FC9", "#FF4DBC", "#FF2BAF", "#FF009F", "#F7009A", "#EC0094", "#DF008B"]
+    var colorGroup1 = ["#E7E9FA", "#CACEF4", "#AAB0EE", "#979FEA", "#8791E7", "#6A76E1", "#4E5BDC", "#2B3CD5", "#2939CD", "#2737C5", "#2534BA"]
+    var colorGroup2 = ["#E7F3FA", "#CCE6F2", "#ADD7EB", "#9ACEE7", "#8BC6E2", "#70B9DC", "#54ABD6", "#329BCD", "#3096C7", "#2E8FBE", "#2E8FBE"]
+    var colorGroup3 = ["#006060", "#007171", "#007D7D", "#00A4A4", "#00B0B0", "#00D0D0", "#00DFDF", "#00ECEC", "#00F7F7", "#00FFFF", "#2BFFFF", "#4DFFFF"]
+    var colorGroup4 = ["#DFDF00", "#ECEC00", "#F7F700", "#FFFF00", "#FFFF2B", "#FFFF4D", "#FFFF6F", "#FFFF82", "#FFFF99", "#FFFFBF", "#FFFFE1"]
+    var colorGroup5 = ["#FFF0E1", "#FFDFBF", "#FFCC99", "#FFC082", "#FFB76F", "#FFA64D", "#FF8000", "#F77B00", "#EC7600", "#DF7000"]
+    var colorGroup6 = ["#0000F7","#3131C6","#0000FF","#3232CD","#2B2BFF","#5555D5","#4D4DFF","#7070DC","#6F6FFF","#8B8BE2","#8282FF","#9A9AE7","#9999FF","#ADADEB","#BFBFFF","#CCCCF2","#E1E1FF"]
+    var colorGroup7 = ["#E8F9ED", "#CCF2D9", "#ADEBC1", "#9BE6B4", "#55D57E", "#8BE2A8", "#71DB94", "#33CC65", "#30BC5E", "#2DB358", "#2BA653"]
+    var colorGroup8 = ["#FFE6E1", "#FFC9BF", "#FFA899", "#FF9582", "#FF846F", "#FF674D", "#FF4A2B", "#FF2600", "#F72500", "#EC2300", "#DF2200"]      
+    var colorGroup9 = ["#F0EDF3", "#DFD8E7", "#CCBFD9", "#C0B0D0", "#B7A5C9", "#A68FBC", "#957AAF", "#80609F", "#7B5C9A", "#765894", "#70548B"]
+    var colorGroup10 = ["#FBE6E6", "#F5C9C9", "#F0A8A8", "#ED9494", "#EB8383", "#E66666", "#E14848", "#DB2424", "#D32323", "#CB2121", "#BF2020"]
 
-    var color = d3.scale.category20c();
-    var colorCat = d3.scale.category20();
-    var colorRisk = d3.scale.category10();
+    var color = d3.scale.category10();
 
 
     createSunburst("/sunburst");
 
-
-    function simulateClick(target) {
-        var event = document.createEvent("MouseEvents");
-        event.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        !target.dispatchEvent(event);
-    };
+   // function simulateClick(target) {
+    //     var event = document.createEvent("MouseEvents");
+    //     event.initMouseEvent("click",true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    //     !target.dispatchEvent(event);
+    // };
 
     $("#zoombutton").on("click", function() {
         d3.select("svg").transition()
@@ -34,9 +42,7 @@ $(document).ready(function() {
 
     $("#search-button").on('click', function(event) {
         event.preventDefault();
-        console.log(event);
-        console.log($("g path:last-child")[0]);
-        var d = $("g path:last-child")[0];
+
         d3.select("svg").transition()
             .duration(750)
             .style('opacity', .2)
@@ -45,13 +51,8 @@ $(document).ready(function() {
         var searchTerm = $("#box").val().replace(/ /g, '+');
         var searchUrl = "/search?utf8=✓&search=" + searchTerm + "&commit=Search";
 
-        // $.get(searchUrl, function(result) {
-        //     console.log(result);;
-        // })
-
         console.log("search url:", searchUrl);
         createSunburst(searchUrl);
-        simulateClick($("g path:nth-child(1)")[0]);
     });
 
     function createSunburst(url) {
@@ -103,33 +104,64 @@ $(document).ready(function() {
             // (' + format_number(d.size) + ')'
         }
 
-        var searchTerm = $("#box").val().replace(/ /g, '+');
 
         d3.json(url, function(error, root) {
 
-            console.log("xhr search data:", root);
+            console.log("data:", root);
 
             var path = svg.selectAll("path")
                 .data(partition.nodes(root))
                 .enter().append("path")
                 .attr("d", arc)
-                .attr("class", function(d) {
-                    if (d.depth === 3) {
-                        return "allele";
-                    }
+                .attr("id", function(d, i) {
+                        console.log(d, i);
+                        return "path-"+ i +"";
                 })
+                .style("stroke", "#2C2C28")
                 .style("fill", function(d) {
                     if (d.depth === 0) {
                         return "#2C2C28";
-                    } else if (d.depth === 3) {
-                        var c = ["#ee8e8e", "#d84343", "#69d488", "#51bc55"]
-                        return c[(Math.floor((Math.random() * 3) + 1))];
-                    } else {
-                        return colorCat((d).name);
-                    }
+                    } else if (d.group === "Positive") {
+                        return "#007D00"
+                    } else if (d.group === "Negative"){
+                        return "#7D1300";
+                    } else if (d.group === 0) {
+                        n = Math.floor(Math.random() * colorGroup0.length)
+                        return colorGroup0[n];
+                    } else if (d.group === 1) {
+                        n = Math.floor(Math.random() * colorGroup1.length)
+                        return colorGroup1[n];
+                    } else if (d.group === 2) {
+                        n = Math.floor(Math.random() * colorGroup2.length)
+                        return colorGroup2[n]; 
+                    } else if (d.group === 3) {
+                        n = Math.floor(Math.random() * colorGroup3.length)
+                        return colorGroup3[n];
+                    } else if (d.group === 4) {
+                        n = Math.floor(Math.random() * colorGroup4.length)
+                        return colorGroup4[n];
+                    } else if (d.group === 5) {
+                        n = Math.floor(Math.random() * colorGroup5.length)
+                        return colorGroup5[n];
+                    } else if (d.group === 6) {
+                        n = Math.floor(Math.random() * colorGroup6.length)
+                        return colorGroup6[n];
+                    } else if (d.group === 7) {
+                        n = Math.floor(Math.random() * colorGroup7.length)
+                        return colorGroup7[n];
+                    } else if (d.group === 8) {
+                        n = Math.floor(Math.random() * colorGroup8.length)
+                        return colorGroup8[n];
+                    } else if (d.group === 9) {
+                        n = Math.floor(Math.random() * colorGroup9.length)
+                        return colorGroup9[n];
+                    } else
+                    {n = Math.floor(Math.random() * colorGroup10.length)
+                        return colorGroup10[n];} 
                 })
                 .on("click", click)
                 .on("mouseover", function(d) {
+                        // $(this).style("opacity", 0.5);
                     tooltip.html(function() {
                         var name = format_name(d);
                         return name;
@@ -143,11 +175,12 @@ $(document).ready(function() {
                         .style("top", (d3.event.pageY - 10) + "px")
                         .style("left", (d3.event.pageX + 10) + "px");
                 })
-                .on("mouseout", function() {
+                .on("mouseout", function(d) {
+                    // $(this).style("opacity", 1);
                     return tooltip.style("opacity", 0);
-                });
+                })
 
-            // $(".allele").hide();
+
 
             function click(d) {
                 // d.attr("id")
