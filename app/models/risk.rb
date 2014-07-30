@@ -8,5 +8,4 @@ class Risk < ActiveRecord::Base
   has_one :category, through: :disease
 
 
-
 end
