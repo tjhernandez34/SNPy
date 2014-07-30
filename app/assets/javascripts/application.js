@@ -15,9 +15,3 @@
 //= require turbolinks
 //= require d3
 //= require_tree .
-
-// $(document).ready(function(){
-//   $( "#home-login" ).on( "click", function( event ) {
-//     event.preventDefault();
-//     $(this).hide();
-// });

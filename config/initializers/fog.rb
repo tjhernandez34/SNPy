@@ -7,4 +7,6 @@ CarrierWave.configure do |config|
 	}
 	config.fog_directory = ENV['AWS_BUCKET']
 	config.fog_public = false
+	
+	config.max_file_size = 1.gigabyte
 end

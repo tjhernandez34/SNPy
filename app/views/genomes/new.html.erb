@@ -1,11 +1,6 @@
-<%= form_for @genome do |f| %>
-  <%= f.hidden_field :user_id %>
-  <div>
-    <%= f.file_field :file_url %>
-      <%= f.hidden_field :first_name %>
-      <%= f.hidden_field :last_name %>
-      <%= f.hidden_field :username %>
-  </div>
-  <div><%= f.submit "Discover", :class => "upload_submit" %></div>
+
+<%= direct_upload_form_for @uploader do |f| %>
+  <%= f.file_field :file_url %>
+	<%= f.submit "Discover" %>
 <% end %>
 

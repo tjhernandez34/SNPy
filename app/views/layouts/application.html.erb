@@ -3,7 +3,7 @@
 <head>
   <title>SNPy</title>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
@@ -24,7 +24,7 @@
             <div class = "modal signup-form hidden" style="display:none">
               <%= render "partials/signup" %>
             </div>
-            
+
             <div class = "modal login-form hidden" style="display:none" >
             <%= link_to 'login', login_path %>
             <%= render "partials/login" =%>
@@ -37,7 +37,7 @@
         </div>
 
           <%= render 'partials/footer'%>
-    
+
     <% if current_user %>
       <% link_to "logout", :controller => "sessions", :action => "destroy" %>
     <% end %>

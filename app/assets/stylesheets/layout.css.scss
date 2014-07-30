@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'fonts';
 
+
 /*.body {
   background-color: $home-background-color;
   min-height: 600px;
@@ -8,13 +9,13 @@
   top: 0px;
 }*/
 
-.body { 
+.body {
   background: url('dna2.jpg') no-repeat center center fixed;
   -moz-background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-} 
+}
 
 .index-header {
   background-color: $nav-bar-color-index;
@@ -62,7 +63,7 @@ header {
   }
   .btn {
     color: $white;
-    background-color: rgba(44, 44, 40, 1); 
+    background-color: rgba(44, 44, 40, 1);
     border-color: $white;
     border: 0;
     border-radius: 4px;
@@ -83,8 +84,8 @@ header {
 }
 
 
-.container {
-  height: 100%;
+// .container {
+/*  height: 100%;
   margin-top: 0px;
   padding-top: 0px;
   padding-left: 8%;
@@ -123,7 +124,7 @@ header {
   font-family: $sans-serif-font, sans-serif;
   font-size: 1em;
   width:400px;
-  border-radius: 
+  border-radius:
 }*/
 
 input.form-btn-submit {
@@ -138,8 +139,8 @@ input#user_first_name, #user_last_name, #user_email, #user_password{
   border:1px solid #aaa;
   box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
   border-radius:0.5em;
-  height:10px; 
-  width:100px; 
+  height:10px;
+  width:100px;
   padding:5px;
   margin: 2%;
 }
@@ -214,6 +215,7 @@ input#genome_file_url::-webkit-file-upload-button {
 
 }
 
+
 .upload_submit {
   border: 0px solid white;
   background: $light-blue;
@@ -225,6 +227,36 @@ input#genome_file_url::-webkit-file-upload-button {
 /*
 Modal styling
 */
+/*#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}
+.form_style {
+  width: 300px;
+  padding: 15px 20px;
+  background: #f3f6fa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+}
 
-
-
+.new_user {
+  width: 300px;
+  padding: 15px 20px;
+  background: #f3f6fa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+}*/
