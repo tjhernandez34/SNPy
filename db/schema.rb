@@ -48,6 +48,9 @@ ActiveRecord::Schema.define(version: 20140729201436) do
   create_table "genomes", force: true do |t|
     t.integer  "user_id"
     t.string   "file_url"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
