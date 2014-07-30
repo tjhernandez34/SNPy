@@ -17,7 +17,7 @@ $(document).ready(function() {
     var colorGroup5 = ["#FFF0E1", "#FFDFBF", "#FFCC99", "#FFC082", "#FFB76F", "#FFA64D", "#FF8000", "#F77B00", "#EC7600", "#DF7000"]
     var colorGroup6 = ["#0000F7","#3131C6","#0000FF","#3232CD","#2B2BFF","#5555D5","#4D4DFF","#7070DC","#6F6FFF","#8B8BE2","#8282FF","#9A9AE7","#9999FF","#ADADEB","#BFBFFF","#CCCCF2","#E1E1FF"]
     var colorGroup7 = ["#E8F9ED", "#CCF2D9", "#ADEBC1", "#9BE6B4", "#55D57E", "#8BE2A8", "#71DB94", "#33CC65", "#30BC5E", "#2DB358", "#2BA653"]
-    var colorGroup8 = ["#FFE6E1", "#FFC9BF", "#FFA899", "#FF9582", "#FF846F", "#FF674D", "#FF4A2B", "#FF2600", "#F72500", "#EC2300", "#DF2200"]      
+    var colorGroup8 = ["#FFE6E1", "#FFC9BF", "#FFA899", "#FF9582", "#FF846F", "#FF674D", "#FF4A2B", "#FF2600", "#F72500", "#EC2300", "#DF2200"]
     var colorGroup9 = ["#F0EDF3", "#DFD8E7", "#CCBFD9", "#C0B0D0", "#B7A5C9", "#A68FBC", "#957AAF", "#80609F", "#7B5C9A", "#765894", "#70548B"]
     var colorGroup10 = ["#FBE6E6", "#F5C9C9", "#F0A8A8", "#ED9494", "#EB8383", "#E66666", "#E14848", "#DB2424", "#D32323", "#CB2121", "#BF2020"]
 
@@ -133,7 +133,7 @@ $(document).ready(function() {
                         return colorGroup1[n];
                     } else if (d.group === 2) {
                         n = Math.floor(Math.random() * colorGroup2.length)
-                        return colorGroup2[n]; 
+                        return colorGroup2[n];
                     } else if (d.group === 3) {
                         n = Math.floor(Math.random() * colorGroup3.length)
                         return colorGroup3[n];
@@ -157,7 +157,7 @@ $(document).ready(function() {
                         return colorGroup9[n];
                     } else
                     {n = Math.floor(Math.random() * colorGroup10.length)
-                        return colorGroup10[n];} 
+                        return colorGroup10[n];}
                 })
                 .on("click", click)
                 .on("mouseover", function(d) {

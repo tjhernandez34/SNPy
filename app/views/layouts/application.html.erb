@@ -3,39 +3,47 @@
 <head>
   <title>SNPy</title>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+
 </head>
 
 <body class="body">
   <%= render "partials/header" %>
+
+
   <div class="container center global clear-fix">
+
 
         <div class="content top clear-fix">
 
           <% if current_user == nil %>
-            <div class = "modal login-form hidden">
-              <%= render "partials/login" %>
-            </div>
-            <div class = "modal signup-form hidden">
+
+            <div class = "modal signup-form hidden" style="display:none">
               <%= render "partials/signup" %>
             </div>
+
+            <div class = "modal login-form hidden" style="display:none" >
+              <%= render "partials/login" =%>
+            </div>
+
+
           <% end %>
 
           <%= yield %>
         </div>
-          <%= render 'partials/footer'%>
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+          <%= render 'partials/footer'%>
 
     <% if current_user %>
       <% link_to "logout", :controller => "sessions", :action => "destroy" %>
     <% end %>
   </div>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+
 </body>
 
 </html>
