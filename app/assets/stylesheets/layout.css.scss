@@ -1,10 +1,18 @@
 @import 'variables';
 
+// .body {
+//   background-color: $home-background-color;
+//   min-height: 600px;
+//   position: relative;
+//   top: 0px;
+// }
+
 .body {
-  background-color: $home-background-color;
-  min-height: 600px;
-  position: relative;
-  top: 0px;
+  background: url('dna.jpg') no-repeat center center fixed;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .index-header {
   background-color: $nav-bar-color-index;
