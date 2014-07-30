@@ -68,7 +68,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
   json_hash = {name: current_user.first_name, children: []}
 
     Category.all.each_with_index do |category, category_index|
-      json_hash[:children] << {name: category.name, children:[]}
+      json_hash[:children] << {name: category.name, children:[], group: category_index}
 
       @result_by_category = []
 
@@ -78,18 +78,24 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
         end
       end
       @result_by_category.each_with_index do |disease, disease_index|
-        json_hash[:children][category_index][:children] << {name: disease.name, children:[]}
+        json_hash[:children][category_index][:children] << {name: disease.name, children:[], group: category_index}
 
 
         @risks_by_disease = []
 
         @risks.each do |risk|
+          if risk.marker.risk_level > 0
+            group = "Negative"
+          else
+            group = "Positive"
+          end
           if risk.marker.disease.name == disease.name
             @risks_by_disease  << risk
           end
         end
         @risks_by_disease.each_with_index do |risk|
-          json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: 1}
+          json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: risk.marker.risk_level.abs,
+             group: group }
         end
       end
     end
@@ -98,7 +104,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
 
     if !request.xhr?
       puts "im in the render json hash section"
-      render json: json_hash, locals: {results: @results}
+      render json: json_hash
     else
       @results
     end

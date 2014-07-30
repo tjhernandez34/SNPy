@@ -29,7 +29,7 @@ class WelcomeController < ApplicationController
             else
               group = "Positive"
             end
-            json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.allele, size: risk.marker.risk_level.abs,
+            json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: risk.marker.risk_level.abs,
              group: group }
           end
         end

@@ -15,3 +15,17 @@
 //= require turbolinks
 //= require d3
 //= require_tree .
+
+
+$("input[name='search']").on('keydown', function() {
+	if (this.attr('text').length >= 3) {
+		search_term = {term: this.attr('text')}
+		$.ajax({
+			url: "/search",
+			data: search_term,
+			success: function(responseData) {
+				//Possible terms
+			}
+		})
+	}
+})
