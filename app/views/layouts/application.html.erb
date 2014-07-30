@@ -24,11 +24,13 @@
             <div class = "modal signup-form hidden" style="display:none">
               <%= render "partials/signup" %>
             </div>
-
+            
             <div class = "modal login-form hidden" style="display:none" >
-              <%= link_to 'login', login_path %>
-              <%= render "partials/login" =%>
+            <%= link_to 'login', login_path %>
+            <%= render "partials/login" =%>
             </div>
+
+
           <% end %>
 
           <%= yield %>
