@@ -76,14 +76,15 @@ header {
 }
 
 .footer {
-  position: relative;
+  position: fixed;
   bottom:0;
   padding-top: 2%;
   padding-bottom: 2%;
   width: 100%;
-  bottom: 0px;
+  bottom: 0;
   background-color: $footer-bar;
-  height: 20%;
+  height: 1.5em;
+  z-index: 5;
   -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
   box-shadow: 0 0 50px rgba(0,0,0,0.8);
   color: $white;
