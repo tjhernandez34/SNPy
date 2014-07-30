@@ -12,17 +12,20 @@ class DiseasesController < ApplicationController
   def barchart
     @disease = Disease.find(params[:id])
     @risks = current_user.current_risks_by_disease["#{@disease.name}"]
-    data = []
+    data = [[],[]]
     @risks.each_with_index do |risk, index|
-      if risk.marker.risk_level > 0
-        data << [{x: 0, y: risk.marker.risk_level, y0: 0}]
-        # data[index] << {x: 1, y: 0, y0: 0}
-      else
 
-        data << [{x: "Negative", y: risk.marker.risk_level, y0: 0}]
+      if risk.marker.risk_level > 0
+        data[0] << {value: risk.marker.risk_level, name: risk.marker.allele, group: "Negative"}
+      else
+        data[1] << {value: risk.marker.risk_level.abs, name: risk.marker.allele, group: "Positve"}
       end
     end
-
     render json: data
   end
+  
+  def sortedbarchart
+    @risks = current_user.current_risks.delete_if{|risk| risk.marker.risk_level < 0 }
+  end
+
 end
