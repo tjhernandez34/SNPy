@@ -15,18 +15,55 @@ $(document).ready(function() {
     var colorGroup3 = ["#006060", "#007171", "#007D7D", "#00A4A4", "#00B0B0", "#00D0D0", "#00DFDF", "#00ECEC", "#00F7F7", "#00FFFF", "#2BFFFF", "#4DFFFF"]
     var colorGroup4 = ["#DFDF00", "#ECEC00", "#F7F700", "#FFFF00", "#FFFF2B", "#FFFF4D", "#FFFF6F", "#FFFF82", "#FFFF99", "#FFFFBF", "#FFFFE1"]
     var colorGroup5 = ["#FFF0E1", "#FFDFBF", "#FFCC99", "#FFC082", "#FFB76F", "#FFA64D", "#FF8000", "#F77B00", "#EC7600", "#DF7000"]
-    var colorGroup6 = ["#0000F7","#3131C6","#0000FF","#3232CD","#2B2BFF","#5555D5","#4D4DFF","#7070DC","#6F6FFF","#8B8BE2","#8282FF","#9A9AE7","#9999FF","#ADADEB","#BFBFFF","#CCCCF2","#E1E1FF"]
+    var colorGroup6 = ["#0000F7", "#3131C6", "#0000FF", "#3232CD", "#2B2BFF", "#5555D5", "#4D4DFF", "#7070DC", "#6F6FFF", "#8B8BE2", "#8282FF", "#9A9AE7", "#9999FF", "#ADADEB", "#BFBFFF", "#CCCCF2", "#E1E1FF"]
     var colorGroup7 = ["#E8F9ED", "#CCF2D9", "#ADEBC1", "#9BE6B4", "#55D57E", "#8BE2A8", "#71DB94", "#33CC65", "#30BC5E", "#2DB358", "#2BA653"]
-    var colorGroup8 = ["#FFE6E1", "#FFC9BF", "#FFA899", "#FF9582", "#FF846F", "#FF674D", "#FF4A2B", "#FF2600", "#F72500", "#EC2300", "#DF2200"]      
+    var colorGroup8 = ["#FFE6E1", "#FFC9BF", "#FFA899", "#FF9582", "#FF846F", "#FF674D", "#FF4A2B", "#FF2600", "#F72500", "#EC2300", "#DF2200"]
     var colorGroup9 = ["#F0EDF3", "#DFD8E7", "#CCBFD9", "#C0B0D0", "#B7A5C9", "#A68FBC", "#957AAF", "#80609F", "#7B5C9A", "#765894", "#70548B"]
     var colorGroup10 = ["#FBE6E6", "#F5C9C9", "#F0A8A8", "#ED9494", "#EB8383", "#E66666", "#E14848", "#DB2424", "#D32323", "#CB2121", "#BF2020"]
 
+    var colorGroups = [colorGroup0, colorGroup1, colorGroup2, colorGroup3, colorGroup4, colorGroup5, colorGroup6, colorGroup7, colorGroup8, colorGroup9, colorGroup10];
+
     var color = d3.scale.category10();
 
+    var BASE_COLOR = "#2C2C28";
+    var POSITIVE_COLOR = "#007D00";
+    var NEGATIVE_COLOR = "#7D1300";
+
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+    // Returns a random integer between min (included) and max (excluded)
+    // Using Math.round() will give you a non-uniform distribution!
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function randomColorFromGroup(groupNumber) {
+        var colorArray = colorGroups[groupNumber];
+        var index = getRandomInt(0, colorGroups.length - 1);
+        return colorArray[index];
+    }
+
+    function setNodeColor(node) {
+        var color;
+        if (node.depth === 0) {
+            color = BASE_COLOR;
+        } else {
+            switch (node.group) {
+                case "Positive":
+                    color = POSITIVE_COLOR;
+                    break;
+                case "Negative":
+                    color = NEGATIVE_COLOR;
+                    break;
+                default:
+                    color = randomColorFromGroup(node.group);
+            }
+        }
+        return (node.nodeColor = color);
+    }
 
     createSunburst("/sunburst");
 
-   // function simulateClick(target) {
+    // function simulateClick(target) {
     //     var event = document.createEvent("MouseEvents");
     //     event.initMouseEvent("click",true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     //     !target.dispatchEvent(event);
@@ -56,8 +93,6 @@ $(document).ready(function() {
     });
 
     function createSunburst(url) {
-        var url = url;
-
 
         var svg = d3.select("#zoomable_sunburst").append("svg")
             .attr("width", width)
@@ -98,7 +133,6 @@ $(document).ready(function() {
 
 
         function format_name(d) {
-            console.log(d);
             var name = d.name;
             return '<b>' + name + '</b><br>';
             // (' + format_number(d.size) + ')'
@@ -114,54 +148,12 @@ $(document).ready(function() {
                 .enter().append("path")
                 .attr("d", arc)
                 .attr("id", function(d, i) {
-                        console.log(d, i);
-                        return "path-"+ i +"";
+                    return "path-" + i + "";
                 })
                 .style("stroke", "#2C2C28")
-                .style("fill", function(d) {
-                    if (d.depth === 0) {
-                        return "#2C2C28";
-                    } else if (d.group === "Positive") {
-                        return "#007D00"
-                    } else if (d.group === "Negative"){
-                        return "#7D1300";
-                    } else if (d.group === 0) {
-                        n = Math.floor(Math.random() * colorGroup0.length)
-                        return colorGroup0[n];
-                    } else if (d.group === 1) {
-                        n = Math.floor(Math.random() * colorGroup1.length)
-                        return colorGroup1[n];
-                    } else if (d.group === 2) {
-                        n = Math.floor(Math.random() * colorGroup2.length)
-                        return colorGroup2[n]; 
-                    } else if (d.group === 3) {
-                        n = Math.floor(Math.random() * colorGroup3.length)
-                        return colorGroup3[n];
-                    } else if (d.group === 4) {
-                        n = Math.floor(Math.random() * colorGroup4.length)
-                        return colorGroup4[n];
-                    } else if (d.group === 5) {
-                        n = Math.floor(Math.random() * colorGroup5.length)
-                        return colorGroup5[n];
-                    } else if (d.group === 6) {
-                        n = Math.floor(Math.random() * colorGroup6.length)
-                        return colorGroup6[n];
-                    } else if (d.group === 7) {
-                        n = Math.floor(Math.random() * colorGroup7.length)
-                        return colorGroup7[n];
-                    } else if (d.group === 8) {
-                        n = Math.floor(Math.random() * colorGroup8.length)
-                        return colorGroup8[n];
-                    } else if (d.group === 9) {
-                        n = Math.floor(Math.random() * colorGroup9.length)
-                        return colorGroup9[n];
-                    } else
-                    {n = Math.floor(Math.random() * colorGroup10.length)
-                        return colorGroup10[n];} 
-                })
+                .style("fill", setNodeColor)
                 .on("click", click)
                 .on("mouseover", function(d) {
-                        // $(this).style("opacity", 0.5);
                     tooltip.html(function() {
                         var name = format_name(d);
                         return name;
@@ -176,20 +168,58 @@ $(document).ready(function() {
                         .style("left", (d3.event.pageX + 10) + "px");
                 })
                 .on("mouseout", function(d) {
-                    // $(this).style("opacity", 1);
                     return tooltip.style("opacity", 0);
                 })
 
+            var legendContainer = d3.select("#zoomable_sunburst")
+                .append("svg")
+                .attr("class", "legend")
+                .attr("width", 200)
+                .attr("height", 300)
 
+
+
+            var legend = legendContainer.selectAll("rect")
+                .data(root.children)
+                .enter()
+                .append("rect")
+                .attr("transform", function(d, i) {
+                    return "translate(0," + i * 32 + ")";
+                })
+                .attr("width", 200)
+                .attr("margin-bottom", 1)
+                .attr("margin-top", 1)
+                .attr("height", 30)
+                .style("fill", function(d) {
+                    return d.nodeColor;
+                })
+                .on("click", click)
+
+            legendContainer.selectAll("text")
+                .data(root.children)
+                .enter()
+                .append("text")
+                .attr("dy", ".35em")
+                .attr("transform", function(d, i) {
+                    return "translate(100," + ((i * 32) + 15) + ")";
+                })
+                .style("text-anchor", "middle")
+                .style("fill", "black")
+                .text(function(d) {
+                    console.log(d.name);
+                    return d.name;
+                })
+                .on("click", click)
 
             function click(d) {
-                // d.attr("id")
+                clickedObject = d
                 path.transition()
                     .duration(750)
                     .attrTween("d", arcTween(d));
             }
 
         });
+
 
         d3.select(self.frameElement).style("height", height + "px");
 
@@ -208,6 +238,7 @@ $(document).ready(function() {
                 };
             };
         }
+
 
     };
 

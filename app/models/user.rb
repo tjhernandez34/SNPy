@@ -8,7 +8,7 @@
   attr_reader :current_username
 
   def current_risks_by_category
-    if self.reports.length > 0
+    if reports.length > 0
       self.current_risks.group_by {|risk| risk.category }
     end
   end
