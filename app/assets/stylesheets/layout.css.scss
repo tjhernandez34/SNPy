@@ -1,19 +1,12 @@
 @import 'variables';
 
-// .body {
-//   background-color: $home-background-color;
-//   min-height: 600px;
-//   position: relative;
-//   top: 0px;
-// }
-
 .body {
-  background: url('DNA-Strand.jpg') no-repeat center center fixed;
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background-color: $home-background-color;
+  min-height: 600px;
+  position: relative;
+  top: 0px;
 }
+
 .index-header {
   background-color: $nav-bar-color-index;
 }

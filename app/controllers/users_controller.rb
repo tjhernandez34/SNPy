@@ -21,7 +21,6 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     @categories = @user.current_risks_by_category
     @genome = Genome.where("user_id =?", @user.id).last
-    render :layout => false
   end
 
   private
