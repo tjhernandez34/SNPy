@@ -83,7 +83,21 @@ header {
   }
 }
 
-
+ .btn {
+    color: $white;
+    background-color: rgba(44, 44, 40, 1);
+    border-color: $white;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0 5px 0 rgba(0,0,0,0.8);
+    color: #fff;
+    cursor: pointer;
+    font: 12px sans-serif;
+    margin: 0;
+    outline: 0;
+    padding: 5px 10px;
+    transition: all .1s linear;
+  }
 // .container {
 /*  height: 100%;
   margin-top: 0px;
@@ -164,19 +178,17 @@ input#user_first_name, #user_last_name, #user_email, #user_password{
 }
 
 
-div.modal.login-form.hidden {
+#home_login_form {
   background-color: rgba(42, 42, 42, 0.8);
   border: $border-style;
   width: $form-width;
   border-radius: 5px;
-  width:300px;
-  height: 155px;
+  width:10em;
+  height: 5em;
   position: fixed;
-  left: 50%;
-  top:50%;
-  margin-left: -200px;
-  margin-top: -200px;
-/*  visibility: hidden;*/
+  margin: 0 auto;
+  visibility: hidden;
+  z-index: 5;
 }
 
 /*#main-image {
