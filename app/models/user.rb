@@ -13,6 +13,10 @@
     end
   end
 
+  def search_risks
+    self.genomes.last.reports.last.risks
+  end
+
   def current_risks
     self.reports.order(created_at: :desc).first.risks
   end

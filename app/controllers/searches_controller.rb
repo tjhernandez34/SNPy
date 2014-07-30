@@ -30,24 +30,6 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
 
 
 
-
-  # def search
-  #   search = params[:search].titleize!.split
-  #   replace_terms(search)
-  #   @risks = current_user.genomes.last.reports.last.risks
-  #   give_risk_names(@risks)
-  #   @results = []
-  # search.each do |term|
-  #   Disease.where('name LIKE ?', "%#{term}%").each do |result|
-  #     if @risk_names.include?(result.name)
-  #       @results << result
-  #     end
-  #   end
-  # end
-  #   @results.uniq!
-  #   @results #below is json
-  # end
-
   def search
     search = params[:search].titleize!.split
     replace_terms(search)
@@ -62,48 +44,89 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
       end
     end
     @results.uniq!
+  #   hashify_for_d3(@results)
+  # end
 
+  # def hashify_for_d3(results)
+  #   @risks = current_user.search_risks
+  #   give_risk_names(@risks)
+    json_hash = {name: current_user.first_name, children: []}
 
+      Category.all.each_with_index do |category, category_index|
+        json_hash[:children] << {name: category.name, children:[]}
 
-  json_hash = {name: current_user.first_name, children: []}
+        @result_by_category = []
 
-    Category.all.each_with_index do |category, category_index|
-      json_hash[:children] << {name: category.name, children:[]}
-
-      @result_by_category = []
-
-      @results.each do |result|
-        if result.category.name == category.name
-          @result_by_category << result
-        end
-      end
-      @result_by_category.each_with_index do |disease, disease_index|
-        json_hash[:children][category_index][:children] << {name: disease.name, children:[]}
-
-
-        @risks_by_disease = []
-
-        @risks.each do |risk|
-          if risk.marker.disease.name == disease.name
-            @risks_by_disease  << risk
+        @results.each do |result|
+          if result.category.name == category.name
+            @result_by_category << result
           end
         end
-        @risks_by_disease.each_with_index do |risk|
-          json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: 1}
+        @result_by_category.each_with_index do |disease, disease_index|
+          json_hash[:children][category_index][:children] << {name: disease.name, children:[]}
+
+
+          @risks_by_disease = []
+
+          @risks.each do |risk|
+            if risk.marker.disease.name == disease.name
+              @risks_by_disease  << risk
+            end
+          end
+          @risks_by_disease.each_with_index do |risk|
+            json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: 1}
+          end
         end
       end
-    end
-  puts "----------------------------"
-  puts json_hash
 
-    if !request.xhr?
-      puts "im in the render json hash section"
-      render json: json_hash, locals: {results: @results}
-    else
-      @results
-    end
+      if !request.xhr?
+        puts json_hash
+        render json: json_hash, locals: {results: @results}
+      else
+        @results
+      end
 
   end
+
+  def hashify_for_d3(results)
+    @risks = current_user.search_risks
+    give_risk_names(@risks)
+    json_hash = {name: current_user.first_name, children: []}
+
+      Category.all.each_with_index do |category, category_index|
+        json_hash[:children] << {name: category.name, children:[]}
+
+        @result_by_category = []
+
+        results.each do |result|
+          if result.category.name == category.name
+            @result_by_category << result
+          end
+        end
+        @result_by_category.each_with_index do |disease, disease_index|
+          json_hash[:children][category_index][:children] << {name: disease.name, children:[]}
+
+
+          @risks_by_disease = []
+
+          @risks.each do |risk|
+            if risk.marker.disease.name == disease.name
+              @risks_by_disease  << risk
+            end
+          end
+          @risks_by_disease.each_with_index do |risk|
+            json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: 1}
+          end
+        end
+      end
+
+      if !request.xhr?
+        puts json_hash
+        render json: json_hash, locals: {results: results}
+      else
+        results
+      end
+end
 
   def replace_terms(search)
     CHANGES.each do |key, value|
@@ -125,6 +148,25 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
       end
       @risk_names.uniq!
     end
+  end
+
+  def search_top_diseases_by_risk_level
+    search_terms = []
+    top_ten_diseases = []
+    current_user.order_user_diseases_by_total_risk_level.each do |disease_risk_pair_array|
+     search_terms << disease_risk_pair_array[1]
+    end
+    search_terms.each do |term|
+      Disease.where('name = ? LIMIT 10', "#{term}").each do |disease|
+          top_ten_diseases << disease
+      end
+    end
+    hashify_for_d3(top_ten_diseases)
+  end
+
+  def search_bottom_diseases_by_risk_level
+    current_user.order_user_diseases_by_total_risk_level {|element| element[0].to_i}.reverse
+
   end
 
 end
