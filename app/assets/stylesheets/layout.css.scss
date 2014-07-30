@@ -159,7 +159,7 @@ input#user_first_name, #user_last_name, #user_email, #user_password{
   margin: 2%;
 }
 
-.new_user {
+#home-signup-form {
   background-color: rgba(42, 42, 42, 0.8);
 /*  border: $border-style;*/
   width: $form-width;
@@ -174,7 +174,7 @@ input#user_first_name, #user_last_name, #user_email, #user_password{
   left: 50%;
   margin-left: -200px;
   margin-top: -200px;
-/*  visibility: hidden;*/
+  visibility: hidden;
 }
 
 
