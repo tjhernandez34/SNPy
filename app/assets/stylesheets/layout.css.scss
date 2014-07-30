@@ -135,12 +135,16 @@ header {
   visibility: hidden;
 }
 
-/*form#new_user {
+form#new_user {
   font-family: $sans-serif-font, sans-serif;
+  color: white;
   font-size: 1em;
-  width:400px;
-  border-radius:
-}*/
+  width:500px;
+  z-index: 5;
+  position: relative;
+  top: 100px;
+  left: 600px;
+}
 
 input.form-btn-submit {
   font-size: 2em;
@@ -160,23 +164,24 @@ input#user_first_name, #user_last_name, #user_email, #user_password{
   margin: 2%;
 }
 
-#home-signup-form {
-  background-color: rgba(42, 42, 42, 0.8);
-/*  border: $border-style;*/
-  width: $form-width;
-  font-family: $sans-serif-font, sans-serif;
-  font-size: 1em;
-  border-radius: 5px;
-  width: 400px;
-  height: 200px;
-  position: fixed;
-  padding: 2%;
-  top: 50%;
-  left: 50%;
-  margin-left: -200px;
-  margin-top: -200px;
-  visibility: hidden;
-}
+// #home-signup-form {
+//   background-color: rgba(42, 42, 42, 0.8);
+//   border: $border-style;
+//   width: $form-width;
+//   font-family: $sans-serif-font, sans-serif;
+//   font-size: 1em;
+//   border-radius: 5px;
+//   width: 400px;
+//   height: 200px;
+//   position: relative;
+//   padding: 2%;
+//   top: 80%;
+//   left: 50%;
+//   z-index: 5;
+//   margin-left: -200px;
+//   margin-top: -200px;
+//   visibility: hidden;
+// }
 
 
 #home_login_form {
