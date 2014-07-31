@@ -80,7 +80,7 @@ $(document).ready(function() {
     $("#search-button").on('click', function(event) {
         event.preventDefault();
 
-        d3.select("svg").transition()
+        d3.selectAll("svg").transition()
             .duration(750)
             .style('opacity', .2)
             .remove();
@@ -119,7 +119,6 @@ $(document).ready(function() {
                 return Math.max(0, y(d.y + d.dy));
             });
 
-
         var tooltip = d3.select("#zoomable_sunburst")
             .append("div")
             .attr("class", "tooltip")
@@ -135,7 +134,6 @@ $(document).ready(function() {
         function format_name(d) {
             var name = d.name;
             return '<b>' + name + '</b><br>';
-            // (' + format_number(d.size) + ')'
         }
 
 
@@ -171,54 +169,69 @@ $(document).ready(function() {
                     return tooltip.style("opacity", 0);
                 })
 
-            var legendContainer = d3.select("#zoomable_sunburst")
-                .append("svg")
-                .attr("class", "legend")
-                .attr("width", 200)
-                .attr("height", 300)
+            buildLegend(root);
 
+            function buildLegend(clickedObject) {
 
+                $(".legend").remove();
 
-            var legend = legendContainer.selectAll("rect")
-                .data(root.children)
-                .enter()
-                .append("rect")
-                .attr("transform", function(d, i) {
-                    return "translate(0," + i * 32 + ")";
-                })
-                .attr("width", 200)
-                .attr("margin-bottom", 1)
-                .attr("margin-top", 1)
-                .attr("height", 30)
-                .style("fill", function(d) {
-                    return d.nodeColor;
-                })
-                .on("click", click)
+                console.log(clickedObject);
 
-            legendContainer.selectAll("text")
-                .data(root.children)
-                .enter()
-                .append("text")
-                .attr("dy", ".35em")
-                .attr("transform", function(d, i) {
-                    return "translate(100," + ((i * 32) + 15) + ")";
-                })
-                .style("text-anchor", "middle")
-                .style("fill", "black")
-                .text(function(d) {
-                    console.log(d.name);
-                    return d.name;
-                })
-                .on("click", click)
+                var legendContainer = d3.select("#zoomable_sunburst")
+                    .append("svg")
+                    .attr("class", "legend")
+                    .attr("width", 200)
+                    .attr("height", 300)
+
+                var legend = legendContainer.selectAll("rect")
+                    .data(clickedObject.children)
+                    .enter()
+                    .append("rect")
+                    .attr("transform", function(d, i) {
+                        return "translate(0," + i * 32 + ")";
+                    })
+                    .attr("width", 200)
+                    .attr("margin-bottom", 1)
+                    .attr("margin-top", 1)
+                    .attr("height", 30)
+                    .style("fill", function(d) {
+                        return d.nodeColor;
+                    })
+                    .on("click", click)
+
+                legendContainer.selectAll("text")
+                    .data(clickedObject.children)
+                    .enter()
+                    .append("text")
+                    .attr("dy", ".35em")
+                    .attr("transform", function(d, i) {
+                        return "translate(100," + ((i * 32) + 15) + ")";
+                    })
+                    .style("text-anchor", "middle")
+                    .style("fill", "black")
+                    .text(function(d) {
+                        return d.name;
+                    })
+                    .on("click", click)
+            }
+
 
             function click(d) {
-                clickedObject = d
+
                 path.transition()
                     .duration(750)
                     .attrTween("d", arcTween(d));
+
+                d3.select(".legend").transition()
+                    .duration(100)
+                    .style('opacity', .2)
+                    .remove();
+
+                buildLegend(d);
             }
 
         });
+
 
 
         d3.select(self.frameElement).style("height", height + "px");
@@ -238,7 +251,6 @@ $(document).ready(function() {
                 };
             };
         }
-
 
     };
 
