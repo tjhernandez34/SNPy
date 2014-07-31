@@ -1,16 +1,14 @@
 <header class="center global clearfix">
   <a href ="/"><h1 class="brand left">SNP<b class="logo">y</b></h1></a>
   <nav class = "right">
-    <ul>
-        <% if signed_in? %>
-          <button class="btn"><%= link_to "sign out", session_path, method: :delete %></button>
-        <% else %>
-          <button class="btn"><%= link_to "sign in", login_path, id: "home-login", class: "login" %></button>
-          <button class="btn"><%= link_to "sign up", new_user_path, class: "signup" %></button>
-        <% end %>
-      </li>
-    <br clear="all">
+    <% if signed_in? %>
+      <button class="btn"><%= link_to "sign out", session_path, method: :delete %></button>
+    <% else %>
+      <button class="btn"><%= link_to "sign in", login_path, id: "home-login", class: "login" %></button>
+      <button class="btn"><%= link_to "sign up", new_user_path, class: "signup" %></button>
+    <% end %>
   </nav>
+  <br clear="all">
 </header>
 
 
