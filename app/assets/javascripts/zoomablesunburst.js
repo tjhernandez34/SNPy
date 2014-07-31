@@ -76,8 +76,9 @@ jQuery(document).ready(function($) {
     $("#search-button").on('click', function(event) {
         event.preventDefault();
 
+        $(".tooltip").remove();
         d3.selectAll("svg").transition()
-            .duration(750)
+            .duration(1000)
             .style('opacity', 0.2)
             .remove();
         var searchTerm = $("#box").val().replace(/ /g, '+');
