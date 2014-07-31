@@ -8,6 +8,7 @@ Buttons
   border: 1px solid;
   background: transparent;
   font-family: $sans-serif-font, sans-serif;
+  color: $light-blue;
 }
 
 .btn-nav {
@@ -15,6 +16,18 @@ Buttons
   background: transparent;
   font-family: $sans-serif-font, sans-serif;
 }
+
+.btn-link {
+  border: 0.1em solid;
+  background: transparent;
+  font-family: $sans-serif-font, sans-serif;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+
+
+
 
 /*
 Tables
@@ -135,6 +148,61 @@ article {
 
 .min-height {
   min-height: 300px;
+}
+
+/* Form Partials */
+
+.partial_form {
+  height: 60%;
+  width: 30%; 
+  background-color: $partials-color;
+
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+
+  margin-top: 20%;
+  margin-bottom: 20%;
+  margin-left: 33%;
+  margin-right: 33%;
+
+  border-radius: 1em;
+}
+
+.form_field {
+  box-shadow: inset 0px 2px 2px #ececec;
+
+  width: 70%;
+  padding: 5px;
+  border: 1px solid #d4d4d4;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 4px;
+  line-height: 1.5em;
+  float: right;
+}
+
+.form_label {
+    font-weight: bold;
+  background: linear-gradient(#f1f1f1, #e2e2e2);
+  padding: 5px 10px;
+  color: #444;
+  
+  border: 1px solid #d4d4d4;
+  /* lets remove the right border */
+  border-right: 0;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  
+  line-height: 1.5em;
+  width: 30%;
+  
+  /* takes the width properly now and also the
+  spacing between the label and input field got removed. */
+  float: left;
+  
+  text-align: center;
+  cursor: pointer;
 }
 
 

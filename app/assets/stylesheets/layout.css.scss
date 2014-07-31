@@ -1,11 +1,16 @@
 @import 'variables';
+@import 'fonts';
 
-.body {
+
+/*.body {
   background-color: $home-background-color;
   min-height: 600px;
   position: relative;
   top: 0px;
-}
+}*/
+
+
+
 .index-header {
   background-color: $nav-bar-color-index;
 }
@@ -14,7 +19,7 @@
   height: 100%;
   min-height: 750px;
   padding-top: 8%;
-  background-color: $home-background-color;
+  background-color: transparent;
   -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
   box-shadow: 0 0 50px rgba(0,0,0,0.8);
   padding-right: 2%;
@@ -41,7 +46,7 @@ header {
     padding-right: 9%;
     margin-top: 6px;
     position: relative;
-    top: px;
+    top: 5px;
     ul{
       float: right;
       li {
@@ -50,90 +55,156 @@ header {
       }
     }
   }
-  .btn {
-    color: $white;
-    border-color: $white;
-  }
 }
 
+
 .container {
-/*  height: 100%;
+ height: 100%;
   margin-top: 0px;
   padding-top: 0px;
   padding-left: 8%;
   padding-right: 8%;
   position: relative;
-  width: 100%;*/
-  background-color: $home-background-color;
+  width: 100%;
+  background-color: $nav-bar-color;
 }
 
-.login{
+/*.login{
   background: url('http://farm3.staticflickr.com/2832/12303719364_c25cecdc28_b.jpg') fixed;
   background-size: cover;
   padding: 0;
   margin: 0;
-}
+}*/
 
 .footer {
-  position: relative;
+  position: fixed;
   bottom:0;
   padding-top: 2%;
   padding-bottom: 2%;
   width: 100%;
-  bottom: 0px;
+  bottom: 0;
   background-color: $footer-bar;
-  height: 20%;
+  height: 1.5em;
+  z-index: 5;
   -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
   box-shadow: 0 0 50px rgba(0,0,0,0.8);
-  color: $white;
-  font-size: 1em;
+  color: $light-blue;
+  font-size: 0.9em;
   font-family: $sans-serif-font, sans-serif;
+  font-weight: lighter;
+  visibility: hidden;
 }
 
-#track_page {
-  width: 100%;
-
+form#new_user {
+  font-family: $sans-serif-font, sans-serif;
+  color: white;
+  font-size: 1em;
+  width:500px;
+  z-index: 5;
+  position: relative;
+  top: 100px;
+  left: 600px;
 }
 
-.new_user {
+input.form-btn-submit {
+  font-size: 2em;
+}
+
+label {
+  display: inline-block;
+}
+
+input#user_first_name, #user_last_name, #user_email, #user_password{
+  border:1px solid #aaa;
+  box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
+  border-radius:0.5em;
+  height:10px;
+  width:100px;
+  padding:5px;
+  margin: 2%;
+}
+
+// #home-signup-form {
+//   background-color: rgba(42, 42, 42, 0.8);
+//   border: $border-style;
+//   width: $form-width;
+//   font-family: $sans-serif-font, sans-serif;
+//   font-size: 1em;
+//   border-radius: 5px;
+//   width: 400px;
+//   height: 200px;
+//   position: relative;
+//   padding: 2%;
+//   top: 80%;
+//   left: 50%;
+//   z-index: 5;
+//   margin-left: -200px;
+//   margin-top: -200px;
+//   visibility: hidden;
+// }
+
+
+#home_login_form {
+  background-color: rgba(42, 42, 42, 0.8);
   border: $border-style;
   width: $form-width;
   border-radius: 5px;
-  width:300px;
-  height: 155px;
-  position: absolute;
-  left: 70%;
-  top:80%;
-  margin-left: -50px;
-  margin-top: -50px;
-/*  visibility: hidden;*/
+  width:10em;
+  height: 5em;
+  position: fixed;
+  margin: 0 auto;
+  visibility: hidden;
+  z-index: 5;
 }
 
-div.modal.login-form.hidden {
-  border: $border-style;
-  width: $form-width;
-  border-radius: 5px;
-  width:300px;
-  height: 155px;
-  position: absolute;
-  left: 15%;
-  top:80%;
-  margin-left: -50px;
-  margin-top: -50px;
-/*  visibility: hidden;*/
-}
-
-#main-image {
+/*#main-image {
   border: 0.1em solid white;
   -webkit-border-radius: 0.3em;
   -moz-border-radius: 0.3em;
+  border-radius: 0.3em;
+}*/
+
+.pure-form {
+  position: relative;
+  top: 50px;
+  border: $border-style;
+  display: inline-block;
+  padding: 2%;
+
+}
+
+label#search_tag {
+  font-family: $sans-serif-font, sans-serif;
+  font-size: 1em;
+
+}
+
+input#search-button {
+  border: 0px solid white;
+  background: $light-blue;
+  font-family: $sans-serif-font, sans-serif;
+}
+
+input#genome_file_url::-webkit-file-upload-button {
+  background: $light-blue;
+  color: white;
+  padding: 1em;
+  border-radius: 0.3em;
+
+}
+
+
+.upload_submit {
+  border: 0px solid white;
+  background: $light-blue;
+  font-family: $sans-serif-font, sans-serif;
+  color: white;
   border-radius: 0.3em;
 }
 
 /*
 Modal styling
 */
-
 /*#lean_overlay {
     position: fixed;
     z-index:100;

@@ -76,6 +76,22 @@ $(document).ready(function() {
         createSunburst("/sunburst");
     });
 
+    $("#positive10").on("click", function() {
+        d3.select("svg").transition()
+            .duration(1000)
+            .style('opacity', .2)
+            .remove();
+        createSunburst("/search/top_10");
+    });
+
+    $("#negative10").on("click", function() {
+        d3.select("svg").transition()
+            .duration(1000)
+            .style('opacity', .2)
+            .remove();
+        createSunburst("/search/bottom_10");
+    });
+
     $("#search-button").on('click', function(event) {
         event.preventDefault();
 

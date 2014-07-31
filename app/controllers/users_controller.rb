@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       sign_in(@user)
       redirect_to @user
     else
-      render :new
+      redirect_to root_path
     end
   end
 
