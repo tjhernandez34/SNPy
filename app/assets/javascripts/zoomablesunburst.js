@@ -123,6 +123,7 @@ jQuery(document).ready(function($) {
         var tooltip = d3.select("#zoomable_sunburst")
             .append("div")
             .attr("class", "tooltip")
+            .style("border-radius", 5)
             .style("position", "absolute")
             .style("z-index", "10")
             .style("opacity", 0);
@@ -164,7 +165,7 @@ jQuery(document).ready(function($) {
                     });
                     return tooltip.transition()
                         .duration(50)
-                        .style("opacity", 0.8);
+                        .style("opacity", 0.95);
                 })
                 .on("mousemove", function(d) {
                     return tooltip
