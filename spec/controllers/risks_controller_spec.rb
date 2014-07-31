@@ -1,5 +1,5 @@
-require 'spec_helper'
+# require 'spec_helper'
 
-describe RisksController do
+# describe RisksController do
 
-end
+# end

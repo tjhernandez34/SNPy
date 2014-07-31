@@ -1,5 +1,5 @@
-require 'spec_helper'
+# require 'spec_helper'
 
-describe DiseaseController do
+# describe DiseaseController do
 
-end
+# end
