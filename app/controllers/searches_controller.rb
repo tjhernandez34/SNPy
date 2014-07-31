@@ -165,8 +165,18 @@ end
   end
 
   def search_bottom_diseases_by_risk_level
-    current_user.order_user_diseases_by_total_risk_level {|element| element[0].to_i}.reverse
-
+    search_terms = []
+    top_ten_diseases = []
+    low_risks = current_user.order_user_diseases_by_total_risk_level {|element| element[0].to_i}.reverse
+    low_risks.each do |disease_risk_pair_array|
+     search_terms << disease_risk_pair_array[1]
+    end
+    search_terms.each do |term|
+      Disease.where('name = ? LIMIT 10', "#{term}").each do |disease|
+          top_ten_diseases << disease
+      end
+    end
+    hashify_for_d3(top_ten_diseases)
   end
 
 end
