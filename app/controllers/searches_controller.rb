@@ -168,7 +168,7 @@ end
     search_terms = []
     top_ten_diseases = []
     low_risks = current_user.order_user_diseases_by_total_risk_level {|element| element[0].to_i}.reverse
-    low_risks.each do |disease_risk_pair_array|
+    low_risksJOPDQW.each do |disease_risk_pair_array|
      search_terms << disease_risk_pair_array[1]
     end
     search_terms.each do |term|

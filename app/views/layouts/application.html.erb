@@ -21,12 +21,12 @@
 
           <% if current_user == nil %>
 
-            <div class = "modal signup-form hidden" style="display:none">
+            <div id = "home-signup-form" style="display:none">
               <%= render "partials/signup" %>
             </div>
 
-            <div class = "modal login-form hidden" style="display:none" >
-              <%= render "partials/login" =%>
+            <div id="home-login-form" style="display: none" >
+              <%= render "partials/login" %>
             </div>
 
 
