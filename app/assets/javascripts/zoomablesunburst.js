@@ -9,6 +9,7 @@ $(document).ready(function() {
 
     var y = d3.scale.sqrt()
         .range([0, radius]);
+
     var colorGroup0 = ["#FFE1F4", "#FFBFE8", "#FF99D9", "#FF82D0", "#FF6FC9", "#FF4DBC", "#FF2BAF", "#FF009F", "#F7009A", "#EC0094", "#DF008B"]
     var colorGroup1 = ["#E7E9FA", "#CACEF4", "#AAB0EE", "#979FEA", "#8791E7", "#6A76E1", "#4E5BDC", "#2B3CD5", "#2939CD", "#2737C5", "#2534BA"]
     var colorGroup2 = ["#E7F3FA", "#CCE6F2", "#ADD7EB", "#9ACEE7", "#8BC6E2", "#70B9DC", "#54ABD6", "#329BCD", "#3096C7", "#2E8FBE", "#2E8FBE"]
@@ -22,8 +23,6 @@ $(document).ready(function() {
     var colorGroup10 = ["#FBE6E6", "#F5C9C9", "#F0A8A8", "#ED9494", "#EB8383", "#E66666", "#E14848", "#DB2424", "#D32323", "#CB2121", "#BF2020"]
 
     var colorGroups = [colorGroup0, colorGroup1, colorGroup2, colorGroup3, colorGroup4, colorGroup5, colorGroup6, colorGroup7, colorGroup8, colorGroup9, colorGroup10];
-
-    var color = d3.scale.category10();
 
     var BASE_COLOR = "#2C2C28";
     var POSITIVE_COLOR = "#007D00";
@@ -177,6 +176,8 @@ $(document).ready(function() {
 
                 console.log(clickedObject);
 
+                // I want to build the legend with only clickedObject's children whose value is not 0????
+
                 var legendContainer = d3.select("#zoomable_sunburst")
                     .append("svg")
                     .attr("class", "legend")
@@ -198,6 +199,8 @@ $(document).ready(function() {
                         return d.nodeColor;
                     })
                     .on("click", click)
+
+
 
                 legendContainer.selectAll("text")
                     .data(clickedObject.children)
