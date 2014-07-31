@@ -1,11 +1,6 @@
 class WelcomeController < ApplicationController
 	skip_before_action :require_login
 
-
-  def testing
-
-  end
-
   def sunburst
     risks_by_disease = current_user.current_risks.group_by{|risk| risk.disease.name }
     # puts risks_by_disease
@@ -35,10 +30,6 @@ class WelcomeController < ApplicationController
         end
       end
     end
-
-    # puts '---------------------------------------------'
-    # puts json_hash
-    # puts '--------------------------------------------------------------'
 
     render json: json_hash
 

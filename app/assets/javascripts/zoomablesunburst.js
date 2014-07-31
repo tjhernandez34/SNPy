@@ -1,4 +1,4 @@
-$(document).ready(function() {
+jQuery(document).ready(function($) {
 
     var width = 960,
         height = 740,
@@ -10,17 +10,19 @@ $(document).ready(function() {
     var y = d3.scale.sqrt()
         .range([0, radius]);
 
-    var colorGroup0 = ["#FFE1F4", "#FFBFE8", "#FF99D9", "#FF82D0", "#FF6FC9", "#FF4DBC", "#FF2BAF", "#FF009F", "#F7009A", "#EC0094", "#DF008B"]
-    var colorGroup1 = ["#E7E9FA", "#CACEF4", "#AAB0EE", "#979FEA", "#8791E7", "#6A76E1", "#4E5BDC", "#2B3CD5", "#2939CD", "#2737C5", "#2534BA"]
-    var colorGroup2 = ["#E7F3FA", "#CCE6F2", "#ADD7EB", "#9ACEE7", "#8BC6E2", "#70B9DC", "#54ABD6", "#329BCD", "#3096C7", "#2E8FBE", "#2E8FBE"]
-    var colorGroup3 = ["#006060", "#007171", "#007D7D", "#00A4A4", "#00B0B0", "#00D0D0", "#00DFDF", "#00ECEC", "#00F7F7", "#00FFFF", "#2BFFFF", "#4DFFFF"]
-    var colorGroup4 = ["#DFDF00", "#ECEC00", "#F7F700", "#FFFF00", "#FFFF2B", "#FFFF4D", "#FFFF6F", "#FFFF82", "#FFFF99", "#FFFFBF", "#FFFFE1"]
-    var colorGroup5 = ["#FFF0E1", "#FFDFBF", "#FFCC99", "#FFC082", "#FFB76F", "#FFA64D", "#FF8000", "#F77B00", "#EC7600", "#DF7000"]
-    var colorGroup6 = ["#0000F7", "#3131C6", "#0000FF", "#3232CD", "#2B2BFF", "#5555D5", "#4D4DFF", "#7070DC", "#6F6FFF", "#8B8BE2", "#8282FF", "#9A9AE7", "#9999FF", "#ADADEB", "#BFBFFF", "#CCCCF2", "#E1E1FF"]
-    var colorGroup7 = ["#E8F9ED", "#CCF2D9", "#ADEBC1", "#9BE6B4", "#55D57E", "#8BE2A8", "#71DB94", "#33CC65", "#30BC5E", "#2DB358", "#2BA653"]
-    var colorGroup8 = ["#FFE6E1", "#FFC9BF", "#FFA899", "#FF9582", "#FF846F", "#FF674D", "#FF4A2B", "#FF2600", "#F72500", "#EC2300", "#DF2200"]
-    var colorGroup9 = ["#F0EDF3", "#DFD8E7", "#CCBFD9", "#C0B0D0", "#B7A5C9", "#A68FBC", "#957AAF", "#80609F", "#7B5C9A", "#765894", "#70548B"]
-    var colorGroup10 = ["#FBE6E6", "#F5C9C9", "#F0A8A8", "#ED9494", "#EB8383", "#E66666", "#E14848", "#DB2424", "#D32323", "#CB2121", "#BF2020"]
+    createSunburst("/sunburst");
+
+    var colorGroup0 = ["#FFE1F4", "#FFBFE8", "#FF99D9", "#FF82D0", "#FF6FC9", "#FF4DBC", "#FF2BAF", "#FF009F", "#F7009A", "#EC0094", "#DF008B"];
+    var colorGroup1 = ["#E7E9FA", "#CACEF4", "#AAB0EE", "#979FEA", "#8791E7", "#6A76E1", "#4E5BDC", "#2B3CD5", "#2939CD", "#2737C5", "#2534BA"];
+    var colorGroup2 = ["#E7F3FA", "#CCE6F2", "#ADD7EB", "#9ACEE7", "#8BC6E2", "#70B9DC", "#54ABD6", "#329BCD", "#3096C7", "#2E8FBE", "#2E8FBE"];
+    var colorGroup3 = ["#006060", "#007171", "#007D7D", "#00A4A4", "#00B0B0", "#00D0D0", "#00DFDF", "#00ECEC", "#00F7F7", "#00FFFF", "#2BFFFF", "#4DFFFF"];
+    var colorGroup4 = ["#DFDF00", "#ECEC00", "#F7F700", "#FFFF00", "#FFFF2B", "#FFFF4D", "#FFFF6F", "#FFFF82", "#FFFF99", "#FFFFBF", "#FFFFE1"];
+    var colorGroup5 = ["#FFF0E1", "#FFDFBF", "#FFCC99", "#FFC082", "#FFB76F", "#FFA64D", "#FF8000", "#F77B00", "#EC7600", "#DF7000"];
+    var colorGroup6 = ["#0000F7", "#3131C6", "#0000FF", "#3232CD", "#2B2BFF", "#5555D5", "#4D4DFF", "#7070DC", "#6F6FFF", "#8B8BE2", "#8282FF", "#9A9AE7", "#9999FF", "#ADADEB", "#BFBFFF", "#CCCCF2", "#E1E1FF"];
+    var colorGroup7 = ["#E8F9ED", "#CCF2D9", "#ADEBC1", "#9BE6B4", "#55D57E", "#8BE2A8", "#71DB94", "#33CC65", "#30BC5E", "#2DB358", "#2BA653"];
+    var colorGroup8 = ["#FFE6E1", "#FFC9BF", "#FFA899", "#FF9582", "#FF846F", "#FF674D", "#FF4A2B", "#FF2600", "#F72500", "#EC2300", "#DF2200"];
+    var colorGroup9 = ["#F0EDF3", "#DFD8E7", "#CCBFD9", "#C0B0D0", "#B7A5C9", "#A68FBC", "#957AAF", "#80609F", "#7B5C9A", "#765894", "#70548B"];
+    var colorGroup10 = ["#FBE6E6", "#F5C9C9", "#F0A8A8", "#ED9494", "#EB8383", "#E66666", "#E14848", "#DB2424", "#D32323", "#CB2121", "#BF2020"];
 
     var colorGroups = [colorGroup0, colorGroup1, colorGroup2, colorGroup3, colorGroup4, colorGroup5, colorGroup6, colorGroup7, colorGroup8, colorGroup9, colorGroup10];
 
@@ -60,46 +62,25 @@ $(document).ready(function() {
         return (node.nodeColor = color);
     }
 
-    createSunburst("/sunburst");
-
-    // function simulateClick(target) {
-    //     var event = document.createEvent("MouseEvents");
-    //     event.initMouseEvent("click",true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-    //     !target.dispatchEvent(event);
-    // };
-
-    $("#zoombutton").on("click", function() {
-        d3.select("svg").transition()
+    $(".chartbutton").on("click", function() {
+        event.preventDefault();
+        var chartUrl = $(this).attr("href")
+        $(".tooltip").remove();
+        d3.selectAll("svg").transition()
             .duration(1000)
-            .style('opacity', .2)
+            .style('opacity', 0.2)
             .remove();
-        createSunburst("/sunburst");
-    });
-
-    $("#positive10").on("click", function() {
-        d3.select("svg").transition()
-            .duration(1000)
-            .style('opacity', .2)
-            .remove();
-        createSunburst("/search/top_10");
-    });
-
-    $("#negative10").on("click", function() {
-        d3.select("svg").transition()
-            .duration(1000)
-            .style('opacity', .2)
-            .remove();
-        createSunburst("/search/bottom_10");
+        createSunburst(chartUrl);
     });
 
     $("#search-button").on('click', function(event) {
         event.preventDefault();
 
+        $(".tooltip").remove();
         d3.selectAll("svg").transition()
-            .duration(750)
-            .style('opacity', .2)
+            .duration(1000)
+            .style('opacity', 0.2)
             .remove();
-
         var searchTerm = $("#box").val().replace(/ /g, '+');
         var searchUrl = "/search?utf8=✓&search=" + searchTerm + "&commit=Search";
 
@@ -182,7 +163,7 @@ $(document).ready(function() {
                 })
                 .on("mouseout", function(d) {
                     return tooltip.style("opacity", 0);
-                })
+                });
 
             buildLegend(root);
 
@@ -198,7 +179,7 @@ $(document).ready(function() {
                     .append("svg")
                     .attr("class", "legend")
                     .attr("width", 200)
-                    .attr("height", 300)
+                    .attr("height", 300);
 
                 var legend = legendContainer.selectAll("rect")
                     .data(clickedObject.children)
@@ -214,7 +195,7 @@ $(document).ready(function() {
                     .style("fill", function(d) {
                         return d.nodeColor;
                     })
-                    .on("click", click)
+                    .on("click", click);
 
 
 
@@ -231,7 +212,7 @@ $(document).ready(function() {
                     .text(function(d) {
                         return d.name;
                     })
-                    .on("click", click)
+                    .on("click", click);
             }
 
 
@@ -243,7 +224,7 @@ $(document).ready(function() {
 
                 d3.select(".legend").transition()
                     .duration(100)
-                    .style('opacity', .2)
+                    .style('opacity', 0.2)
                     .remove();
 
                 buildLegend(d);
@@ -271,7 +252,6 @@ $(document).ready(function() {
             };
         }
 
-    };
+    }
 
-
-})
+});
