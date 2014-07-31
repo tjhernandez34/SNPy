@@ -19,12 +19,12 @@ Rails.application.routes.draw do
 
   resources :risks
 
-  get 'testing' => "welcome#testing"
+  get '/testing' => "welcome#testing"
 
   get '/sunburst' => 'welcome#sunburst'
-  
+
   get '/search/top_10' => 'searches#search_top_diseases_by_risk_level'
-  
+
   get '/search/bottom_10' => 'searches#search_bottom_diseases_by_risk_level'
 
   get '/search' => 'searches#search'

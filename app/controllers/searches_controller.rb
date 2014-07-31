@@ -149,13 +149,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
         end
       end
 
-      if !request.xhr?
-      puts "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-        puts json_hash
-        render json: json_hash
-      else
-        results
-      end
+      return json_hash
   end
 
 
@@ -171,44 +165,8 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
     end
   end
 
-  def give_risk_names(risks)
-    @risk_names = []
-    risks.each do |risk|
-      if risk.marker.disease.name
-        @risk_names << risk.marker.disease.name
-      end
-      @risk_names.uniq!
-    end
-  end
 
-   def search_top_diseases_by_risk_level
-    search_terms = []
-    top_ten_diseases = []
-    current_user.order_user_diseases_by_total_risk_level.each do |disease_risk_pair_array|
-     search_terms << disease_risk_pair_array[1]
-    end
-    top_diseases = search_terms.slice(0,9).flatten
-    top_diseases.each do |term|
-          top_ten_diseases << Disease.where('name = ?', "#{term}")
-      end
-    puts "---------top_ten_diseases"
-    top_ten_diseases.flatten!
-    hashify_for_d3(top_ten_diseases)
-  end
 
-  def search_bottom_diseases_by_risk_level
-    search_terms = []
-    bottom_ten_diseases = []
-    low_risks = current_user.order_user_diseases_by_total_risk_level {|element| element[0].to_i}.reverse
-    low_risks.each do |disease_risk_pair_array|
-     search_terms << disease_risk_pair_array[1]
-    end
-    bottom_diseases = search_terms.slice(0,9).flatten
-    bottom_diseases.each do |term|
-          bottom_ten_diseases << Disease.where('name = ?', "#{term}")
-      end
-    bottom_ten_diseases.flatten!
-    hashify_for_d3(bottom_ten_diseases)
-  end
+
 
 end

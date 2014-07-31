@@ -1,10 +1,13 @@
 class WelcomeController < ApplicationController
 	skip_before_action :require_login
 
+  def testing
+    @sunburst_data = {foo: "bar"}
+    render 'testing'
+  end
+
   def sunburst
     risks_by_disease = current_user.current_risks.group_by{|risk| risk.disease.name }
-    # puts risks_by_disease
-    # puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     risks = current_user.current_risks_by_category
     diseases = current_user.current_risks.group_by{|risk| risk.disease}.keys.group_by{|disease| disease.category}
     data = risks.merge(diseases){|category,risks,diseases| risks.group_by{|risk| risk.disease}}
@@ -30,9 +33,10 @@ class WelcomeController < ApplicationController
         end
       end
     end
-
     render json: json_hash
-
   end
 
+
 end
+
+
