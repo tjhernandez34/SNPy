@@ -1,25 +1,26 @@
 <h1 class="h1">Hello, <%= current_user.first_name %></h1>
-<%= link_to "Upload Your Genome", new_genome_path, :class => "btn-link" %>
+<div><%= link_to "Upload Genome", new_genome_path, :class => "btn" %></div>
 
 <% if current_user.genomes %>
-<div id = "home_search">
-  <%= form_tag("/search", method: "get", class: "pure-form") do %>
-  <%= label_tag(:q, "find your genetic risks", id: "search_tag") %>
-    <%= text_field_tag :search, params[:search], :placeholder => "enter illness", id: "box", class: "pure-input-1-4" %>
-  <%= submit_tag("Search", id: "search-button") %>
-<% end %>
-</div>
+	<div id = "home_search">
+	  <%= form_tag("/search", method: "get") do %>
+		    <%= text_field_tag :search, params[:search], :placeholder => "enter illness", id: "box", class: "form_field" %>
+		  <div>
+		  	<%= submit_tag("Search", :class => "btn", id: "search-button") %>
+		  </div>
+		<% end %>
+	</div>
 <% else %>
-  <p>please upload genome, <%= current_user.first_name %></p>
+  <p>Please upload genome, <%= current_user.first_name %></p>
 <% end %>
 
 <% if @results %>
-<% @results.inspect %>`
+	<% @results.inspect %>
 <% end %>
 
-<button id="positive10"> Healthy Genes </button>
-<button id="zoombutton"> Zoom Zoom </button>
-<button id="negative10"> Risk Genes </button>
+<button class= "btn" id="positive10"> Healthy Genes </button>
+<button class = "btn" id="zoombutton"> Zoom Zoom </button>
+<button class = "btn" id="negative10"> Risk Genes </button>
 
 <div id="zoomable_sunburst">
 

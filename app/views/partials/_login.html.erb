@@ -1,4 +1,4 @@
-<div class="partial_form clear-fix">
+<div class="partial_form clear-fix center">
 <%= form_for :session, url: login_path do |f| %>
 <h2 class="h2">Login</h2>
 <ul class = "login_errors">
@@ -6,15 +6,13 @@
 </ul>
 
 	<div>
-		<label class="form_label" for="pub_url">Email</label>
-    <%= f.email_field :email, :placeholder => "Email", :class => "form_field email" %>
+    <%= f.email_field :email, :placeholder => "Email", :class => "form_field" %>
   </div>
   <div>
-  	<label class="form_label" for="pub_url">Password</label>
-    <%= f.password_field :password, :placeholder => "Password",  :class => "form_field password" %>
+    <%= f.password_field :password, :placeholder => "Password",  :class => "form_field" %>
   </div>
   <div>
-    <%= f.submit "login",  :class => "btn" %>
+    <%= f.submit "SUBMIT",  :class => "btn" %>
   </div>
 <% end %>
 </div>

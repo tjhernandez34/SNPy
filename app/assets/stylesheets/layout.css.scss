@@ -19,7 +19,7 @@
   height: 100%;
   min-height: 750px;
   padding-top: 8%;
-  background-color: transparent;
+  background-color: $black;
   -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
   box-shadow: 0 0 50px rgba(0,0,0,0.8);
   padding-right: 2%;
@@ -29,6 +29,7 @@
 header {
   background-color: $nav-bar-color;
   max-height: 50%;
+  min-height: 4.6em;
   width: 100%;
   position: fixed;
   top: 0px;
@@ -37,7 +38,7 @@ header {
     padding: 10px;
     padding-left: 9%;
     color: $white;
-    font-size: 2.8em;
+    font-size: 3.8em;
     font-family: $sans-serif-font, sans-serif;
     font-weight: lighter;
   }
@@ -57,6 +58,10 @@ header {
   }
 }
 
+.right-nav {
+  min-width: 30%;
+}
+
 
 .container {
  height: 100%;
@@ -69,12 +74,6 @@ header {
   background-color: $nav-bar-color;
 }
 
-/*.login{
-  background: url('http://farm3.staticflickr.com/2832/12303719364_c25cecdc28_b.jpg') fixed;
-  background-size: cover;
-  padding: 0;
-  margin: 0;
-}*/
 
 .footer {
   position: fixed;
@@ -95,36 +94,15 @@ header {
   visibility: hidden;
 }
 
-form#new_user {
-  font-family: $sans-serif-font, sans-serif;
-  color: white;
-  font-size: 1em;
-  width:500px;
-  z-index: 5;
-  position: relative;
-  top: 100px;
-  left: 600px;
-}
 
-input.form-btn-submit {
-  font-size: 2em;
-}
+
 
 label {
   display: inline-block;
 }
 
-input#user_first_name, #user_last_name, #user_email, #user_password{
-  border:1px solid #aaa;
-  box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
-  border-radius:0.5em;
-  height:10px;
-  width:100px;
-  padding:5px;
-  margin: 2%;
-}
 
-// #home-signup-form {
+/*// #home-signup-form {
 //   background-color: rgba(42, 42, 42, 0.8);
 //   border: $border-style;
 //   width: $form-width;
@@ -141,9 +119,9 @@ input#user_first_name, #user_last_name, #user_email, #user_password{
 //   margin-left: -200px;
 //   margin-top: -200px;
 //   visibility: hidden;
-// }
+// }*/
 
-
+/*
 #home_login_form {
   background-color: rgba(42, 42, 42, 0.8);
   border: $border-style;
@@ -156,7 +134,7 @@ input#user_first_name, #user_last_name, #user_email, #user_password{
   visibility: hidden;
   z-index: 5;
 }
-
+*/
 /*#main-image {
   border: 0.1em solid white;
   -webkit-border-radius: 0.3em;
@@ -164,14 +142,7 @@ input#user_first_name, #user_last_name, #user_email, #user_password{
   border-radius: 0.3em;
 }*/
 
-.pure-form {
-  position: relative;
-  top: 50px;
-  border: $border-style;
-  display: inline-block;
-  padding: 2%;
 
-}
 
 label#search_tag {
   font-family: $sans-serif-font, sans-serif;
@@ -179,11 +150,6 @@ label#search_tag {
 
 }
 
-input#search-button {
-  border: 0px solid white;
-  background: $light-blue;
-  font-family: $sans-serif-font, sans-serif;
-}
 
 input#genome_file_url::-webkit-file-upload-button {
   background: $light-blue;
