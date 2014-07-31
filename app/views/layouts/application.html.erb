@@ -12,30 +12,12 @@
 
 <body class="body">
   <%= render "partials/header" %>
-
-
   <div class="container center global clear-fix">
+    <div class="content top clear-fix">
+      <%= yield %>
+    </div>
 
-
-        <div class="content top clear-fix">
-
-          <% if current_user == nil %>
-
-            <div id = "home-signup-form" style="display:none">
-              <%= render "partials/signup" %>
-            </div>
-
-            <div id="home-login-form" style="display: none" >
-              <%= render "partials/login" %>
-            </div>
-
-
-          <% end %>
-
-          <%= yield %>
-        </div>
-
-          <%= render 'partials/footer'%>
+    <%= render 'partials/footer'%>
 
     <% if current_user %>
       <% link_to "logout", :controller => "sessions", :action => "destroy" %>

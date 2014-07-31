@@ -32,7 +32,7 @@ $(document).ready(function() {
     //     !target.dispatchEvent(event);
     // };
 
-    $("#zoombutton").on("click", function() {
+    $("#zoombutton").click(function() {
         d3.select("svg").transition()
             .duration(1000)
             .style('opacity', .2)

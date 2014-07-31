@@ -4,9 +4,10 @@ function showSignupForm(){
 
  // setTimeout(function(){
   $("#home-signup-form").show()//},44);
+	$("#home-login-form").hide()
 }
   $(".signup").click(function(event) {
-    // event.preventDefault();
+    event.preventDefault();
     console.log("sign up button event")
     showSignupForm();
 
