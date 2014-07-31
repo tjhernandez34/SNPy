@@ -62,6 +62,17 @@ jQuery(document).ready(function($) {
         return (node.nodeColor = color);
     }
 
+    $(".chartbutton").on("click", function() {
+        event.preventDefault();
+        var chartUrl = $(this).attr("href")
+        $(".tooltip").remove();
+        d3.selectAll("svg").transition()
+            .duration(1000)
+            .style('opacity', 0.2)
+            .remove();
+        createSunburst(chartUrl);
+    });
+
     $("#search-button").on('click', function(event) {
         event.preventDefault();
 
@@ -75,34 +86,6 @@ jQuery(document).ready(function($) {
         console.log("search url:", searchUrl);
         createSunburst(searchUrl);
     });
-
-    $("#zoombutton").on("click", function() {
-        event.preventDefault();
-        d3.select("svg").transition()
-            .duration(1000)
-            .style('opacity', 0.2)
-            .remove();
-        createSunburst("/sunburst");
-    });
-    $("#positive10").on("click", function() {
-        event.preventDefault();
-        d3.select("svg").transition()
-            .duration(1000)
-            .style('opacity', 0.2)
-            .remove();
-        createSunburst("/search/top_10");
-    });
-
-    $("#negative10").on("click", function() {
-        console.log("im in the negative click")
-        event.preventDefault();
-        d3.select("svg").transition()
-            .duration(1000)
-            .style('opacity', 0.2)
-            .remove();
-        createSunburst("/search/bottom_10");
-    });
-
 
     function createSunburst(url) {
 
