@@ -1,34 +1,35 @@
-<h1 class="h1">Hello, <%= current_user.first_name %></h1>
-<div><%= link_to "Upload Genome", new_genome_path, :class => "btn" %></div>
-
-<% if current_user.genomes %>
-	<div id = "home_search">
-	  <%= form_tag("/search", method: "get") do %>
-		    <%= text_field_tag :search, params[:search], :placeholder => "enter illness", id: "box", class: "form_field" %>
-		  <div>
-		  	<%= submit_tag("Search", :class => "btn", id: "search-button") %>
-		  </div>
-		<% end %>
-	</div>
-<% else %>
-  <p>Please upload genome, <%= current_user.first_name %></p>
-<% end %>
-
-<% if @results %>
-	<% @results.inspect %>
-<% end %>
-
-<!-- <a id="positive10" href="/search/top_10"> Healthy Genes </a>
-<a id="zoombutton" href="/search/bottom_10"> Zoom Zoom </a>
-<a id="negative10" href="/sunburst"> Risk Genes </a> -->
-
-<button class="chartbutton btn" id="positive10" href="/search/bottom_10"> Healthy Genes </button>
-<button class="chartbutton btn" id="zoombutton" href="/sunburst"> Zoom Zoom </button>
-<button class="chartbutton btn" id="negative10" href="/search/top_10"> Risk Genes </button>
-<div>
-<div id="zoomable_sunburst">
-
+<!-- <div id="preshowgraph">
+	<h2 id="pageintro"> Which Genomic Visualization would you like to see? </h2>
+	<ul> Your options include
+		<li>Search by a disease or category</li>
+		<li>View all irregular genes</li>
+		<li>View your genes with highest risk levels</li>
+		<li>View your most superior genes</li>
+	</ul>
+</div> -->
+<div id="showgraph">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<h1 class="h1">Welcome to Your Genome </h1>
+<div id="chartoptions">
+	<% if current_user.genomes %>
+		<div id = "home_search">
+		  <%= form_tag("/search", method: "get", :class => "width") do %>
+			    <%= text_field_tag :search, params[:search], :placeholder => "enter illness", id: "box", class: "form_field" %>
+			  <i id="search-button" class="fa fa-search" style="margin-left: -20px"></i>
+			<% end %>
+		</div>
+	<button class="chartbutton btn top" id="positive10" href="/search/bottom_10"> Superior Traits </button>
+	<br>
+	<button class="chartbutton btn bottom" id="negative10" href="/search/top_10"> Risk Traits </button>
+	<br>
+	<button class="chartbutton btn zoom" id="zoombutton" href="/sunburst"> All Traits </button>
+	<% else %>
+	  <p>Please upload genome, <%= current_user.first_name %></p>
+	<% end %>
 </div>
+	<div id="zoomable_sunburst">
+	</div>
+
 </div>
 
 

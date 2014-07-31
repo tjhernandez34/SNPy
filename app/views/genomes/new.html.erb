@@ -1,4 +1,6 @@
-
+<h1 class="h1">Hello, <%= current_user.first_name %></h1>
+<div><%= link_to "Upload Genome", new_genome_path, :class => "btn" %></div>
+<br><br>
 <%= direct_upload_form_for @uploader do |f| %>
   <%= f.file_field :file_url %>
 	<%= f.submit "Discover" %>
