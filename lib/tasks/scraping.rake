@@ -1,4 +1,4 @@
-desc "totaling the karma points"
+desc "fetch markers for genome"
 task :fetch_markers => :environment do
   def parse(page)
     @cut_page = page

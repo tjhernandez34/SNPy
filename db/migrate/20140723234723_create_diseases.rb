@@ -3,6 +3,7 @@ class CreateDiseases < ActiveRecord::Migration
     create_table :diseases do |t|
       t.string :name
       t.integer :category_id
+      t.text :description
 
       t.timestamps
     end
