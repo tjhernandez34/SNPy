@@ -68,7 +68,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
   json_hash = {name: current_user.first_name, children: []}
 
     Category.all.each_with_index do |category, category_index|
-      json_hash[:children] << {name: category.name, children:[]}
+      json_hash[:children] << {name: category.name, children:[], group: category_index}
 
       @result_by_category = []
 
@@ -78,7 +78,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
         end
       end
       @result_by_category.each_with_index do |disease, disease_index|
-        json_hash[:children][category_index][:children] << {name: disease.name, children:[]}
+        json_hash[:children][category_index][:children] << {name: disease.name, children:[], group: category_index}
 
 
         @risks_by_disease = []
@@ -89,7 +89,13 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
           end
         end
         @risks_by_disease.each_with_index do |risk|
-          json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: 1}
+            if risk.marker.risk_level > 0
+              group = "Negative"
+            else
+              group = "Positive"
+            end
+          json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: risk.marker.risk_level.abs,
+             group: group}
         end
       end
     end
@@ -98,7 +104,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
 
     if !request.xhr?
       puts "im in the render json hash section"
-      render json: json_hash, locals: {results: @results}
+      render json: json_hash
     else
       @results
     end
@@ -111,7 +117,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
     json_hash = {name: current_user.first_name, children: []}
 
       Category.all.each_with_index do |category, category_index|
-        json_hash[:children] << {name: category.name, children:[]}
+        json_hash[:children] << {name: category.name, children:[], group: category_index}
 
         @result_by_category = []
 
@@ -121,7 +127,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
           end
         end
         @result_by_category.each_with_index do |disease, disease_index|
-          json_hash[:children][category_index][:children] << {name: disease.name, children:[]}
+          json_hash[:children][category_index][:children] << {name: disease.name, children:[], group: category_index}
 
 
           @risks_by_disease = []
@@ -132,14 +138,21 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
             end
           end
           @risks_by_disease.each_with_index do |risk|
-            json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: 1}
+            if risk.marker.risk_level > 0
+              group = "Negative"
+            else
+              group = "Positive"
+            end
+            json_hash[:children][category_index][:children][disease_index][:children] << {name: risk.marker.snp, size: risk.marker.risk_level.abs,
+             group: group }
           end
         end
       end
 
       if !request.xhr?
+      puts "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
         puts json_hash
-        render json: json_hash, locals: {results: results}
+        render json: json_hash
       else
         results
       end
@@ -174,27 +187,28 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
     current_user.order_user_diseases_by_total_risk_level.each do |disease_risk_pair_array|
      search_terms << disease_risk_pair_array[1]
     end
-    search_terms.each do |term|
-      Disease.where('name = ? LIMIT 10', "#{term}").each do |disease|
-          top_ten_diseases << disease
+    top_diseases = search_terms.slice(0,9).flatten
+    top_diseases.each do |term|
+          top_ten_diseases << Disease.where('name = ?', "#{term}")
       end
-    end
+    puts "---------top_ten_diseases"
+    top_ten_diseases.flatten!
     hashify_for_d3(top_ten_diseases)
   end
 
   def search_bottom_diseases_by_risk_level
     search_terms = []
-    top_ten_diseases = []
+    bottom_ten_diseases = []
     low_risks = current_user.order_user_diseases_by_total_risk_level {|element| element[0].to_i}.reverse
-    low_risksJOPDQW.each do |disease_risk_pair_array|
+    low_risks.each do |disease_risk_pair_array|
      search_terms << disease_risk_pair_array[1]
     end
-    search_terms.each do |term|
-      Disease.where('name = ? LIMIT 10', "#{term}").each do |disease|
-          top_ten_diseases << disease
+    bottom_diseases = search_terms.slice(0,9).flatten
+    bottom_diseases.each do |term|
+          bottom_ten_diseases << Disease.where('name = ?', "#{term}")
       end
-    end
-    hashify_for_d3(top_ten_diseases)
+    bottom_ten_diseases.flatten!
+    hashify_for_d3(bottom_ten_diseases)
   end
 
 end

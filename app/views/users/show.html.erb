@@ -1,3 +1,9 @@
+
+<%= @page.title %>
+<div>
+<%= @page.content%>
+</div>
+
 <h1 class="h1">Hello, <%= current_user.first_name %></h1>
 <div><%= link_to "Upload Genome", new_genome_path, :class => "btn" %></div>
 
@@ -18,9 +24,13 @@
 	<% @results.inspect %>
 <% end %>
 
-<button class= "btn" id="positive10"> Healthy Genes </button>
-<button class = "btn" id="zoombutton"> Zoom Zoom </button>
-<button class = "btn" id="negative10"> Risk Genes </button>
+<!-- <a id="positive10" href="/search/top_10"> Healthy Genes </a>
+<a id="zoombutton" href="/search/bottom_10"> Zoom Zoom </a>
+<a id="negative10" href="/sunburst"> Risk Genes </a> -->
+
+<button class="chartbutton btn" id="positive10" href="/search/bottom_10"> Healthy Genes </button>
+<button class="chartbutton btn" id="zoombutton" href="/sunburst"> Zoom Zoom </button>
+<button class="chartbutton btn" id="negative10" href="/search/top_10"> Risk Genes </button>
 
 <div id="zoomable_sunburst">
 

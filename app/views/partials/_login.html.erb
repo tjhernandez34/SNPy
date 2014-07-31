@@ -1,18 +1,20 @@
-<div class="partial_form clear-fix center">
-<%= form_for :session, url: login_path do |f| %>
-<h2 class="h2">Login</h2>
-<ul class = "login_errors">
-  <li></li>
-</ul>
 
-	<div>
-    <%= f.email_field :email, :placeholder => "Email", :class => "form_field" %>
-  </div>
-  <div>
-    <%= f.password_field :password, :placeholder => "Password",  :class => "form_field" %>
-  </div>
-  <div>
-    <%= f.submit "SUBMIT",  :class => "btn" %>
-  </div>
-<% end %>
+<div class="partial_form center">
+  <h2 class="h2">LOGIN</h2>
+  <%= form_for :session, url: login_path do |f| %>
+    <ul class = "login_errors">
+      <li></li>
+    </ul>
+
+    <div class="inline">
+      <%= f.email_field :email, :placeholder => "Email", :class => "form_field" %>
+    </div>
+    <div>
+      <%= f.password_field :password, :placeholder => "Password",  :class => "form_field" %>
+    </div>
+
+    <div>
+      <%= f.submit "login",  :class => "btn" %>
+    </div>
+  <% end %>
 </div>

@@ -1,3 +1,5 @@
+require 'wikipedia'
+
 class UsersController < ApplicationController
 
   skip_before_action :require_login, only: [:new, :create]
@@ -21,6 +23,8 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     @categories = @user.current_risks_by_category
     @genome = Genome.where("user_id =?", @user.id).last
+
+    @page = Wikipedia.find( "Alzheimer's" )
   end
 
   private

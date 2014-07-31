@@ -13,12 +13,29 @@
     end
   end
 
+  def search_risks
+    self.genomes.last.reports.last.risks
+  end
+
+
   def current_risks
     self.reports.order(created_at: :desc).first.risks
   end
 
   def current_risks_by_disease
     self.current_risks.group_by {|risk| risk.disease.name}
+  end
+
+  def order_user_diseases_by_total_risk_level
+    array_of_disease_sums = []
+    self.current_risks_by_disease.each do |disease, risk_array|
+      total = 0
+        risk_array.each do |risk|
+          total += risk.marker.risk_level
+        end
+        array_of_disease_sums << [total, disease]
+    end
+    array_of_disease_sums.sort_by {|element| element[0].to_i}.reverse
   end
 
 end

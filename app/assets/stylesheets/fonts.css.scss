@@ -68,6 +68,7 @@ h3, .h3 {
 
   h2, .h2 {
     font-size: 3.25em;
+    font-weight: 100;
   }
 
   h3, .h3 {
@@ -95,6 +96,13 @@ table {
     color: $alt-color-light;
   }
 }
+
+.form_font {
+    font-weight: 700;
+    font-size: 100%;
+    font-family: $sans-serif-font, sans-serif;
+    color: $alt-color;
+  }
 
 
 
