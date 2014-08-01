@@ -92,6 +92,22 @@ jQuery(document).ready(function($) {
         createSunburst(searchUrl);
     });
 
+    $('#home_search').keypress(function(e) {
+        if (e.which == 13) {
+            e.preventDefault()
+            $(".tooltip").remove();
+            d3.selectAll("svg").transition()
+                .duration(1000)
+                .style('opacity', 0.2)
+                .remove();
+            var searchTerm = $("#box").val().replace(/ /g, '+');
+            var searchUrl = "/search?utf8=✓&search=" + searchTerm + "&commit=Search";
+
+            console.log("search url:", searchUrl);
+            createSunburst(searchUrl);
+        }
+    });
+
     function createSunburst(url) {
 
         var svg = d3.select("#zoomable_sunburst").append("svg")

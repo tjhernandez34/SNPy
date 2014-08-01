@@ -15,7 +15,7 @@
 		<div id = "home_search">
 		  <%= form_tag("/search", method: "get", :class => "width") do %>
 			    <%= text_field_tag :search, params[:search], :placeholder => "enter illness", id: "box", class: "form_field" %>
-			  <i id="search-button" class="fa fa-search" style="margin-left: -20px"></i>
+			  <i id='search-button' class="fa fa-search" style="margin-left: -20px"></i>
 			<% end %>
 		</div>
 	<button class="chartbutton btn top" id="positive10" href="/search/bottom_10"> Superior Traits </button>
