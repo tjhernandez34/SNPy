@@ -1,9 +1,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
-<div id="showgraph">
+<div class = "mega_div" id="showgraph">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<h1 class="h1">Welcome to Your Genome </h1>
+	<h1 class="h1 thin-column right">Welcome to Your Genome </h1>
 
-	<div id="chartoptions">
+	<ul>
+	<li>
+	<div class = "left col_1" id="chartoptions">
 		<% if current_user.genomes %>
 			<div id = "home_search">
 			  <%= form_tag("/search", method: "get", :class => "width") do %>
@@ -26,24 +28,50 @@
 				</li>
 			</ul>
 		</section>
+		<br>
 
 
-		<div class = "panel" ng-show="tab === 1">
-		  <h2>Lowest Disease Risks</h2>
+		<div class = "panel description" ng-show="tab === 1">
+		  <div><b class="description-h">Low Disease Risks</b></div>
+		  <br>
+		  <br>
 		  <div>
-		  		This is the Top ten diseases for which you have risks
+		  	This is an interactive visuali- zation of your risk levels for vari- ous diseases. The inner most layer sorts your risks by <b> Category</b>. The middle layer sorts your risks by <b> Diseases</b>. The outer most layer displays each SNP (address within your genome) that matched a known risk level for a particular disease. There are two SNP risk types.
+		 		<ol>
+		 			<br>
+			  	<li>1 - <b class ="green">GREEN</b> outer segment: Indicates that you have a <b>LOWER</b> risk (depending on size) for developing a particu- lar disease.</li>
+			  	<br>
+			  	<li>2 - <b class ="red">RED</b> and Small outer segement: Indicates that you have a <b>HIGHER</b> risk (depend- ing on size) for developing a particular disease.</li>
+		  	</ol>
 		  </div>
 		</div>
-		<div class = "panel" ng-show="tab === 2">
-		  <h2>Highest Disease Risks</h2>
+		<div class = "panel description" ng-show="tab === 2">
+		  <div><b class="description-h">High Disease Risks</b></div>
+		  <br>
+		  <br>
 		  <div>
-		  	These are the 10 diseases for which you have the least amount of rish
+		  	This is an interactive visuali- zation of your risk levels for vari- ous diseases. The inner most layer sorts your risks by <b> Category</b>. The middle layer sorts your risks by <b> Diseases</b>. The outer most layer displays each SNP (address within your genome) that matched a known risk level for a particular disease. There are two SNP risk types.
+		 		<ol>
+		 			<br>
+			  	<li>1 - <b class ="green">GREEN</b> outer segment: Indicates that you have a <b>LOWER</b> risk (depending on size) for developing a particu- lar disease.</li>
+			  	<br>
+			  	<li>2 - <b class ="red">RED</b> and Small outer segement: Indicates that you have a <b>HIGHER</b> risk (depend- ing on size) for developing a particular disease.</li>
+		  	</ol>
 		  </div>
 		</div>
-		<div class = "panel" ng-show="tab === 3">
-		  <h2>All Disease Risks</h2>
+
+		<div class = "panel description" ng-show="tab === 3">
+		  <div><b class="description-h">All Disease Risks</b></div>
+		  <br>
+		  <br>
 		  <div>
-		  	This is an interactive visualization of showing your risk levels for various diseases. The inner most layer sorts your risks by <b> Category </b>.
+		  	This is an interactive visuali- zation of your risk levels for vari- ous diseases. The inner most layer sorts your risks by <b> Category</b>. The middle layer sorts your risks by <b> Diseases</b>. The outer most layer displays each SNP (address within your genome) that matched a known risk level for a particular disease. There are two SNP risk types.
+		 		<ol>
+		 			<br>
+			  	<li>1 - <b class ="green">GREEN</b> outer segment: Indicates that you have a <b>LOWER</b> risk (depending on size) for developing a particu- lar disease.</li>
+			  	<br>
+			  	<li>2 - <b class ="red">RED</b> and Small outer segement: Indicates that you have a <b>HIGHER</b> risk (depend- ing on size) for developing a particular disease.</li>
+		  	</ol>
 		  </div>
 		</div>
 	</div>
@@ -53,10 +81,13 @@
 		  <p>Please upload genome, <%= current_user.first_name %></p>
 		<% end %>
 	</div>
-
-	<div id="zoomable_sunburst">
+	</li>
+	<li>
+	<div class = "col_2 right" id="zoomable_sunburst">
 	</div>
-
+	</li>
+	</ul>
+	<br clear="all">
 
 
 </div>

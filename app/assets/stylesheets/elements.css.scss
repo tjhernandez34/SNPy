@@ -8,9 +8,7 @@ Buttons
   width: 20%;
 }
 #zoomable_sunburst{
-  margin-top: -10%;
   padding-bottom: 3%;
-  margin-left: 20%;
 }
 
 .legend{
@@ -19,6 +17,60 @@ Buttons
 
 #pageintro{
   font-size: 32;
+}
+
+.mega_div {
+  width: 100%;
+}
+
+.col_1 {
+  width: 20%;
+  margin-top: 5%;
+}
+
+.col_2 {
+  width: 68%;
+  position: relative;
+  top: 10px;
+  margin-bottom: 2%;
+}
+
+.thin-column {
+  width: 68%;
+  padding-left: 0;
+  text-align: left;
+}
+
+.panel {
+  margin-top: 12%;
+  margin-bottom: 5%;
+}
+
+.description {
+  color: $off-white;
+  width: 216px;
+  margin-bottom: 2%;
+  margin-left: 60px;
+  margin-right: 0px;
+  padding: 0px;
+  font-family: $sans-serif-font, sans-serif;
+  weight: 200;
+  padding-bottom: 2%;
+  text-align: justify;
+}
+
+.description-h {
+  font-family: $sans-serif-font, sans-serif;
+  color: $light-blue;
+  font-size: 1.4em;
+}
+
+.green {
+  color: $green;
+}
+
+.red {
+  color: $red;
 }
 
 .tooltip{
