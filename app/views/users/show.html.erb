@@ -1,34 +1,64 @@
-<h1 class="h1">Hello, <%= current_user.first_name %></h1>
-<div><%= link_to "Upload Genome", new_genome_path, :class => "btn" %></div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+<div id="showgraph">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<h1 class="h1">Welcome to Your Genome </h1>
 
-<% if current_user.genomes %>
-	<div id = "home_search">
-	  <%= form_tag("/search", method: "get") do %>
-		    <%= text_field_tag :search, params[:search], :placeholder => "enter illness", id: "box", class: "form_field" %>
+	<div id="chartoptions">
+		<% if current_user.genomes %>
+			<div id = "home_search">
+			  <%= form_tag("/search", method: "get", :class => "width") do %>
+				    <%= text_field_tag :search, params[:search], :placeholder => "enter illness", id: "box", class: "form_field" %>
+				  <i id='search-button' class="fa fa-search" style="margin-left: -20px"></i>
+				<% end %>
+			</div>
+
+	<div ng-app>
+		<section ng-init="tab=1">
+			<ul class= "nav nav-pills">
+				<li ng-class="{ active:tab === 1 }">
+					<button ng-click ="tab=1" class="chartbutton btn top" id="positive10" href="/search/bottom_10"> Lowest Disease Risks </button>
+				</li>
+				<li ng-class="{ active:tab === 2 }">
+					<button ng-click ="tab=2" class="chartbutton btn bottom" id="negative10" href="/search/top_10"> Highest Disease Risks </button>
+				</li>
+				<li ng-class="{ active:tab === 3 }">
+					<button ng-click ="tab=3" class="chartbutton btn zoom" id="zoombutton" href="/sunburst"> All Disease Risks </button>
+				</li>
+			</ul>
+		</section>
+
+
+		<div class = "panel" ng-show="tab === 1">
+		  <h2>Lowest Disease Risks</h2>
 		  <div>
-		  	<%= submit_tag("Search", :class => "btn", id: "search-button") %>
+		  		This is the Top ten diseases for which you have risks
 		  </div>
+		</div>
+		<div class = "panel" ng-show="tab === 2">
+		  <h2>Highest Disease Risks</h2>
+		  <div>
+		  	These are the 10 diseases for which you have the least amount of rish
+		  </div>
+		</div>
+		<div class = "panel" ng-show="tab === 3">
+		  <h2>All Disease Risks</h2>
+		  <div>
+		  	This is an interactive visualization of showing your risk levels for various diseases. The inner most layer sorts your risks by <b> Category </b>.
+		  </div>
+		</div>
+	</div>
+
+
+		<% else %>
+		  <p>Please upload genome, <%= current_user.first_name %></p>
 		<% end %>
 	</div>
-<% else %>
-  <p>Please upload genome, <%= current_user.first_name %></p>
-<% end %>
 
-<% if @results %>
-	<% @results.inspect %>
-<% end %>
+	<div id="zoomable_sunburst">
+	</div>
 
-<!-- <a id="positive10" href="/search/top_10"> Healthy Genes </a>
-<a id="zoombutton" href="/search/bottom_10"> Zoom Zoom </a>
-<a id="negative10" href="/sunburst"> Risk Genes </a> -->
 
-<button class="chartbutton btn" id="positive10" href="/search/bottom_10"> Healthy Genes </button>
-<button class="chartbutton btn" id="zoombutton" href="/sunburst"> Zoom Zoom </button>
-<button class="chartbutton btn" id="negative10" href="/search/top_10"> Risk Genes </button>
-<div>
-<div id="zoomable_sunburst">
 
-</div>
 </div>
 
 
