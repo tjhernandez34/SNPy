@@ -84,6 +84,11 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
         @risks_by_disease = []
 
         @risks.each do |risk|
+          if risk.marker.risk_level > 0
+            group = "Negative"
+          else
+            group = "Positive"
+          end
           if risk.marker.disease.name == disease.name
             @risks_by_disease  << risk
           end
