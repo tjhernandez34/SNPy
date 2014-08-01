@@ -16,3 +16,4 @@
 
 //= require zoomablesunburst
 //= require_tree .
+//= zoomablesunburst_spec

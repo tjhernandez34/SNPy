@@ -32,6 +32,7 @@ end
 group :development, :test do
   gem 'sqlite3', '1.3.8'
   gem 'rspec-rails', '2.13.1'
+  gem 'jasmine', "~> 2.0.0.rc4"
   gem 'spring'
 end
 
@@ -40,6 +41,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
+  gem 'jasmine', "~> 2.0.0.rc4"
 end
 
 group :production do

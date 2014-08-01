@@ -1,4 +1,4 @@
-// jQuery(document).ready(function($) {
+jQuery(document).ready(function($) {
 
     var width = 960,
         height = 740,
@@ -254,4 +254,4 @@
 
     }
 
-// });
+});

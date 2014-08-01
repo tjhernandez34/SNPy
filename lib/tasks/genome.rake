@@ -1,9 +1,14 @@
 desc "generate risk genome"
 task :generate_genome => :environment do
 
+	def unique_markers
+		Marker.all.uniq! {|marker| marker.snp}
+	end
+
+
 	def generate_genome(file)
 		File.open(file, 'w') do |line|
-			Marker.all.each do |marker|
+			unique_markers.each do |marker|
 				line << "#{marker.snp}        #{marker.allele}" + "\n"
 			end
 		end
