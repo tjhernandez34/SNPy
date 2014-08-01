@@ -99,8 +99,7 @@ CHANGES = { "Heart" => "Cardiovascular Myocardial Atrial Atherosclerosis",
         end
       end
     end
-  puts "----------------------------"
-  puts json_hash
+    return json_hash
 
     if !request.xhr?
       puts "im in the render json hash section"

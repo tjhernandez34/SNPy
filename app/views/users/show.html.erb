@@ -1,36 +1,66 @@
-<!-- <div id="preshowgraph">
-	<h2 id="pageintro"> Which Genomic Visualization would you like to see? </h2>
-	<ul> Your options include
-		<li>Search by a disease or category</li>
-		<li>View all irregular genes</li>
-		<li>View your genes with highest risk levels</li>
-		<li>View your most superior genes</li>
-	</ul>
-</div> -->
-<div id="showgraph">
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<h1 class="h1">Welcome to Your Genome </h1>
-<div id="chartoptions">
-	<% if current_user.genomes %>
-		<div id = "home_search">
-		  <%= form_tag("/search", method: "get", :class => "width") do %>
-			    <%= text_field_tag :search, params[:search], :placeholder => "enter illness", id: "box", class: "form_field" %>
-			  <i id="search-button" class="fa fa-search" style="margin-left: -20px"></i>
-			<% end %>
-		</div>
-	<button class="chartbutton btn top" id="positive10" href="/search/bottom_10"> Superior Traits </button>
-	<br>
-	<button class="chartbutton btn bottom" id="negative10" href="/search/top_10"> Risk Traits </button>
-	<br>
-	<button class="chartbutton btn zoom" id="zoombutton" href="/sunburst"> All Traits </button>
-	<% else %>
-	  <p>Please upload genome, <%= current_user.first_name %></p>
-	<% end %>
-</div>
-	<div id="zoomable_sunburst">
-	</div>
+<script>
+  window.sunburstTopData = <%= current_user.search_top_diseases_by_risk_level.to_json.html_safe %>
+  window.sunburstBottomData = <%= current_user.search_bottom_diseases_by_risk_level.to_json.html_safe %>
+  window.sunburstData = <%= current_user.sunburst.to_json.html_safe %>
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
 
-</div>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<h1 class="h1">Welcome to Your Genome </h1>
+
+
+<% if current_user.genomes %>
+
+  <div id = "home_search">
+    <%= form_tag("/search", method: "get", :class => "width") do %>
+       <%= text_field_tag :search, params[:search], :placeholder => "enter illness", id: "box", class: "form_field" %>
+      <i id="search-button" class="fa fa-search" style="margin-left: -20px"></i>
+    <% end %>
+  </div>
+
+
+	<div ng-app>
+		<section ng-init="tab=1" id="chartoptions">
+		  <ul class= "nav nav-pills">
+		    <li >
+		      <button ng-class="{ active:tab === 1 }" href ng-click ="tab=1" class="btn" id="positive10">10 High Risk Diseases</button>
+		    </li>
+		    <li >
+		      <button ng-class="{ active:tab === 2 }" href ng-click ="tab=2" class="btn" id="negative10">10 Low Risk Diseases</button>
+		    </li>
+		    <li>
+		      <button ng-class="{ active:tab === 3 }" href ng-click ="tab=3" class="btn" id="zoombutton">All Disease Risks</button>
+		    </li>
+		  </ul>
+		</section>
+
+
+		<div class = "panel" ng-show="tab === 1">
+		  <h2>Top Ten</h2>
+		  <div id="zoomable_sunburst_angular_top">
+		  </div>
+		</div>
+		<div class = "panel" ng-show="tab === 2">
+		  <h2>Bottom Ten</h2>
+		  <div id="zoomable_sunburst_angular_bottom">
+		  </div>
+		</div>
+		<div class = "panel" ng-show="tab === 3">
+		  <h2>Zoom Zoom</h2>
+		  <div id="zoomable_sunburst_angular_zoom">
+		  </div>
+		</div>
+	</div>
+<% else %>
+  <p>Please upload genome, <%= current_user.first_name %></p>
+<% end %>
+
+
+
+
+
+
+
 
 
 
