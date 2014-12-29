@@ -1,23 +1,23 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/Travis/Desktop/SNPy/app/helpers/application_helper.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/helpers/categories_helper.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/helpers/categories_helper.rb": [
         1,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/helpers/disease_helper.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/helpers/disease_helper.rb": [
         1,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/helpers/risks_helper.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/helpers/risks_helper.rb": [
         1,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/controllers/categories_controller.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/controllers/categories_controller.rb": [
         1,
         null,
         1,
@@ -30,7 +30,7 @@
         null,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/controllers/application_controller.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/controllers/application_controller.rb": [
         1,
         1,
         1,
@@ -38,30 +38,16 @@
         null,
         1,
         null,
-        1,
         1,
         1,
         0,
-        0,
-        null,
-        null,
-        null
-      ],
-      "/Users/Travis/Desktop/SNPy/app/controllers/diseases_controller.rb": [
-        1,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
         0,
         0,
         null,
         null,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/controllers/risks_controller.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/controllers/risks_controller.rb": [
         1,
         null,
         1,
@@ -69,12 +55,12 @@
         null,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/models/category.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/models/category.rb": [
         1,
         1,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/models/disease.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/models/disease.rb": [
         1,
         null,
         1,
@@ -83,7 +69,7 @@
         null,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/models/genome.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/models/genome.rb": [
         1,
         null,
         1,
@@ -97,7 +83,7 @@
         null,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/uploaders/genome_uploader.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/uploaders/genome_uploader.rb": [
         null,
         null,
         null,
@@ -189,7 +175,7 @@
         null,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/models/marker.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/models/marker.rb": [
         1,
         1,
         1,
@@ -201,7 +187,7 @@
         null,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/models/report.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/models/report.rb": [
         1,
         null,
         1,
@@ -232,7 +218,7 @@
         null,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/models/risk.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/models/risk.rb": [
         1,
         null,
         1,
@@ -246,7 +232,7 @@
         null,
         null
       ],
-      "/Users/Travis/Desktop/SNPy/app/models/user.rb": [
+      "/Users/Travis/Documents/Projects/SNPy/app/models/user.rb": [
         1,
         1,
         1,
@@ -290,6 +276,6 @@
         null
       ]
     },
-    "timestamp": 1406863292
+    "timestamp": 1408051316
   }
 }
